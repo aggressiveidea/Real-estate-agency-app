@@ -1,5 +1,5 @@
 package main.DAO;
 
-public class Profile {
+public class Payment {
     
 }
