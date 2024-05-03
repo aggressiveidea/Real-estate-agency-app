@@ -30,10 +30,12 @@ public class Transaction {
 
     //methods
     public int generate_contract(int id){
+        return id;
         //add later
     }
 
     public int add_payment (int id, double cost){
+        return id;
         //add later
     }
 

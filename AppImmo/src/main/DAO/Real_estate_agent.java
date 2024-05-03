@@ -41,6 +41,7 @@ public class Real_estate_agent extends User{
     }
 
     public int add_appointment (int id, int client_id){
+        return client_id;
         // add later
     }
 
@@ -54,6 +55,7 @@ public class Real_estate_agent extends User{
 
     //change this type later after enumeration
     public int add_transaction (int id, String type){
+        return id;
         //add later
     }
 

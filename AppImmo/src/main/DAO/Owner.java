@@ -58,6 +58,7 @@ public class Owner extends User{
     //methods
 
     public int add_property (int id, property_type typeproperty, String address){
+        return id;
         // add later
     }
 
