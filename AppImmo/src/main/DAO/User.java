@@ -1,10 +1,14 @@
 package main.DAO;
 
+enum type{
+    OWNER, CLIENT, REAL_ESTATE_AGENT;
+}
+
 public class User {
 
     public int id;
     public String surname, name, email, phone_number;
-    public String type; //change this type later after enumeration
+    public type type;
     public String username, password;
 
     //consructor 1
@@ -14,7 +18,7 @@ public class User {
     }
 
     //constructor 2
-    public User(int id, String surname, String name, String email, String phone_number, String type) {
+    public User(int id, String surname, String name, String email, String phone_number, type type) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -24,7 +28,7 @@ public class User {
     }
 
     //full constructor
-    public User(int id, String surname, String name, String email, String phone_number, String type, String username,
+    public User(int id, String surname, String name, String email, String phone_number, type type, String username,
             String password) {
         this.id = id;
         this.surname = surname;
@@ -95,11 +99,11 @@ public class User {
         this.phone_number = phone_number;
     }
 
-    public String getType() {
+    public type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(type type) {
         this.type = type;
     }
 
