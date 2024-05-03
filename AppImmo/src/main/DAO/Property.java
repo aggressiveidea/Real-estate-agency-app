@@ -45,15 +45,18 @@ public class Property {
 
     //methods 
     public int affecteproperty (int id){
+        return id;
         //add later
     }
 
     //change this type later after enumeration
     public int searchproperty (String property_type){
+        return assignedAgentid;
         //add later
     }
 
     public int searchproperty (double price){
+        return assignedAgentid;
         //add later
     }
 
