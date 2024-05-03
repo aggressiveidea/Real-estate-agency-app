@@ -18,26 +18,48 @@ public class User {
     }
 
     //constructor 2
-    public User(int id, String surname, String name, String email, String phone_number, type type) {
+    public User(int id, String surname, String name, String email, String phone_number, int t) {
         this.id = id;
         this.surname = surname;
         this.name = name;
         this.email = email;
         this.phone_number = phone_number;
-        this.type = type;
+        switch (t) {
+            case 1:
+                this.type = type.CLIENT;
+                break;
+            case 2:
+                this.type = type.OWNER;
+            case 3:
+                this.type = type.REAL_ESTATE_AGENT;
+            default:
+                this.type = null;
+                break;
+        }
     }
 
     //full constructor
-    public User(int id, String surname, String name, String email, String phone_number, type type, String username,
+    public User(int id, String surname, String name, String email, String phone_number, int t, String username,
             String password) {
         this.id = id;
         this.surname = surname;
         this.name = name;
         this.email = email;
         this.phone_number = phone_number;
-        this.type = type;
         this.username = username;
         this.password = password;
+        switch (t) {
+            case 1:
+                this.type = type.CLIENT;
+                break;
+            case 2:
+                this.type = type.OWNER;
+            case 3:
+                this.type = type.REAL_ESTATE_AGENT;
+            default:
+                this.type = null;
+                break;
+        }
     }
 
     //methods
