@@ -24,6 +24,17 @@ public class Interaction {
     public Interaction(int id2) {
         this.id = id2;
     }
+    
+    //methodes
+    public void AddInteraction ()
+    {
+        //for later
+    }
+
+    public void RemoveInteraction (int id)
+    {
+        //for later
+    }
 
     //getters and setters
     public int getId() {
@@ -72,17 +83,6 @@ public class Interaction {
 
     public void setdetails(String details) {
         this.details = details;
-    }
-
-    //methodes
-    public void AddInteraction ()
-    {
-        //for later
-    }
-
-    public void RemoveInteraction (int id)
-    {
-        //for later
     }
     
 }

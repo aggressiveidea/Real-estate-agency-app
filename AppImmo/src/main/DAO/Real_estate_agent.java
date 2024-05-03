@@ -22,6 +22,7 @@ public class Real_estate_agent extends User{
         this.appointment_id = appointment_id;
     }
 
+    //constructor 3
     public Real_estate_agent(int id, String surname, String name, String email, String phone_number,
             String username, String password, int property_id, int transaction_id, int appointment_id) {
         super(id, surname, name, email, phone_number, 3, username, password);

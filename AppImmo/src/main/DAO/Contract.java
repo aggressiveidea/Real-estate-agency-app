@@ -2,6 +2,10 @@ package main.DAO;
 
 import java.util.Date;
 
+enum contract_type{
+    PURCHASE_AGREEMENT_CONTRACT, LEASE_AGREEMENTS;
+}
+
 public class Contract {
     
     public int id, client_id, payment_id, owner_id, agent_id;
@@ -10,6 +14,7 @@ public class Contract {
     public String agent_name, agent_surname;
     public Date duration;
     public double amount;
+    public contract_type type;
 
     
     //construtor 1
@@ -20,12 +25,30 @@ public class Contract {
         this.duration = duration;
         this.amount = amount;
     }
+    //those constructors don't containt type, it will be modified only by its setter
 
     //empty constructor
     public Contract() {
     }
 
     //getters and setters
+    public void setType(int t){
+        switch (t) {
+            case 1:
+                this.type = contract_type.PURCHASE_AGREEMENT_CONTRACT;
+                break;
+            case 2:
+                this.type = contract_type.LEASE_AGREEMENTS;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public contract_type getType (contract_type type){
+        return this.type;
+    }
+
     public int getId() {
         return id;
     }

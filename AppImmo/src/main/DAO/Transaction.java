@@ -2,17 +2,20 @@ package main.DAO;
 
 import java.sql.Date;
 
+enum transaction_type{
+    RENT, BUY;
+}
 
 public class Transaction {
 
     public int id, property_id, agent_id, client_id, owner_id, contract_id, payment_id;
-    public String type; //change this later after enumeration
+    public transaction_type type;
     public Date date;
     public double cost;
 
     //constructor
     public Transaction(int id, int property_id, int agent_id, int client_id, int owner_id, int contract_id,
-            int payment_id, String type, Date date, double cost) {
+            int payment_id, Date date, double cost) {
         this.id = id;
         this.property_id = property_id;
         this.agent_id = agent_id;
@@ -20,10 +23,10 @@ public class Transaction {
         this.owner_id = owner_id;
         this.contract_id = contract_id;
         this.payment_id = payment_id;
-        this.type = type;
         this.date = date;
         this.cost = cost;
     }
+    //type in the setter instead of the constructor
 
     //methods
     public int generate_contract(int id){
@@ -33,7 +36,7 @@ public class Transaction {
     public int add_payment (int id, double cost){
         //add later
     }
-    
+
     //getters and setters
     public int getId() {
         return id;
@@ -91,12 +94,22 @@ public class Transaction {
         this.payment_id = payment_id;
     }
 
-    public String getType() {
+    public transaction_type getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void settype (int t){
+        switch (t) {
+            case 1:
+                this.type = transaction_type.RENT;
+                break;
+            case 2:
+                this.type = transaction_type.BUY;
+                break;
+            default:
+                this.type = null;
+                break;
+        }
     }
 
     public Date getDate() {
