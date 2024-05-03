@@ -1,29 +1,44 @@
 package main.DAO;
 
-public class Owner {
+enum owner_type{
+    LESSOR, SELLER;
+}
 
-    public String owner_type; //change this type after enumeration
+public class Owner extends User{
+
+    public owner_type ownertype;
     public int property_id;
 
-    //constructor   
-    public Owner (boolean t, int perperty_id) {
-        
+    //constructor 1
+    public Owner(String username, String password, owner_type ownertype, int property_id) {
+        super(username, password);
+        this.ownertype = ownertype;
         this.property_id = property_id;
-        // if the condition is true, then the owner is a seller, or else he's a lessor
-       if (t) {
-        this.owner_type = "Seller";
-        } else {
-        this.owner_type = "Lessor";
-        }
     }
 
-   //getters and setters
-    public String getowner_type() {
-        return owner_type;
+    //constructor 2
+    public Owner(int id, String surname, String name, String email, String phone_number, String type,
+            owner_type ownertype, int property_id) {
+        super(id, surname, name, email, phone_number, type);
+        this.ownertype = ownertype;
+        this.property_id = property_id;
     }
 
-    public void setowner_type(String owner_type) {
-        this.owner_type = owner_type;
+    //full constructor
+    public Owner(int id, String surname, String name, String email, String phone_number, String type, String username,
+            String password, owner_type ownertype, int property_id) {
+        super(id, surname, name, email, phone_number, type, username, password);
+        this.ownertype = ownertype;
+        this.property_id = property_id;
+    }
+
+    //getters and setters
+    public owner_type getownertype() {
+        return ownertype;
+    }
+
+    public void setownertype(owner_type ownertype) {
+        this.ownertype = ownertype;
     }
 
    public int getProperty_id() {
@@ -35,9 +50,8 @@ public class Owner {
     }
 
     //methods
-    
-    //change type after enumeration
-    public int add_property (int id, String property_type, String address){
+
+    public int add_property (int id, property_type typeproperty, String address){
         // add later
     }
 
@@ -47,7 +61,7 @@ public class Owner {
 
     @Override 
     public String toString() {
-        return "Proprietaire [owner_type=" + owner_type + "]";
+        return "Proprietaire [ownertype=" + ownertype + "]";
     }
 
    
