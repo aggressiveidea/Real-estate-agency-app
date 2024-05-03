@@ -9,6 +9,7 @@ public class Owner extends User{
     public owner_type ownertype;
     public int property_id;
 
+
     //constructor 1
     public Owner(String username, String password, owner_type ownertype, int property_id) {
         super(username, password);
@@ -17,17 +18,16 @@ public class Owner extends User{
     }
 
     //constructor 2
-    public Owner(int id, String surname, String name, String email, String phone_number, String type,
-            owner_type ownertype, int property_id) {
-        super(id, surname, name, email, phone_number, type);
+    public Owner(int id, String surname, String name, String email, String phone_number, owner_type ownertype,
+            int property_id) {
+        super(id, surname, name, email, phone_number, 2);
         this.ownertype = ownertype;
         this.property_id = property_id;
     }
 
-    //full constructor
-    public Owner(int id, String surname, String name, String email, String phone_number, String type, String username,
+    public Owner(int id, String surname, String name, String email, String phone_number, String username,
             String password, owner_type ownertype, int property_id) {
-        super(id, surname, name, email, phone_number, type, username, password);
+        super(id, surname, name, email, phone_number, 2, username, password);
         this.ownertype = ownertype;
         this.property_id = property_id;
     }
