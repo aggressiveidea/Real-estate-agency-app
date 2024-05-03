@@ -1,26 +1,44 @@
 package main.DAO;
 
-public class Client {
+enum client_type{
+    BUYER, TENANT;
+}
+
+public class Client extends User{
     
-    public String client_type;
+    public client_type clienttype;
 
-    //constructor
-    public Client(boolean t) {
-        if (t == true)
-        this.client_type = "Buyer";
-        else this.client_type = "Tenant";
+    //constructor 1
+    public Client(String username, String password, client_type clienttype) {
+        super(username, password);
+        this.clienttype = clienttype;
     }
 
-    public String getclient_type() {
-        return client_type;
+    //constructor 2
+    public Client(int id, String surname, String name, String email, String phone_number, String type,
+            client_type clienttype) {
+        super(id, surname, name, email, phone_number, type);
+        this.clienttype = clienttype;
     }
-    public void setclient_type(String client_type) {
-        this.client_type = client_type;
+
+    //full constructor
+    public Client(int id, String surname, String name, String email, String phone_number, String type, String username,
+            String password, client_type clienttype) {
+        super(id, surname, name, email, phone_number, type, username, password);
+        this.clienttype = clienttype;
+    }
+
+    //setters and getters
+    public client_type getclient_type() {
+        return clienttype;
+    }
+    public void setclient_type(client_type clienttype) {
+        this.clienttype = clienttype;
     }
 
     @Override
     public String toString() {
-        return "Client [client_type=" + client_type + "]";
+        return "Client [client_type=" + clienttype + "]";
     }
 
     
