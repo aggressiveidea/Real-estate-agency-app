@@ -11,24 +11,30 @@ public class Owner extends User{
 
 
     //constructor 1
-    public Owner(String username, String password, owner_type ownertype, int property_id) {
+    public Owner(String username, String password, int t, int property_id) {
         super(username, password);
-        this.ownertype = ownertype;
         this.property_id = property_id;
+        switch (t) {
+            case 1:
+                this.ownertype = owner_type.LESSOR;
+                break;
+            case 2:
+                this.ownertype = owner_type.SELLER;
+                break;
+            default:
+                break;
+        }
     }
 
     //constructor 2
-    public Owner(int id, String surname, String name, String email, String phone_number, owner_type ownertype,
-            int property_id) {
+    public Owner(int id, String surname, String name, String email, String phone_number,int property_id) {
         super(id, surname, name, email, phone_number, 2);
-        this.ownertype = ownertype;
-        this.property_id = property_id;
     }
 
+    //full constructor
     public Owner(int id, String surname, String name, String email, String phone_number, String username,
-            String password, owner_type ownertype, int property_id) {
+            String password, int property_id) {
         super(id, surname, name, email, phone_number, 2, username, password);
-        this.ownertype = ownertype;
         this.property_id = property_id;
     }
 

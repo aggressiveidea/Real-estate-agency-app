@@ -30,8 +30,10 @@ public class User {
                 break;
             case 2:
                 this.type = type.OWNER;
+                break;
             case 3:
                 this.type = type.REAL_ESTATE_AGENT;
+                break;
             default:
                 this.type = null;
                 break;
