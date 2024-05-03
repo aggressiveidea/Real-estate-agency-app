@@ -15,19 +15,18 @@ public class Client extends User{
     }
 
     //constructor 2
-    public Client(int id, String surname, String name, String email, String phone_number, String type,
+    public Client(int id, String surname, String name, String email, String phone_number,
             client_type clienttype) {
-        super(id, surname, name, email, phone_number, type);
+        super(id, surname, name, email, phone_number, 1);
         this.clienttype = clienttype;
     }
 
     //full constructor
-    public Client(int id, String surname, String name, String email, String phone_number, String type, String username,
+    public Client(int id, String surname, String name, String email, String phone_number, String username,
             String password, client_type clienttype) {
-        super(id, surname, name, email, phone_number, type, username, password);
+        super(id, surname, name, email, phone_number, 1, username, password);
         this.clienttype = clienttype;
     }
-
     //setters and getters
     public client_type getclient_type() {
         return clienttype;
