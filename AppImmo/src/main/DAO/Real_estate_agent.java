@@ -14,18 +14,17 @@ public class Real_estate_agent extends User{
     }
 
     //constructor 2
-    public Real_estate_agent(int id, String surname, String name, String email, String phone_number, String type,
+    public Real_estate_agent(int id, String surname, String name, String email, String phone_number,
             int property_id, int transaction_id, int appointment_id) {
-        super(id, surname, name, email, phone_number, type);
+        super(id, surname, name, email, phone_number, 3);
         this.property_id = property_id;
         this.transaction_id = transaction_id;
         this.appointment_id = appointment_id;
     }
 
-    //full constructor
-    public Real_estate_agent(int id, String surname, String name, String email, String phone_number, String type,
+    public Real_estate_agent(int id, String surname, String name, String email, String phone_number,
             String username, String password, int property_id, int transaction_id, int appointment_id) {
-        super(id, surname, name, email, phone_number, type, username, password);
+        super(id, surname, name, email, phone_number, 3, username, password);
         this.property_id = property_id;
         this.transaction_id = transaction_id;
         this.appointment_id = appointment_id;
