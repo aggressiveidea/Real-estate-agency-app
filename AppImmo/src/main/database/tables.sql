@@ -90,3 +90,4 @@ CREATE TABLE Interaction (
     CONSTRAINT fk__AgentID FOREIGN KEY (AgentID) REFERENCES AgentImm(IDagent),
     CONSTRAINT fk__ClientID FOREIGN KEY (ClientID) REFERENCES Client(IDclient)
 );
+//
