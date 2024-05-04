@@ -44,7 +44,7 @@ public class SignupFrame extends JFrame implements ActionListener {
     public SignupFrame() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "DAOUADI2004");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
             statement = connection.createStatement();
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -59,7 +59,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         this.setResizable(false);
         getContentPane().setLayout(null);
         this.setLocationRelativeTo(null);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(SignupFrame.class.getResource("images/logo.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(SignupFrame.class.getResource("assets\\logo.png")));
         getContentPane().setLayout(null);
         
         panel = new JPanel();
@@ -157,7 +157,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         panel.add(comboBox);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(SignupFrame.class.getResource("images\\Default_a_picture_related_to_a_real_estate_agency_in_purple_3.jpg")));
+        lblNewLabel.setIcon(new ImageIcon(SignupFrame.class.getResource("assets\\sign up bg.jpg")));
         lblNewLabel.setBounds(0, 0, 969, 593);
         getContentPane().add(lblNewLabel);
 
@@ -192,6 +192,7 @@ public class SignupFrame extends JFrame implements ActionListener {
     public static void main(String[] args) {
        
         SignupFrame frame = new SignupFrame();
+    
         frame.setVisible(true);
     }
 }

@@ -32,10 +32,10 @@ public class LoginFrame extends JFrame implements ActionListener{
 	    private Statement statement;
 	    private JPanel panel;
 
-    LoginFrame(){
+    public LoginFrame(){
     	 try {
              Class.forName("oracle.jdbc.driver.OracleDriver");
-             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "DAOUADI2004");
+             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
              statement = connection.createStatement();
          } catch (Exception e1) {
              e1.printStackTrace();
@@ -49,7 +49,7 @@ public class LoginFrame extends JFrame implements ActionListener{
          this.setResizable(false);
          getContentPane().setLayout(null);
          this.setLocationRelativeTo(null);
-         this.setIconImage(Toolkit.getDefaultToolkit().getImage(SignupFrame.class.getResource("images/logo.png")));
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(SignupFrame.class.getResource("assets\\logo.png")));
          getContentPane().setLayout(null);
          
          panel = new JPanel();
@@ -133,7 +133,7 @@ public class LoginFrame extends JFrame implements ActionListener{
          label2.setBorder(BorderFactory.createEmptyBorder(80, 10, 10, 10));
          
          JLabel lblNewLabel = new JLabel("");
-         lblNewLabel.setIcon(new ImageIcon(LoginFrame.class.getResource("images/Default_a_picture_related_to_a_real_estate_agency_in_purple_2 (1).jpg")));
+         lblNewLabel.setIcon(new ImageIcon(LoginFrame.class.getResource("assets/login bg.jpg")));
          lblNewLabel.setBounds(0, 0, 969, 593);
          getContentPane().add(lblNewLabel);
 
