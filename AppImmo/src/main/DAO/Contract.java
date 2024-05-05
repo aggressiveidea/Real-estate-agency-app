@@ -1,6 +1,7 @@
 package main.DAO;
 
 import java.util.Date;
+import java.util.Random;
 
 enum contract_type{
     PURCHASE_AGREEMENT_CONTRACT, LEASE_AGREEMENTS;
@@ -18,14 +19,22 @@ public class Contract {
 
     
     //construtor 1
-    public Contract(int id, String agent_name, String agent_surname, Date duration, double amount) {
-        this.id = id;
+    public Contract(String agent_name, String agent_surname, double amount) {
+        
+        this.id = generateRandomId();
+
+        this.duration = new Date ();
+
         this.agent_name = agent_name;
         this.agent_surname = agent_surname;
-        this.duration = duration;
         this.amount = amount;
     }
     //those constructors don't containt type, it will be modified only by its setter
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
+    }
 
     //empty constructor
     public Contract() {
