@@ -1,11 +1,9 @@
+package main.DAO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-enum owner_type {
-    LESSOR, SELLER;
-}
 
 public class Owner extends User {
 
@@ -60,21 +58,24 @@ public class Owner extends User {
 
     // methods
 
-    public int add_property(property_type typeproperty, String address) {
-        // Generate random ID
+    public int add_property(Property property) {
+        
         int id = generateRandomId();
 
         // Execute SQL insert
         try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123")) {
-            String sql = "INSERT INTO Proprietaire (IDpropr, Nompropr, Prenompropr, Emailpropr, telephonepropr) " +
-                    "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Localbien, Descbien, AgentID, PropriID) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 // Set parameters for the prepared statement
                 pstmt.setInt(1, id);
-                pstmt.setString(2, typeproperty.getNompropr());
-                pstmt.setString(3, typeproperty.getPrenompropr());
-                pstmt.setString(4, typeproperty.getEmailpropr());
-                pstmt.setString(5, typeproperty.getTelephonepropr());
+                pstmt.setString(2, property.property_type.name());
+                pstmt.setDouble(3, property.Size);
+                pstmt.setDouble(4, property.price);
+                pstmt.setString(5, property.address);
+                pstmt.setString(6, property.description);
+                pstmt.setInt(7, Property.assignedAgentid);
+                pstmt.setInt(8, getProperty_id());
 
                 // Execute the SQL query
                 int rowsInserted = pstmt.executeUpdate();
@@ -95,7 +96,7 @@ public class Owner extends User {
     }
 
     public void remove_property(int property_id) {
-
+        // Implementation for removing property
     }
 
     private int generateRandomId() {
@@ -106,8 +107,8 @@ public class Owner extends User {
     public String toString() {
         return "Proprietaire [ownertype=" + ownertype + "]";
     }
-
 }
+
 
 
 
