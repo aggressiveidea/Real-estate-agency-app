@@ -1,39 +1,36 @@
 package main.ui;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JPanel;
-import java.sql.Connection; 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.swing.JTextField;
+
+import main.DAO.User;
 
 public class InformationsFrame extends JFrame implements ActionListener {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JTextField nomField;
+    private static final long serialVersionUID = 1L;
+    private JTextField nomField;
     private JTextField prenomField;
     private JTextField numTelephoneField;
     private JTextField emailField;
-    private Connection connection;
     private JButton button;
     private JButton retour;
-    private JComboBox<String> chooseType;
+
+    public Connection connection;
 
     public InformationsFrame() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(InformationsFrame.class.getResource("assets\\logo.png")));
@@ -75,8 +72,6 @@ public class InformationsFrame extends JFrame implements ActionListener {
         emailLabel.setBounds(100, 343, 200, 30);
         emailLabel.setFont(new Font("Arial (Corps CS)", Font.PLAIN, 20));
 
-        String[] types = {"Buyer", "Tenant", "Seller", "Lessor"};
-
         button = new JButton("Register");
         button.setForeground(new Color(115, 24, 154));
         button.setFont(new Font("Dialog", Font.PLAIN, 11));
@@ -111,21 +106,21 @@ public class InformationsFrame extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 766, 65);
         getContentPane().add(panel);
-        
+
         JPanel panel_1 = new JPanel();
-        panel_1.setBounds(504, 98, 252, 275);
+        panel_1.setBounds(467, 98, 289, 275);
         getContentPane().add(panel_1);
-        panel_1.setBackground(new Color(115,24,154));
+        panel_1.setBackground(new Color(115, 24, 154));
         panel_1.setLayout(null);
-        
+
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setBounds(504, 98, 250, 275);
-        getContentPane().add(lblNewLabel);
         lblNewLabel.setIcon(new ImageIcon(InformationsFrame.class.getResource("assets\\clipart2415206.png")));
+        lblNewLabel.setBounds(10, 0, 279, 275);
+        panel_1.add(lblNewLabel);
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,54 +129,36 @@ public class InformationsFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            // Retrieve input from text fields and combo box
             String nom = nomField.getText();
             String prenom = prenomField.getText();
             String numtel = numTelephoneField.getText();
             String email = emailField.getText();
-            String type = chooseType.getSelectedItem().toString();
-            String sql = ("INSERT INTO infoframe (nom, prenom, telephone, email, typeuser) VALUES (?, ?, ?, ?,?)");
 
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                // Set parameters in the prepared statement
-                preparedStatement.setString(1, nom);
-                preparedStatement.setString(2, prenom);
-                preparedStatement.setString(3, numtel);
-                preparedStatement.setString(4, email);
-                preparedStatement.setString(5, type);
-
-                
-
-                // Execute the INSERT statement
-                int rowsAffected = preparedStatement.executeUpdate();
-
-                if (rowsAffected >= 1) {
-                    JOptionPane.showMessageDialog(button, "Welcome, " + nom + " " + prenom + "!");
-                } else {
-                    JOptionPane.showMessageDialog(button, "No records inserted. Please try again.");
-                }
-
-                // Clear the input fields after successful insertion
+            try {
+                User utilisateur = new User(nom, prenom, email, numtel);
+                utilisateur.signup(nom, prenom, email, numtel);
+                JOptionPane.showMessageDialog(this, "Welcome, " + nom + " " + prenom);
+            
                 nomField.setText("");
                 prenomField.setText("");
                 numTelephoneField.setText("");
                 emailField.setText("");
-                // to go to the main page
-                //LandingFrame mainPage = new LandingFrame();
-                //mainPage.setVisible(true);
+            
                 this.dispose();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                JOptionPane.showMessageDialog(button, "Error occurred while processing the form: " + e1.getMessage());
+            
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Registration Error", JOptionPane.ERROR_MESSAGE);
             }
+            
+
         } else if (e.getSource() == retour) {
             this.dispose();
-            new SignupFrame();
         }
     }
+
     public static void main(String[] args) {
-	       
         InformationsFrame frame = new InformationsFrame();
         frame.setVisible(true);
     }
+
 }

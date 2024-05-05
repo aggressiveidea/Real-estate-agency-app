@@ -1,4 +1,5 @@
 package main.ui;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -29,28 +30,39 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import main.DAO.User;
+//import main.DAO.Type;
+
+import javax.swing.*;
+import java.awt.*;
+
+
 public class SignupFrame extends JFrame implements ActionListener {
 
     private JButton button;
-    
     private JTextField textField;
     private JPasswordField textField2;
     private JButton btnNewButton;
     private Connection connection;
     private Statement statement;
     private JPanel panel;
-   
+    private JComboBox<String> comboBox;
 
     public SignupFrame() {
         try {
+            // Établir la connexion à la base de données
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
-        } catch (Exception e1) {
-            e1.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // Afficher un message d'erreur si le pilote JDBC n'est pas trouvé
+            JOptionPane.showMessageDialog(this, "JDBC driver not found");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Afficher un message d'erreur en cas d'échec de la connexion
+            JOptionPane.showMessageDialog(this, "Failed to connect to database");
         }
-
-       
 
         this.setTitle("IMMO");
         this.setSize(963, 630);
@@ -61,9 +73,9 @@ public class SignupFrame extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(SignupFrame.class.getResource("assets\\logo.png")));
         getContentPane().setLayout(null);
-        
+
         panel = new JPanel();
-        panel.setBackground(new Color(115, 24, 154,130));
+        panel.setBackground(new Color(115, 24, 154, 130));
         panel.setBounds(357, 76, 351, 438);
         getContentPane().add(panel);
         panel.setLayout(null);
@@ -75,7 +87,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         JLabel label3 = new JLabel("Username");
         label3.setBounds(35, 68, 146, 104);
         panel.add(label3);
-        label3.setForeground(Color.white);
+        label3.setForeground(Color.WHITE);
         label3.setFont(new Font("Arial (Corps CS)", Font.PLAIN, 17));
         label3.setVerticalAlignment(JLabel.TOP);
         label3.setHorizontalAlignment(JLabel.CENTER);
@@ -84,7 +96,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         JLabel label4 = new JLabel("Password");
         label4.setBounds(56, 149, 103, 113);
         panel.add(label4);
-        label4.setForeground(Color.white);
+        label4.setForeground(Color.WHITE);
         label4.setFont(new Font("Arial (Corps CS)", Font.PLAIN, 17));
         label4.setVerticalAlignment(JLabel.TOP);
         label4.setBorder(BorderFactory.createEmptyBorder(80, 10, 10, 10));
@@ -98,6 +110,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         panel.add(button);
         button.setForeground(new Color(115, 24, 154));
         button.setFont(new Font("Dialog", Font.PLAIN, 11));
+        button.addActionListener(this);
 
         JLabel lblNewLabel_1 = new JLabel("You already have an account ?");
         lblNewLabel_1.setBounds(22, 402, 155, 14);
@@ -110,23 +123,21 @@ public class SignupFrame extends JFrame implements ActionListener {
         panel.add(btnNewButton);
         btnNewButton.setFont(new Font("Dialog", Font.BOLD, 13));
         btnNewButton.setForeground(new Color(255, 255, 255));
-        btnNewButton.setContentAreaFilled(false); 
+        btnNewButton.setContentAreaFilled(false);
         btnNewButton.setBorderPainted(false); // Remove button border
         btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 
-				 LoginFrame LoginFrame = new LoginFrame();
-				LoginFrame.setVisible(true);
-				dispose();
-				
-			}
-		});
+            public void actionPerformed(ActionEvent e) {
+                LoginFrame LoginFrame = new LoginFrame();
+                LoginFrame.setVisible(true);
+                dispose();
+            }
+        });
 
         JLabel label = new JLabel();
         label.setBounds(69, -16, 211, 115);
         panel.add(label);
         label.setText("Sign up");
-        label.setForeground(Color.white);
+        label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial (Corps CS)", Font.PLAIN, 35));
         label.setVerticalAlignment(JLabel.TOP);
         label.setHorizontalAlignment(JLabel.CENTER);
@@ -136,12 +147,12 @@ public class SignupFrame extends JFrame implements ActionListener {
         label2.setBounds(47, 11, 267, 115);
         panel.add(label2);
         label2.setText("Hello! let's get started");
-        label2.setForeground(Color.white);
+        label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Arial (Corps CS)", Font.PLAIN, 20));
         label2.setVerticalAlignment(JLabel.TOP);
         label2.setHorizontalAlignment(JLabel.CENTER);
         label2.setBorder(BorderFactory.createEmptyBorder(80, 10, 10, 10));
-        
+
         JLabel lblSignupAs = new JLabel(" signup as : ");
         lblSignupAs.setVerticalAlignment(SwingConstants.TOP);
         lblSignupAs.setForeground(Color.WHITE);
@@ -149,22 +160,17 @@ public class SignupFrame extends JFrame implements ActionListener {
         lblSignupAs.setBorder(BorderFactory.createEmptyBorder(80, 10, 10, 10));
         lblSignupAs.setBounds(47, 224, 130, 113);
         panel.add(lblSignupAs);
-        
-        JComboBox comboBox = new JComboBox();
+
+        comboBox = new JComboBox<>();
         comboBox.setForeground(new Color(115, 24, 154));
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Owner ", "Client ", "Real estate agent "}));
+        comboBox.setModel(new DefaultComboBoxModel<>(new String[] { "OWNER", "CLIENT", "REAL_ESTATE_AGENT" }));
         comboBox.setBounds(151, 307, 119, 22);
         panel.add(comboBox);
-        
+
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon(SignupFrame.class.getResource("assets\\sign up bg.jpg")));
         lblNewLabel.setBounds(0, 0, 969, 593);
         getContentPane().add(lblNewLabel);
-
-        
-
-    
-    
     }
 
     @Override
@@ -172,27 +178,30 @@ public class SignupFrame extends JFrame implements ActionListener {
         if (e.getSource() == button) {
             String username = textField.getText();
             String password = new String(textField2.getPassword());
-            String sql = "INSERT INTO login VALUES('" + username + "','" + password + "')";
+           // Récupérer le type sélectionné dans la liste déroulante
+           String userType = (String) comboBox.getSelectedItem();
+
             try {
-                statement.executeUpdate(sql);
-                JOptionPane.showMessageDialog(button, "Successfully registered");
-                // Go to the registration page
-                //InfoFrame InfoFrame = new InfoFrame();
-                //InfoFrame.setVisible(true);
+                // Appeler la méthode signup de User avec le type sélectionné
+                User utilisateur = new User(username, password);
+                utilisateur.signup(username, password, userType.toUpperCase());
+
+                // Afficher un message de réussite
+                JOptionPane.showMessageDialog(button, " Inscription réussie ! Votre identifiant est : " + utilisateur.id_generate);
+
+                // Fermer la fenêtre de sign up
                 this.dispose();
             } catch (SQLException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(button, "Error occurred while registering");
             }
-            textField.setText(""); //hadi bach nfrgho l input feild
+            textField.setText("");
             textField2.setText("");
-        } 
+        }
     }
 
     public static void main(String[] args) {
-       
         SignupFrame frame = new SignupFrame();
-    
         frame.setVisible(true);
     }
 }

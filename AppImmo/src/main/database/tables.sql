@@ -2,19 +2,9 @@ CREATE TABLE login (
     nomutilisateur VARCHAR2(15),
     motdepasse VARCHAR2(15) NOT NULL,
     id NUMBER(7) PRIMARY KEY NOT NULL,
+    typeuser VARCHAR2(30),
     NUM INT NOT NULL
 );
-
-CREATE TABLE infoframe (
-    nom VARCHAR2(15) NOT NULL,
-    prenom VARCHAR2(15) NOT NULL,
-    telephone VARCHAR2(10) NOT NULL,
-    email VARCHAR2(35) NOT NULL,
-    typeuser VARCHAR2(30),
-    ID_INFO NUMBER(7) PRIMARY KEY NOT NULL,
-    CONSTRAINT fk_id_info FOREIGN KEY (ID_INFO) REFERENCES login(id)
-);
-
 
 CREATE TABLE Proprietaire (
     IDpropr NUMBER(7) PRIMARY KEY NOT NULL,
@@ -22,7 +12,7 @@ CREATE TABLE Proprietaire (
     Prenompropr VARCHAR2(20),
     Emailpropr VARCHAR2(40),
     telephonepropr VARCHAR2(10),
-    CONSTRAINT fk_Proprietaire FOREIGN KEY (IDpropr) REFERENCES infoframe(ID_INFO)
+    CONSTRAINT fk_Proprietaire FOREIGN KEY (IDpropr) REFERENCES login(id)
 );
 
 CREATE TABLE AgentImm (
@@ -31,7 +21,7 @@ CREATE TABLE AgentImm (
     PrenomAgent VARCHAR2(20),
     EmailAgent VARCHAR2(40),
     telephoneAgAJent VARCHAR2(10),
-    CONSTRAINT fk_AgentImm FOREIGN KEY (IDagent) REFERENCES infoframe(ID_INFO)
+    CONSTRAINT fk_AgentImm FOREIGN KEY (IDagent) REFERENCES login(id)
 );
 
 CREATE TABLE Client (
@@ -41,7 +31,7 @@ CREATE TABLE Client (
     AdressClient VARCHAR2(30),
     EmailClient VARCHAR2(45),
     telephoneClient VARCHAR2(10),
-    CONSTRAINT fk_Client FOREIGN KEY (IDclient) REFERENCES infoframe(ID_INFO)
+    CONSTRAINT fk_Client FOREIGN KEY (IDclient) REFERENCES login(id)
 );
 
 CREATE TABLE BienImmobilier (
