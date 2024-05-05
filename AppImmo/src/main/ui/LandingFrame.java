@@ -84,7 +84,7 @@ public class LandingFrame extends JFrame implements ActionListener{
 		separator_1_2.setBounds(41, 219, 175, 2);
 		panel.add(separator_1_2);
 		
-		JButton btnNewButton_1 = new JButton("Property");
+		JButton btnNewButton_1 = new JButton("Agent ");
 		btnNewButton_1.setBounds(41, 168, 144, 40);
 		panel.add(btnNewButton_1);
 		btnNewButton_1.setBackground(new Color(115,24,154));
@@ -103,17 +103,17 @@ public class LandingFrame extends JFrame implements ActionListener{
 		btnNewButton_1_1.setContentAreaFilled(false); 
 		btnNewButton_1_1.setBorderPainted(false); 
 		
-		/*btnNewButton_1_1.addActionListener(new ActionListener() {
+		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 // Create an instance of LoginFrame
-				 transactionframe transactionframe = new transactionframe();
-				 // Make the loginFrame visible
+				 
+				 Transactionframe transactionframe = new Transactionframe();
+				 
 				 transactionframe.setVisible(true);
-				 // Close the current frame
+				 
 				dispose();
 				
 			}
-		});*/
+		});
 
 		
 		btnNewButton_1_1.setFont(new Font("Dialog", Font.PLAIN, 25));
@@ -137,17 +137,7 @@ public class LandingFrame extends JFrame implements ActionListener{
        btnNewButton_1_1_1.setForeground(Color.WHITE);
        btnNewButton_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 25));
        btnNewButton_1_1_1.setContentAreaFilled(false); 
-       btnNewButton_1_1_1.setBorderPainted(false); // Remove button border
-
-       
-       JButton btnNewButton_1_1_1_2 = new JButton("Agent");
-       btnNewButton_1_1_1_2.setForeground(Color.WHITE);
-       btnNewButton_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 25));
-       btnNewButton_1_1_1_2.setBackground(new Color(115, 24, 154));
-       btnNewButton_1_1_1_2.setBounds(41, 369, 144, 40);
-       panel.add(btnNewButton_1_1_1_2);
-       btnNewButton_1_1_1_2.setContentAreaFilled(false); 
-       btnNewButton_1_1_1_2.setBorderPainted(false); 
+       btnNewButton_1_1_1.setBorderPainted(false);
 
        btnNewButton_1_1_1.addActionListener(this); 
            btnNewButton_1_1_1_1.addActionListener(this);
@@ -227,12 +217,12 @@ public class LandingFrame extends JFrame implements ActionListener{
         lblNewLabel_3_1.setBounds(0, 25, 64, 25);
         panel_2.add(lblNewLabel_3_1);
         
-        JLabel lblNewLabel_4 = new JLabel("");//pour afficher le type
+        JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 15));
         lblNewLabel_4.setBounds(73, 5, 112, 20);
         panel_2.add(lblNewLabel_4);
         
-        JLabel lblNewLabel_4_1 = new JLabel("");//pour afficher le prix
+        JLabel lblNewLabel_4_1 = new JLabel("");
         lblNewLabel_4_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         lblNewLabel_4_1.setBounds(73, 25, 112, 20);
         panel_2.add(lblNewLabel_4_1);
@@ -248,22 +238,22 @@ public class LandingFrame extends JFrame implements ActionListener{
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");
     if (e.getSource() == btnNewButton_1_1_1_1) {
-        // Create an instance of LoginFrame
+        
         LoginFrame loginFrame = new LoginFrame();
-        // Make the loginFrame visible
+        
         loginFrame.setVisible(true);
-        // Close the current frame
+        
         this.dispose();
     }
     
-	/*if (e.getSource() == btnNewButton_1_1_1) {
-        // Create an instance of the transactionframe class
-        profile profile = new profile();
-        // Make the transactionframe visible
+	if (e.getSource() == btnNewButton_1_1_1) {
+        
+        ProfileFrame profile = new ProfileFrame();
+        
         profile.setVisible(true);
-        // Close the current frame
+        
         this.dispose();
-    }*/
+    }
 }
 	 public static void main(String[] args) {
 	        
