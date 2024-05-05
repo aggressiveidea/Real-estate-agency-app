@@ -80,4 +80,12 @@ CREATE TABLE Interaction (
     CONSTRAINT fk__AgentID FOREIGN KEY (AgentID) REFERENCES AgentImm(IDagent),
     CONSTRAINT fk__ClientID FOREIGN KEY (ClientID) REFERENCES Client(IDclient)
 );
+
+CREATE TABLE Payment (
+    ID NUMBER(7) PRIMARY KEY,
+    TransactionID NUMBER(7),
+    Amount NUMBER(7),
+    DatePay Date,
+    CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(IDtransaction)
+);
 //
