@@ -1,7 +1,12 @@
 package main.DAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 enum transaction_type{
     RENT, BUY;
@@ -32,20 +37,55 @@ public class Transaction {
     }
     //type in the setter instead of the constructor
 
+    //necessary methods
     private int generateRandomId (){
         Random rand = new Random();
         return rand.nextInt(1000000);
     }  
 
-    //methods
+    private java.sql.Date SqlDate (Date utilDate){
+        return new java.sql.Date (utilDate.getTime());
+    }
+
+    //class methods
     public int generate_contract(int id){
         return id;
         //add later
     }
 
-    public int add_payment (int id, double cost){
-        return id;
-        //add later
+    public int add_payment (double cost){
+       
+        Payment pay = new Payment(this.id, cost);
+        this.payment_id = pay.id;
+
+        //SQL insert
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+
+            String sql = "INSERT INTO Payment (ID, Amount, DatePay) VALUES (?,?,?)";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, this.id);
+            pstmt.setDouble(2, cost);
+            pstmt.setDate(3,SqlDate(this.date));
+
+            // Execute query
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(null, "Transaction added successfully", "NOTE",JOptionPane.PLAIN_MESSAGE);
+                return pay.id;
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to add transaction", "ERROR 1",JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to add transaction", "ERROR 2",JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
     }
 
     //getters and setters
@@ -141,3 +181,4 @@ public class Transaction {
 
     
 }
+
