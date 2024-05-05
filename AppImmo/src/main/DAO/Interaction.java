@@ -2,6 +2,7 @@ package main.DAO;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.Random;
 
 public class Interaction {
     
@@ -11,20 +12,28 @@ public class Interaction {
     public String details;
 
     //constructor 1
-    public Interaction(int id, int client_id, int property_id, Date date, Time hour, String details) {
-        this.id = id;
+    public Interaction(int client_id, int property_id, Time hour, String details) {
+        
+        this.id = generateRandomId();
+
+        this.date = new Date();
+
         this.client_id = client_id;
         this.property_id = property_id;
-        this.date = date;
         this.hour = hour;
         this.details = details;
     }
     
     //constructor 2
-    public Interaction(int id2) {
-        this.id = id2;
+    public Interaction() {
+        this.id = generateRandomId();
     }
-    
+ 
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
+    }    
+
     //methodes
     public void AddInteraction ()
     {

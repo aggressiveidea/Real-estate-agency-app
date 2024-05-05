@@ -1,5 +1,7 @@
 package main.DAO;
 
+import java.util.Random;
+
 enum type{
     OWNER, CLIENT, REAL_ESTATE_AGENT;
 }
@@ -18,21 +20,23 @@ public class User {
     }
 
     //constructor 2
-    public User(int id, String surname, String name, String email, String phone_number, int t) {
-        this.id = id;
+    public User(String surname, String name, String email, String phone_number, int t) {
+        
+        this.id = generateRandomId();
+
         this.surname = surname;
         this.name = name;
         this.email = email;
         this.phone_number = phone_number;
         switch (t) {
             case 1:
-                this.type = type.CLIENT;
+                this.type = main.DAO.type.CLIENT;
                 break;
             case 2:
-                this.type = type.OWNER;
+                this.type = main.DAO.type.OWNER;
                 break;
             case 3:
-                this.type = type.REAL_ESTATE_AGENT;
+                this.type = main.DAO.type.REAL_ESTATE_AGENT;
                 break;
             default:
                 this.type = null;
@@ -41,9 +45,11 @@ public class User {
     }
 
     //full constructor
-    public User(int id, String surname, String name, String email, String phone_number, int t, String username,
+    public User(String surname, String name, String email, String phone_number, int t, String username,
             String password) {
-        this.id = id;
+        
+        this.id = generateRandomId();
+        
         this.surname = surname;
         this.name = name;
         this.email = email;
@@ -52,16 +58,21 @@ public class User {
         this.password = password;
         switch (t) {
             case 1:
-                this.type = type.CLIENT;
+                this.type = main.DAO.type.CLIENT;
                 break;
             case 2:
-                this.type = type.OWNER;
+                this.type = main.DAO.type.OWNER;
             case 3:
-                this.type = type.REAL_ESTATE_AGENT;
+                this.type = main.DAO.type.REAL_ESTATE_AGENT;
             default:
                 this.type = null;
                 break;
         }
+    }
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
     }
 
     //methods

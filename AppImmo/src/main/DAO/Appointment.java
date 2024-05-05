@@ -1,7 +1,8 @@
 package main.DAO;
 
 import java.sql.Time;
-import java.util.Date;;
+import java.util.Date;
+import java.util.Random;;
 
 public class Appointment {
     
@@ -13,15 +14,23 @@ public class Appointment {
 
 
     // Constructeur 
-    public Appointment(int id, int client_id, int owner_id, int agent_id, String property_address, Date appointment_date, Time appointment_hour_deb, Time appointment_hour_fin) {
-        this.id = id;
+    public Appointment(int client_id, int owner_id, int agent_id, String property_address, Time appointment_hour_deb, Time appointment_hour_fin) {
+        
+        this.id = generateRandomId();
+
+        this.appointment_date = new Date();
+
         this.client_id = client_id;
         this.owner_id = owner_id;
         this.agent_id = agent_id;
         this.property_address = property_address;
-        this.appointment_date = appointment_date;
         this.appointment_hour_deb = appointment_hour_deb;
         this.appointment_hour_fin = appointment_hour_fin;
+    }
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
     }
     
     // getters and setters

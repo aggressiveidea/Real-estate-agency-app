@@ -1,6 +1,7 @@
 package main.DAO;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Random;
 
 public class Payment {
     
@@ -9,11 +10,19 @@ public class Payment {
     public Date date;
 
     //constructor
-    public Payment(int id, int transaction_id, double amount, Date date) {
-        this.id = id;
+    public Payment(int transaction_id, double amount) {
+        
+        this.id = generateRandomId();
+
+        this.date = new Date();
+
         this.transaction_id = transaction_id;
         this.amount = amount;
-        this.date = date;
+    }
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
     }
 
     //getters and setters

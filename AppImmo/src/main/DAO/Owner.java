@@ -5,54 +5,27 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
 public class Owner extends User {
 
-    public owner_type ownertype;
     public int property_id;
     
     // constructor 1
     public Owner(String username, String password, int t, int property_id) {
         super(username, password);
         this.property_id = property_id;
-        switch (t) {
-            case 1:
-                this.ownertype = owner_type.LESSOR;
-                break;
-            case 2:
-                this.ownertype = owner_type.SELLER;
-                break;
-            default:
-                break;
-        }
     }
 
     // constructor 2
-    public Owner(int id, String surname, String name, String email, String phone_number, int property_id) {
-        super(id, surname, name, email, phone_number, 2);
+    public Owner(String surname, String name, String email, String phone_number, int property_id) {
+        super(surname, name, email, phone_number, 2);
         this.property_id = property_id;
     }
 
     // full constructor
-    public Owner(int id, String surname, String name, String email, String phone_number, String username,
+    public Owner(String surname, String name, String email, String phone_number, String username,
             String password, int property_id) {
-        super(id, surname, name, email, phone_number, 2, username, password);
-        this.property_id = property_id;
-    }
-
-    // getters and setters
-    public owner_type getownertype() {
-        return ownertype;
-    }
-
-    public void setownertype(owner_type ownertype) {
-        this.ownertype = ownertype;
-    }
-
-    public int getProperty_id() {
-        return property_id;
-    }
-
-    public void setProperty_id(int property_id) {
+        super(surname, name, email, phone_number, 2, username, password);
         this.property_id = property_id;
     }
 
@@ -70,10 +43,10 @@ public class Owner extends User {
                 // Set parameters for the prepared statement
                 pstmt.setInt(1, id);
                 pstmt.setString(2, property.property_type.name());
-                pstmt.setDouble(3, property.Size);
-                pstmt.setDouble(4, property.price);
-                pstmt.setString(5, property.address);
-                pstmt.setString(6, property.description);
+                pstmt.setDouble(3, Property.Size);
+                pstmt.setDouble(4, Property.price);
+                pstmt.setString(5, Property.address);
+                pstmt.setString(6, Property.description);
                 pstmt.setInt(7, Property.assignedAgentid);
                 pstmt.setInt(8, getProperty_id());
 
@@ -103,9 +76,15 @@ public class Owner extends User {
         return (int) (Math.random() * 1000000); // Adjust range as needed
     }
 
-    @Override
-    public String toString() {
-        return "Proprietaire [ownertype=" + ownertype + "]";
+
+    // getters and setters
+
+    public int getProperty_id() {
+        return property_id;
+    }
+
+    public void setProperty_id(int property_id) {
+        this.property_id = property_id;
     }
 }
 

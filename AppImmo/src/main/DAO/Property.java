@@ -1,5 +1,7 @@
 package main.DAO;
 
+import java.util.Random;
+
 public class Property {
 
     public int id;
@@ -14,15 +16,38 @@ public class Property {
     public double price_min;
 
     // Constructor
-    public Property(int id, int assignedAgentid,
+    public Property(int assignedAgentid,
             double size, String address, String description, double price, double price_min) {
-        this.id = id;
-        this.assignedAgentid = assignedAgentid;
-        this.Size = size;
-        this.address = address;
-        this.description = description;
-        this.price = price;
+        
+        this.id = generateRandomId();
+
+        Property.assignedAgentid = assignedAgentid;
+        Property.Size = size;
+        Property.address = address;
+        Property.description = description;
+        Property.price = price;
         this.price_min = price_min;
+    }
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
+    }
+
+    //methods
+    public int affecteproperty(int id) {
+        return id;
+        // add later
+    }
+
+    public int searchproperty(String property_type) {
+        return assignedAgentid;
+        // add later
+    }
+
+    public int searchproperty(double price) {
+        return assignedAgentid;
+        // add later
     }
 
     // Getter and Setter methods
@@ -101,21 +126,6 @@ public class Property {
 
     public void setSpecifications(p_specifications specifications) {
         this.specifications = specifications;
-    }
-
-    public int affecteproperty(int id) {
-        return id;
-        // add later
-    }
-
-    public int searchproperty(String property_type) {
-        return assignedAgentid;
-        // add later
-    }
-
-    public int searchproperty(double price) {
-        return assignedAgentid;
-        // add later
     }
 
     // Nested enum classes

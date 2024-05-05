@@ -1,6 +1,7 @@
 package main.DAO;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Random;
 
 enum transaction_type{
     RENT, BUY;
@@ -14,19 +15,27 @@ public class Transaction {
     public double cost;
 
     //constructor
-    public Transaction(int id, int property_id, int agent_id, int client_id, int owner_id, int contract_id,
-            int payment_id, Date date, double cost) {
-        this.id = id;
+    public Transaction(int property_id, int agent_id, int client_id, int owner_id, int contract_id,
+            int payment_id, double cost) {
+        
+        this.id = generateRandomId();
+
+        this.date = new Date();
+
         this.property_id = property_id;
         this.agent_id = agent_id;
         this.client_id = client_id;
         this.owner_id = owner_id;
         this.contract_id = contract_id;
         this.payment_id = payment_id;
-        this.date = date;
         this.cost = cost;
     }
     //type in the setter instead of the constructor
+
+    private int generateRandomId (){
+        Random rand = new Random();
+        return rand.nextInt(1000000);
+    }  
 
     //methods
     public int generate_contract(int id){
