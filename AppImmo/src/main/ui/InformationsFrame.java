@@ -1,5 +1,6 @@
 package main.ui;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -112,15 +113,15 @@ public class InformationsFrame extends JFrame implements ActionListener {
         getContentPane().add(panel);
         
         JPanel panel_1 = new JPanel();
-        panel_1.setBounds(467, 98, 289, 275);
+        panel_1.setBounds(504, 98, 252, 275);
         getContentPane().add(panel_1);
         panel_1.setBackground(new Color(115,24,154));
         panel_1.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setBounds(504, 98, 250, 275);
+        getContentPane().add(lblNewLabel);
         lblNewLabel.setIcon(new ImageIcon(InformationsFrame.class.getResource("assets\\clipart2415206.png")));
-        lblNewLabel.setBounds(10, 0, 279, 275);
-        panel_1.add(lblNewLabel);
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -184,4 +185,3 @@ public class InformationsFrame extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 }
-
