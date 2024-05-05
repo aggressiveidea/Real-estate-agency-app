@@ -1,7 +1,27 @@
 package main.DAO;
 
 enum property_type{
-    STUDIO, F1, F2, F3, F4, F5, DUPLEXE, VILLA, CARCASS, COMMERCIAL, BUILDING, LAND; 
+    STUDIO, F1, F2, F3, F4, F5, DUPLEXE, VILLA, CARCASS, COMMERCIAL, BUILDING, LAND;
+
+    String getNompropr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNompropr'");
+    }
+
+    String getTelephonepropr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTelephonepropr'");
+    }
+
+    String getEmailpropr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEmailpropr'");
+    }
+
+    String getPrenompropr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPrenompropr'");
+    } 
 }
 
 enum property_papers{

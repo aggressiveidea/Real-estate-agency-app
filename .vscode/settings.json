@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\ACER\\Downloads\\ojdbc11.jar",
+        "c:\\Users\\ACER\\Downloads\\rs2xml.jar"
+    ]
+}
