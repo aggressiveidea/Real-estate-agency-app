@@ -1,12 +1,14 @@
 package main.ui;
-
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Random;
 
 public class AddpropertyFrame extends JFrame {
 
@@ -35,7 +37,7 @@ public class AddpropertyFrame extends JFrame {
     }
 
     public AddpropertyFrame() {
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(AddpropertyFrame.class.getResource("assets\\logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(AddpropertyFrame.class.getResource("assets\\logo.png")));
         setTitle("IMMO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 797, 621);
@@ -75,8 +77,6 @@ public class AddpropertyFrame extends JFrame {
         lblNewLabel.setBounds(291, 51, 197, 40);
         lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 30));
         contentPane.add(lblNewLabel);
-
-        
 
         JLabel lblNewLabel_1 = new JLabel("Address");
         lblNewLabel_1.setBounds(93, 133, 71, 20);
@@ -121,92 +121,162 @@ public class AddpropertyFrame extends JFrame {
         textField_3.setColumns(10);
         contentPane.add(textField_3);
         panel_1.setLayout(null);
-    
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(96, 430, 328, 64);
         contentPane.add(scrollPane);
-        
-                textArea = new JTextArea();
-                scrollPane.setViewportView(textArea);
-                textArea.setWrapStyleWord(true);
-                textArea.setDoubleBuffered(true);
-                textArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-                textArea.setDragEnabled(true);
-                textArea.setLineWrap(true);
-                textArea.setFont(new Font("Dialog", Font.PLAIN, 13));
+
+        textArea = new JTextArea();
+        scrollPane.setViewportView(textArea);
+        textArea.setWrapStyleWord(true);
+        textArea.setDoubleBuffered(true);
+        textArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        textArea.setDragEnabled(true);
+        textArea.setLineWrap(true);
+        textArea.setFont(new Font("Dialog", Font.PLAIN, 13));
 
         JButton btnNewButton = new JButton("ADD");
         btnNewButton.setBounds(323, 510, 165, 23);
         btnNewButton.setFont(new Font("Dialog", Font.BOLD, 11));
         contentPane.add(btnNewButton);
-        // JLabel to display the image
+
         imageLabel = new JLabel();
         imageLabel.setBounds(423, 119, 225, 187);
         contentPane.add(imageLabel);
 
-        
-        // Button to browse and select an image
-btnBrowse = new JButton("Browse");
-btnBrowse.setBounds(485, 317, 100, 30);
-btnBrowse.setForeground(Color.BLACK);
-btnBrowse.setFont(new Font("Dialog", Font.BOLD, 11));
-contentPane.add(btnBrowse);
-JComboBox comboBox = new JComboBox();
-comboBox.setBounds(192, 165, 167, 22);
-comboBox.setModel(new DefaultComboBoxModel(new String[] {"Studio ", "F1", "F2 ", "F3", "F4", "F5", "Duplex ", "Land ", "Villa ", "Carcass", "Commercial", "Building"}));
-contentPane.add(comboBox);
-JLabel lblNewLabel_1_1_1_2 = new JLabel("Price_Min");
-lblNewLabel_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-lblNewLabel_1_1_1_2.setBounds(93, 262, 71, 20);
-contentPane.add(lblNewLabel_1_1_1_2);
-textField_2 = new JTextField();
-textField_2.setFont(new Font("Dialog", Font.PLAIN, 11));
-textField_2.setColumns(10);
-textField_2.setBounds(194, 258, 165, 20);
-contentPane.add(textField_2);
-JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Papers");
-lblNewLabel_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-lblNewLabel_1_1_1_2_1.setBounds(93, 302, 71, 20);
-contentPane.add(lblNewLabel_1_1_1_2_1);
-JLabel lblNewLabel_1_1_1_2_2 = new JLabel("Specifications");
-lblNewLabel_1_1_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-lblNewLabel_1_1_1_2_2.setBounds(93, 345, 100, 20);
-contentPane.add(lblNewLabel_1_1_1_2_2);
-JComboBox comboBox_1 = new JComboBox();
-comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Notarial act", "Real estate promotion ", "Decision", "Real estate booklet", "Stamped papers", "Indivision act "}));
-comboBox_1.setBounds(194, 303, 165, 22);
-contentPane.add(comboBox_1);
-JComboBox comboBox_1_1 = new JComboBox();
-comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"Water", "Gas", "Electricity", "Garden ", "Fournished "}));
-comboBox_1_1.setBounds(194, 347, 165, 22);
-contentPane.add(comboBox_1_1);
-btnBrowse.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            // Resize the image to fit the label
-            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-            Image image = imageIcon.getImage();
-            Image scaledImage = image.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
-            // Set the scaled image to the label
-            imageLabel.setIcon(scaledIcon);
-        }
-    }
-});
+        btnBrowse = new JButton("Browse");
+        btnBrowse.setBounds(485, 317, 100, 30);
+        btnBrowse.setForeground(Color.BLACK);
+        btnBrowse.setFont(new Font("Dialog", Font.BOLD, 11));
+        contentPane.add(btnBrowse);
 
+        JComboBox comboBox = new JComboBox();
+        comboBox.setBounds(192, 165, 167, 22);
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"STUDIO", "F1", "F2 ", "F3", "F4", "F5", "DUPLEXE", "VILLA", "CARCASS", "COMMERCIAL", "BUILDING", "LAND"}));
+        contentPane.add(comboBox);
 
-        
-        
+        JLabel lblNewLabel_1_1_1_2 = new JLabel("Price_Min");
+        lblNewLabel_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+        lblNewLabel_1_1_1_2.setBounds(93, 262, 71, 20);
+        contentPane.add(lblNewLabel_1_1_1_2);
+
+        textField_2 = new JTextField();
+        textField_2.setFont(new Font("Dialog", Font.PLAIN, 11));
+        textField_2.setColumns(10);
+        textField_2.setBounds(194, 258, 165, 20);
+        contentPane.add(textField_2);
+
+        JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Papers");
+        lblNewLabel_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+        lblNewLabel_1_1_1_2_1.setBounds(93, 302, 71, 20);
+        contentPane.add(lblNewLabel_1_1_1_2_1);
+
+        JLabel lblNewLabel_1_1_1_2_2 = new JLabel("Specifications");
+        lblNewLabel_1_1_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+        lblNewLabel_1_1_1_2_2.setBounds(93, 345, 100, 20);
+        contentPane.add(lblNewLabel_1_1_1_2_2);
+
+        JComboBox comboBox_1 = new JComboBox();
+        comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"NOTARIAL_ACT", "REAL_ESTATE_PROMOTION ", "DECISION", "REAL_ESTATE_BOOKLET", "STAMBED_PAPERS", "INDIVISION_ACT"}));
+        comboBox_1.setBounds(194, 303, 165, 22);
+        contentPane.add(comboBox_1);
+
+        JComboBox comboBox_1_1 = new JComboBox();
+        comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"WATER", "GAS", "ELECTRICITY", "GARAGE", "GARDEN", "FURNISHED"}));
+        comboBox_1_1.setBounds(194, 347, 165, 22);
+        contentPane.add(comboBox_1_1);
+
+        btnBrowse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+                    Image image = imageIcon.getImage();
+                    Image scaledImage = image.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                    imageLabel.setIcon(scaledIcon);
+                }
+            }
+        });
 
         retour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LandingFrame LandingFrame = new LandingFrame();
-               LandingFrame.setVisible(true);
+                LandingFrame.setVisible(true);
                 dispose();
             }
         });
+
+        // Action Listener for ADD button
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get the values from the text fields and combo boxes
+                String address = textField.getText();
+                String type = (String) comboBox.getSelectedItem();
+                double price = Double.parseDouble(textField_1.getText());
+                double size = Double.parseDouble(textField_3.getText());
+                String description = textArea.getText();
+                double minPrice = Double.parseDouble(textField_2.getText());
+                String papers = (String) comboBox_1.getSelectedItem();
+                String specifications = (String) comboBox_1_1.getSelectedItem();
+
+                // Database connection parameters
+                String url = "jdbc:oracle:thin:@localhost:1521:XE";
+                String user = "system";
+                String password = "aldjia123";
+
+                String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+   
+   // Assuming you have the agent ID available
+   int agentID = 123; // Replace 123 with the actual agent ID
+   int propriID = 456; // Replace 456 with the actual propri ID
+   
+   try (Connection conn = DriverManager.getConnection(url, user, password);
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+   
+       pstmt.setInt(1, getNextID()); // Assuming this generates a valid ID
+       pstmt.setString(2, type);
+       pstmt.setDouble(3, size);
+       pstmt.setDouble(4, price);
+       pstmt.setString(5, description);
+       pstmt.setInt(6, agentID); // Set the AgentID
+       pstmt.setInt(7, propriID); // Set the PropriID
+       pstmt.setString(8, papers);
+       pstmt.setString(9, specifications);
+   
+       // Execute the SQL statement
+       pstmt.executeUpdate();
+       JOptionPane.showMessageDialog(null, "Property added successfully!");
+   
+   } catch (SQLException ex) {
+       ex.printStackTrace();
+       JOptionPane.showMessageDialog(null, "Error adding property: " + ex.getMessage());
+   }
+   
+            }
+        });
+    }
+
+    // Method to generate the next ID for IDbien
+    private int getNextID() {
+        int minID = 1000000; // le min 
+        int maxID = 9999999; // le max
+    
+       //instance de la class randome so n9drou we generate a random id
+        Random random = new Random();
+    
+        // ^^
+        int id = random.nextInt(maxID - minID + 1) + minID;
+    
+        return id;
     }
 }
+
+
+
+
+
+

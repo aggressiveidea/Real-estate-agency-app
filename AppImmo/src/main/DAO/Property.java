@@ -29,6 +29,11 @@ public class Property {
         this.price_min = price_min;
     }
 
+    public Property(String address2, String type, double price2, double size2, String description2, double minPrice,
+            String papers2, String specifications2) {
+        //TODO Auto-generated constructor stub
+    }
+
     private int generateRandomId (){
         Random rand = new Random();
         return rand.nextInt(1000000);
@@ -145,6 +150,11 @@ public class Property {
     public String toString() {
         return "Property [id=" + id + ", property_type=" + property_type + ", Size=" + Size + ", address=" + address
                 + ", description=" + description + ", price=" + price + "]";
+    }
+
+    public void setType(String text) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setType'");
     }
 }
 

@@ -18,14 +18,14 @@ public class Owner extends User {
 
     // constructor 2
     public Owner(String surname, String name, String email, String phone_number, int property_id) {
-        super(surname, name, email, phone_number, 2);
+        super(property_id, surname, name, email, phone_number, 2);
         this.property_id = property_id;
     }
 
     // full constructor
     public Owner(String surname, String name, String email, String phone_number, String username,
             String password, int property_id) {
-        super(surname, name, email, phone_number, 2, username, password);
+        super(property_id, surname, name, email, phone_number, 2, username, password);
         this.property_id = property_id;
     }
 

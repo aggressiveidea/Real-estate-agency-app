@@ -80,6 +80,7 @@ CREATE TABLE Interaction (
     CONSTRAINT fk__AgentID FOREIGN KEY (AgentID) REFERENCES AgentImm(IDagent),
     CONSTRAINT fk__ClientID FOREIGN KEY (ClientID) REFERENCES Client(IDclient)
 );
+<<<<<<< Updated upstream
 
 CREATE TABLE Payment (
     ID NUMBER(7) PRIMARY KEY,
@@ -89,3 +90,13 @@ CREATE TABLE Payment (
     CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(IDtransaction)
 );
 //
+=======
+//
+ALTER TABLE BienImmobilier
+ADD (property_type VARCHAR2(100),
+     property_papers VARCHAR2(100),
+     p_specifications VARCHAR2(200));
+     
+ALTER TABLE BienImmobilier
+DROP COLUMN property_type;
+>>>>>>> Stashed changes
