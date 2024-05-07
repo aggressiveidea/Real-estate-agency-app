@@ -1,5 +1,4 @@
 package main.ui;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -7,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import main.DAO.User;
+import main.ui.LoginFrame;
 
 public class InformationsFrame extends JFrame implements ActionListener {
 
@@ -120,7 +121,7 @@ public class InformationsFrame extends JFrame implements ActionListener {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,21 +137,20 @@ public class InformationsFrame extends JFrame implements ActionListener {
 
             try {
                 User utilisateur = new User(nom, prenom, email, numtel);
-                utilisateur.signup(nom, prenom, email, numtel);
-                JOptionPane.showMessageDialog(this, "Welcome, " + nom + " " + prenom);
-            
+                utilisateur.signup(nom, prenom, numtel, email);  
+
                 nomField.setText("");
                 prenomField.setText("");
                 numTelephoneField.setText("");
                 emailField.setText("");
             
-                this.dispose();
+                dispose();
             
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Registration Error", JOptionPane.ERROR_MESSAGE);
+                // Afficher la page InformationsFrame
+                setVisible(true);
             }
-            
-
         } else if (e.getSource() == retour) {
             this.dispose();
         }
@@ -160,5 +160,4 @@ public class InformationsFrame extends JFrame implements ActionListener {
         InformationsFrame frame = new InformationsFrame();
         frame.setVisible(true);
     }
-
 }

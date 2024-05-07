@@ -8,7 +8,9 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 public class AddpropertyFrame extends JFrame {
@@ -235,42 +237,66 @@ public class AddpropertyFrame extends JFrame {
                 double minPrice = Double.parseDouble(textField_2.getText());
                 String papers = (String) comboBox_1.getSelectedItem();
                 String specifications = (String) comboBox_1_1.getSelectedItem();
-
+                
                 // Database connection parameters
                 String url = "jdbc:oracle:thin:@localhost:1521:XE";
                 String user = "system";
                 String password = "aldjia123";
-
+            
+                // SQL to insert property
                 String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications) " +
-                "VALUES (?,?,?,?,?,?,?,?,?)";
-   
-   // Assuming you have the agent ID available
-   int agentID = 123; // Replace 123 with the actual agent ID
-   int propriID = 456; // Replace 456 with the actual propri ID
-   
-   try (Connection conn = DriverManager.getConnection(url, user, password);
-        PreparedStatement pstmt = conn.prepareStatement(sql)) {
-   
-       pstmt.setInt(1, getNextID()); // Assuming this generates a valid ID
-       pstmt.setString(2, type);
-       pstmt.setDouble(3, size);
-       pstmt.setDouble(4, price);
-       pstmt.setString(5, description);
-       pstmt.setInt(6, agentID); // Set the AgentID
-       pstmt.setInt(7, propriID); // Set the PropriID
-       pstmt.setString(8, papers);
-       pstmt.setString(9, specifications);
-   
-       // Execute the SQL statement
-       pstmt.executeUpdate();
-       JOptionPane.showMessageDialog(null, "Property added successfully!");
-   
-   } catch (SQLException ex) {
-       ex.printStackTrace();
-       JOptionPane.showMessageDialog(null, "Error adding property: ");
-       System.out.println(ex.getMessage());
-   }
-   
+                        "VALUES (?,?,?,?,?,?,?,?,?)";
+            
+                int PropriID = 0;
+                int AgentID = 0;
+            
+                try (Connection conn = DriverManager.getConnection(url, user, password);
+                     Statement stmt = conn.createStatement()) {
+            
+                    // Get PropriID
+                    ResultSet rs = stmt.executeQuery("SELECT IDPROPR FROM Proprietaire");
+                    if (rs.next()) {
+                        PropriID = rs.getInt(1);
+                    } else {
+                        throw new SQLException("No PropriID found");
+                    }
+                    
+                    // Get AgentID
+                    rs = stmt.executeQuery("SELECT IDAGENT FROM AgentImm ORDER BY DBMS_RANDOM.RANDOM");
+                    if (rs.next()) {
+                        AgentID = rs.getInt(1);
+                    } else {
+                        throw new SQLException("No AgentID found");
+                    }
+            
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error fetching IDs: " + ex.getMessage());
+                    return; // Exit the method if there's an error
+                }
+            
+                // Now you can use PropriID and AgentID in your PreparedStatement
+                try (Connection conn = DriverManager.getConnection(url, user, password);
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+                    pstmt.setInt(1, getNextID()); // Assuming this generates a valid ID
+                    pstmt.setString(2, type);
+                    pstmt.setDouble(3, size);
+                    pstmt.setDouble(4, price);
+                    pstmt.setString(5, description);
+                    pstmt.setInt(6, AgentID); // Set the AgentID
+                    pstmt.setInt(7, PropriID); // Set the PropriID
+                    pstmt.setString(8, papers);
+                    pstmt.setString(9, specifications);
+            
+                    // Execute the SQL statement
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Property added successfully!");
+            
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error adding property: " + ex.getMessage());
+                }
             }
         });
     }
@@ -280,7 +306,7 @@ public class AddpropertyFrame extends JFrame {
         int minID = 1000000; // le min 
         int maxID = 9999999; // le max
     
-       //instance de la class randome so n9drou we generate a random id
+        //instance de la class randome so n9drou we generate a random id
         Random random = new Random();
     
         // ^^
@@ -289,6 +315,7 @@ public class AddpropertyFrame extends JFrame {
         return id;
     }
 }
+
 
 
 
