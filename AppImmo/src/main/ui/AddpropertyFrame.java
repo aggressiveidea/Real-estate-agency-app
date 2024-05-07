@@ -1,4 +1,5 @@
 package main.ui;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -74,31 +75,37 @@ public class AddpropertyFrame extends JFrame {
         panel.add(retour);
 
         JLabel lblNewLabel = new JLabel("Add property");
+        lblNewLabel.setForeground(new Color(115,24,154));
         lblNewLabel.setBounds(291, 51, 197, 40);
         lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 30));
         contentPane.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("Address");
+        lblNewLabel_1.setForeground(new Color(115,24,154));
         lblNewLabel_1.setBounds(93, 133, 71, 20);
         lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(lblNewLabel_1);
 
         JLabel lblNewLabel_1_1 = new JLabel("Type ");
+        lblNewLabel_1_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1.setBounds(93, 164, 71, 20);
         lblNewLabel_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(lblNewLabel_1_1);
 
         JLabel lblNewLabel_1_1_1 = new JLabel("Price");
+        lblNewLabel_1_1_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1.setBounds(93, 195, 71, 20);
         lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(lblNewLabel_1_1_1);
 
         JLabel lblNewLabel_1_1_1_1 = new JLabel("Description");
+        lblNewLabel_1_1_1_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_1.setBounds(93, 399, 89, 20);
         lblNewLabel_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(lblNewLabel_1_1_1_1);
 
         JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Size");
+        lblNewLabel_1_1_1_1_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_1_1.setBounds(93, 226, 89, 20);
         lblNewLabel_1_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(lblNewLabel_1_1_1_1_1);
@@ -136,6 +143,7 @@ public class AddpropertyFrame extends JFrame {
         textArea.setFont(new Font("Dialog", Font.PLAIN, 13));
 
         JButton btnNewButton = new JButton("ADD");
+        btnNewButton.setForeground(new Color(115,24,154));
         btnNewButton.setBounds(323, 510, 165, 23);
         btnNewButton.setFont(new Font("Dialog", Font.BOLD, 11));
         contentPane.add(btnNewButton);
@@ -146,16 +154,18 @@ public class AddpropertyFrame extends JFrame {
 
         btnBrowse = new JButton("Browse");
         btnBrowse.setBounds(485, 317, 100, 30);
-        btnBrowse.setForeground(Color.BLACK);
+        btnBrowse.setForeground(new Color(115,24,154));
         btnBrowse.setFont(new Font("Dialog", Font.BOLD, 11));
         contentPane.add(btnBrowse);
 
         JComboBox comboBox = new JComboBox();
+        comboBox.setForeground(new Color(115,24,154));
         comboBox.setBounds(192, 165, 167, 22);
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"STUDIO", "F1", "F2 ", "F3", "F4", "F5", "DUPLEXE", "VILLA", "CARCASS", "COMMERCIAL", "BUILDING", "LAND"}));
         contentPane.add(comboBox);
 
         JLabel lblNewLabel_1_1_1_2 = new JLabel("Price_Min");
+        lblNewLabel_1_1_1_2.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
         lblNewLabel_1_1_1_2.setBounds(93, 262, 71, 20);
         contentPane.add(lblNewLabel_1_1_1_2);
@@ -167,21 +177,25 @@ public class AddpropertyFrame extends JFrame {
         contentPane.add(textField_2);
 
         JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Papers");
+        lblNewLabel_1_1_1_2_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         lblNewLabel_1_1_1_2_1.setBounds(93, 302, 71, 20);
         contentPane.add(lblNewLabel_1_1_1_2_1);
 
         JLabel lblNewLabel_1_1_1_2_2 = new JLabel("Specifications");
+        lblNewLabel_1_1_1_2_2.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 15));
         lblNewLabel_1_1_1_2_2.setBounds(93, 345, 100, 20);
         contentPane.add(lblNewLabel_1_1_1_2_2);
 
         JComboBox comboBox_1 = new JComboBox();
+        comboBox_1.setForeground(new Color(115,24,154));
         comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"NOTARIAL_ACT", "REAL_ESTATE_PROMOTION ", "DECISION", "REAL_ESTATE_BOOKLET", "STAMBED_PAPERS", "INDIVISION_ACT"}));
         comboBox_1.setBounds(194, 303, 165, 22);
         contentPane.add(comboBox_1);
 
         JComboBox comboBox_1_1 = new JComboBox();
+        comboBox_1_1.setForeground(new Color(115,24,154));
         comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"WATER", "GAS", "ELECTRICITY", "GARAGE", "GARDEN", "FURNISHED"}));
         comboBox_1_1.setBounds(194, 347, 165, 22);
         contentPane.add(comboBox_1_1);
@@ -274,8 +288,6 @@ public class AddpropertyFrame extends JFrame {
         return id;
     }
 }
-
-
 
 
 
