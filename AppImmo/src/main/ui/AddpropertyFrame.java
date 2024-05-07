@@ -267,7 +267,8 @@ public class AddpropertyFrame extends JFrame {
    
    } catch (SQLException ex) {
        ex.printStackTrace();
-       JOptionPane.showMessageDialog(null, "Error adding property: " + ex.getMessage());
+       JOptionPane.showMessageDialog(null, "Error adding property: ");
+       System.out.println(ex.getMessage());
    }
    
             }
