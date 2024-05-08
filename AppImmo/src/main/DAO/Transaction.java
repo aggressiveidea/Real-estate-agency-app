@@ -35,7 +35,13 @@ public class Transaction {
         this.payment_id = payment_id;
         this.cost = cost;
     }
-    //type in the setter instead of the constructor
+
+    //constructor 2
+    public Transaction (){
+        this.id = generateRandomId();
+        this.date = new Date();
+    }
+    //type in the setter instead of the constructors
 
     //necessary methods
     private int generateRandomId (){
@@ -66,7 +72,7 @@ public class Transaction {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setInt(1, this.id);
+            pstmt.setInt(1, this.payment_id);
             pstmt.setDouble(2, cost);
             pstmt.setDate(3,SqlDate(this.date));
 
@@ -77,13 +83,13 @@ public class Transaction {
                 JOptionPane.showMessageDialog(null, "Transaction added successfully", "NOTE",JOptionPane.PLAIN_MESSAGE);
                 return pay.id;
             } else {
-                JOptionPane.showMessageDialog(null, "Failed to add transaction", "ERROR 1",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed to add Payment", "ERROR 1",JOptionPane.ERROR_MESSAGE);
                 return -1;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed to add transaction", "ERROR 2",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add Payment", "ERROR 2",JOptionPane.ERROR_MESSAGE);
             return -1;
         }
     }
@@ -165,6 +171,10 @@ public class Transaction {
 
     public Date getDate() {
         return date;
+    }
+
+    public Date getSQLDate() {
+        return SqlDate(this.date);
     }
 
     public void setDate(Date date) {

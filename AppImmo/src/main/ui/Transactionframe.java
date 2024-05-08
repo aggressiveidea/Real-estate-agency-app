@@ -1,20 +1,33 @@
 package main.ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Toolkit;
+import java.sql.Date;
+
+import java.awt.*;
+import java.awt.image.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import main.DAO.Transaction;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class Transactionframe extends JFrame {
@@ -156,13 +169,13 @@ public class Transactionframe extends JFrame {
 		lblNewLabel_2_1_1.setBounds(409, 274, 96, 23);
 		contentPane.add(lblNewLabel_2_1_1);
 		
-		JLabel lblNewLabel_2_1_2 = new JLabel("Cost  : ");
+		/*JLabel lblNewLabel_2_1_2 = new JLabel("Cost  : ");
 		lblNewLabel_2_1_2.setForeground(new Color(115,24,154));
 		lblNewLabel_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_2_1_2.setBounds(409, 474, 96, 23);
-		contentPane.add(lblNewLabel_2_1_2);
+		contentPane.add(lblNewLabel_2_1_2);*/
 		
-		JLabel lblNewLabel_2_1_3 = new JLabel("Date : ");
+		JLabel lblNewLabel_2_1_3 = new JLabel("Cost : ");
 		lblNewLabel_2_1_3.setForeground(new Color(115,24,154));
 		lblNewLabel_2_1_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_2_1_3.setBounds(409, 428, 96, 23);
@@ -211,12 +224,74 @@ public class Transactionframe extends JFrame {
 		textField_4.setBounds(515, 431, 224, 20);
 		contentPane.add(textField_4);
 		
-		textField_5 = new JTextField();
+		/*textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(515, 477, 224, 20);
-		contentPane.add(textField_5);
+		contentPane.add(textField_5);*/
 		
 		JButton btnSave = new JButton("Save ");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				String agentID_t = textField.getText();
+				String Property_id_t = textField_1.getText();
+				String Client_id_t = textField_2.getText();
+				String Owner_id_t = textField_3.getText();
+				String Type = comboBox.getSelectedItem().toString();
+				String Cost_t = textField_4.getText();
+				
+				int agentID = Integer.parseInt(agentID_t);
+				int Property_id = Integer.parseInt(Property_id_t);
+				int Client_id = Integer.parseInt(Client_id_t);
+				int Owner_id = Integer.parseInt(Owner_id_t);
+				int Cost = Integer.parseInt(Cost_t);
+
+				Transaction tran = new Transaction();
+				int IDT = tran.getId();
+				Date date = (Date) tran.getSQLDate();
+
+				String sql = "INSERT INTO Transactions (IDtransaction, Typetrans, Datetans, Cost) VALUES (?,?,?,?)";
+
+				try {
+					Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+
+					pstmt.setInt(1, IDT);
+					pstmt.setString(2, Type);
+					pstmt.setDate(3, date);
+					//pstmt.setInt(4,Client_id);
+					//pstmt.setInt (5,Owner_id);
+					//pstmt.setInt (6,agentID);
+					pstmt.setInt (4,Cost);
+
+					// Execute query
+					pstmt.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Transaction added successfully!");
+
+					try {
+						BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                    	Graphics2D g2d = image.createGraphics();
+                    	getContentPane().paint(g2d);
+                    	g2d.dispose();
+
+						JFileChooser fileChooser = new JFileChooser();
+                    	int option = fileChooser.showSaveDialog(Transactionframe.this);
+                    	if (option == JFileChooser.APPROVE_OPTION) {
+                        	File selectedFile = fileChooser.getSelectedFile();
+                        
+                        	// Save the image to the selected file
+                        	ImageIO.write(image, "png", selectedFile);
+                   		}
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+
+				} catch (Exception ee) {
+					ee.printStackTrace();
+            		JOptionPane.showMessageDialog(null, "Failed to add transaction", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnSave.setForeground(new Color(115, 24, 154));
 		btnSave.setFont(new Font("Dialog", Font.PLAIN, 11));
 		btnSave.setBounds(430, 532, 147, 23);

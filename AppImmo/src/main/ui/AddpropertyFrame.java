@@ -242,7 +242,7 @@ public class AddpropertyFrame extends JFrame {
                 // Database connection parameters
                 String url = "jdbc:oracle:thin:@localhost:1521:XE";
                 String user = "system";
-                String password = "aldjia123";
+                String password = "sabrine.123";
             
                 // SQL to insert property
                 String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications) " +
