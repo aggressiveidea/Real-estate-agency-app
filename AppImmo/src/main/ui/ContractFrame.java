@@ -74,10 +74,10 @@ public class ContractFrame extends JFrame {
         panel_1_1_1.add(retour);
         retour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Navigate back to the previous frame
-                // Example: transactionframe transactionframe = new transactionframe();
-                // transactionframe.setVisible(true);
-                // Close the current frame
+               
+                 Transactionframe transactionframe = new Transactionframe();
+                 transactionframe.setVisible(true);
+                
                 dispose();
             }
         });

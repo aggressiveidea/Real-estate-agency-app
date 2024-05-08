@@ -112,23 +112,11 @@ public class Transactionframe extends JFrame {
 		btnRemoveAppointment.setBounds(34, 90, 147, 23);
 		panel_1.add(btnRemoveAppointment);
 		
-		JButton btnRemoveProperty = new JButton("Remove property ");
-		btnRemoveProperty.setForeground(new Color(115, 24, 154));
-		btnRemoveProperty.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnRemoveProperty.setBounds(34, 144, 147, 23);
-		panel_1.add(btnRemoveProperty);
-		
 		JButton btnRemoveATransaction = new JButton("Remove a transaction ");
 		btnRemoveATransaction.setForeground(new Color(115, 24, 154));
 		btnRemoveATransaction.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnRemoveATransaction.setBounds(34, 205, 147, 23);
+		btnRemoveATransaction.setBounds(34, 151, 147, 23);
 		panel_1.add(btnRemoveATransaction);
-		
-		JButton btnModifyProperty = new JButton("modify property ");
-		btnModifyProperty.setForeground(new Color(115, 24, 154));
-		btnModifyProperty.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnModifyProperty.setBounds(34, 263, 147, 23);
-		panel_1.add(btnModifyProperty);
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 0, 1052, 63);
 		panel_2.setBackground(new Color(115, 24, 154));
@@ -300,6 +288,9 @@ public class Transactionframe extends JFrame {
 		JButton btnGenerateContract = new JButton("Generate Contract ");
 		btnGenerateContract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ContractFrame frame = new ContractFrame();
+				frame.setVisible(true);
+				dispose();
 			}
 		});
 		btnGenerateContract.setForeground(new Color(115, 24, 154));
