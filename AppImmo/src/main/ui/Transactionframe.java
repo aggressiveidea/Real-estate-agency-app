@@ -65,12 +65,15 @@ public class Transactionframe extends JFrame {
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Appointment");
-		/*btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				AppointementFrame frame = new AppointementFrame();
+				frame.setVisible(true);
+			
 				dispose();
-				new appointement();
 			}
-		});*/
+		});
 		retour = new JButton("<");
         retour.setBounds(10, 10, 45, 45);
         contentPane.add(retour);

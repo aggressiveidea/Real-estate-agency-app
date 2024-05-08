@@ -92,7 +92,17 @@ public class LandingFrame extends JFrame implements ActionListener{
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setContentAreaFilled(false); 
 		btnNewButton_1.setBorderPainted(false); 
-		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 
+				AgentFrame frame = new AgentFrame();
+				 
+				 frame.setVisible(true);
+				 
+				dispose();
+				
+			}
+		});
 		
 		JButton btnNewButton_1_1 = new JButton("Transaction");
 		btnNewButton_1_1.addActionListener(this);
