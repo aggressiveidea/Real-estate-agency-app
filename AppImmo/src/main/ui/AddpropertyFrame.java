@@ -25,6 +25,7 @@ public class AddpropertyFrame extends JFrame {
     private JLabel imageLabel;
     private JButton btnBrowse;
     private JTextField textField_2;
+    private LandingFrame landingFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -219,8 +220,8 @@ public class AddpropertyFrame extends JFrame {
 
         retour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                LandingFrame LandingFrame = new LandingFrame();
-                LandingFrame.setVisible(true);
+                LandingFrame landingFrame = new LandingFrame();
+                landingFrame.setVisible(true);
                 dispose();
             }
         });
@@ -241,7 +242,7 @@ public class AddpropertyFrame extends JFrame {
                 // Database connection parameters
                 String url = "jdbc:oracle:thin:@localhost:1521:XE";
                 String user = "system";
-                String password = "8888";
+                String password = "sabrine.123";
             
                 // SQL to insert property
                 String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications) " +
@@ -292,6 +293,13 @@ public class AddpropertyFrame extends JFrame {
                     // Execute the SQL statement
                     pstmt.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Property added successfully!");
+
+                    // Pass the values to the LandingFrame
+                    landingFrame.setValues(type, description, price);
+
+                    // Navigate to the landing page
+                    landingFrame.setVisible(true);
+                    dispose(); // Close the current frame
             
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -315,6 +323,7 @@ public class AddpropertyFrame extends JFrame {
         return id;
     }
 }
+
 
 
 
