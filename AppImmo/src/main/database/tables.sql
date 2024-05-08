@@ -51,10 +51,13 @@ CREATE TABLE Transactions (
     IDtransaction NUMBER(7) PRIMARY KEY,
     Typetrans VARCHAR2(15),
     Datetans DATE,
-    Heurtrans TIMESTAMP,
-    CltID NUMBER(7) NOT NULL, 
-    CONSTRAINT fk_id_BienImmobilier FOREIGN KEY (IDtransaction) REFERENCES BienImmobilier(IDbien),
-    CONSTRAINT fk_id_Client FOREIGN KEY (CltID) REFERENCES Client(IDclient)
+    CltID NUMBER(7),
+    OwnerID NUMBER(7),
+    AgentID NUMBER(7),
+    Cost NUMBER(7),
+    CONSTRAINT fk_id_Client FOREIGN KEY (CltID) REFERENCES Client(IDclient),
+    CONSTRAINT fk_id_Owner FOREIGN KEY (OwnerID) REFERENCES Proprietaire(IDpropr),
+    CONSTRAINT fk_id_Trans_AgentImm FOREIGN KEY (AgentID) REFERENCES AgentImm (IDagent)
 );
 
 CREATE TABLE PropertyContract (
@@ -88,8 +91,7 @@ CREATE TABLE Payment (
     DatePay Date,
     CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(IDtransaction)
 );
-//
-//
+
 ALTER TABLE BienImmobilier
 ADD (property_type VARCHAR2(100),
      property_papers VARCHAR2(100),
