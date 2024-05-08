@@ -36,7 +36,7 @@ public class Owner extends User {
         int id = generateRandomId();
 
         // Execute SQL insert
-        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123")) {
             String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Localbien, Descbien, AgentID, PropriID) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {

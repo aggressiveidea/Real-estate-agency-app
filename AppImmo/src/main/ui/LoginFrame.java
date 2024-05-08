@@ -33,7 +33,7 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -141,6 +141,9 @@ public class LoginFrame extends JFrame {
                 if (e.getSource() == button) {
                     User user = new User(username, password);
                     user.login();
+                    
+                    LandingFrame landing  = new LandingFrame();
+
                     dispose(); // Ferme la fenêtre de connexion après l'affichage du message
                 }
             }

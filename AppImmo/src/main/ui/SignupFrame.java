@@ -52,7 +52,7 @@ public class SignupFrame extends JFrame implements ActionListener {
         try {
             // Établir la connexion à la base de données
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

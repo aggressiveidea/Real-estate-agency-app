@@ -11,6 +11,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import main.ui.LandingFrame;
+import main.ui.LoginFrame;
+import main.ui.InformationsFrame;
 
 enum Type {
     OWNER, CLIENT, REAL_ESTATE_AGENT;
@@ -21,7 +23,7 @@ public class User {
     public Connection connection;
     public Statement statement;
 
-    public static int id;
+    public int id;
     public String surname, name, email, phone_number;
     public Type type;
     public String username, password;
@@ -34,7 +36,7 @@ public class User {
         this.password = password;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,8 +67,7 @@ public class User {
     }
 
     // Full constructor
-    public User(int id, String surname, String name, String email, String phone_number, int t, String username,
-            String password) {
+    public User(int id, String surname, String name, String email, String phone_number, int t, String username, String password) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -90,10 +91,35 @@ public class User {
         }
     }
 
+// Full constructor
+    public User( String surname, String name, String email, String phone_number, int t, String username,String password) {
+ 
+        this.surname = surname;
+        this.name = name;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.username = username;
+        this.password = password;
+        switch (t) {
+            case 1:
+            this.type = Type.CLIENT;
+            break;
+            case 2:
+            this.type = Type.OWNER;
+            break;
+            case 3:
+            this.type = Type.REAL_ESTATE_AGENT;
+            break;
+            default:
+            this.type = null;
+            break;
+        }
+    }
+
     public User(String nom, String prenom, String email, String numtel) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "aldjia123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,13 +210,13 @@ public class User {
                         break;
                     case "CLIENT":
                         // Insert into Client table
-                        String sql3 = "INSERT INTO Client (IDclient, NomClient, prenomClient, EmailClient, telephoneClient) VALUES (?, ?, ?, ?, ?)";
+                        String sql3 = "INSERT INTO Client (IDclient, NomClient, prenomClient,telephoneClient,EmailClient) VALUES (?, ?, ?, ?, ?)";
                         try (PreparedStatement preparedStatement = connection.prepareStatement(sql3)) {
                             preparedStatement.setInt(1, id_generate);
                             preparedStatement.setString(2, nom);
                             preparedStatement.setString(3, prenom);
-                            preparedStatement.setString(4, email);
-                            preparedStatement.setString(5, numtel);
+                            preparedStatement.setString(4, numtel);
+                            preparedStatement.setString(5, email);
                             preparedStatement.executeUpdate();
                         }
                         break;
@@ -200,12 +226,19 @@ public class User {
                         break;
                 }
             }
-            // Fermeture des ressources ResultSet et PreparedStatement
-            rs.close();
-            ps.close();
+                    // Fermeture des ressources ResultSet et PreparedStatement
+                    rs.close();
+                    ps.close();
+                    // Si l'insertion s'est bien passée, afficher le message de bienvenue et ouvrir la page de connexion
+                    JOptionPane.showMessageDialog(null, "Welcome, " + nom + " " + prenom);
+                    LoginFrame loginFrame = new LoginFrame();
+                    loginFrame.setVisible(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erreur SQL lors de l'inscription: " + ex.getMessage(), "Registration Error", JOptionPane.ERROR_MESSAGE);
+            // Recharger la page InformationsFrame en cas d'erreur
+            InformationsFrame informationsFrame = new InformationsFrame();
+            informationsFrame.setVisible(true);
         }
     }
 
@@ -218,12 +251,14 @@ public class User {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                System.out.println("yes ");
                 String sql1 = "SELECT id FROM LOGIN WHERE  nomutilisateur = ? AND motdepasse = ?";
                 PreparedStatement ps1 = connection.prepareStatement(sql1);
                 ps1.setString(1, username);
                 ps1.setString(2, password);
                 ResultSet rs1 = ps1.executeQuery();
                 if (rs1.next()) {
+                    System.out.println("catched");
                     idall = rs1.getInt("id");
                     System.out.println("catch the id done");
                 }
@@ -233,7 +268,7 @@ public class User {
                 
             } else {
                 JOptionPane.showMessageDialog(null, "User doesn't exist");
-                
+                new LoginFrame().setVisible(true);
             }
         } catch (SQLException e) {
             e.printStackTrace();

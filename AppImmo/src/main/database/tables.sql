@@ -81,7 +81,6 @@ CREATE TABLE Interaction (
     CONSTRAINT fk__ClientID FOREIGN KEY (ClientID) REFERENCES Client(IDclient)
 );
 
-
 CREATE TABLE Payment (
     ID NUMBER(7) PRIMARY KEY,
     TransactionID NUMBER(7),
@@ -89,7 +88,8 @@ CREATE TABLE Payment (
     DatePay Date,
     CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(IDtransaction)
 );
-
+//
+//
 ALTER TABLE BienImmobilier
 ADD (property_type VARCHAR2(100),
      property_papers VARCHAR2(100),
@@ -98,3 +98,10 @@ ADD (property_type VARCHAR2(100),
 ALTER TABLE BienImmobilier
 DROP COLUMN property_type;
 
+ALTER TABLE Client  DROP COLUMN  EmailClient;
+ALTER TABLE Proprietaire  DROP COLUMN  Emailpropr;
+ALTER TABLE AgentImm  DROP COLUMN EmailAgent;
+
+ALTER TABLE Client ADD (EmailClient VARCHAR2(40));
+ALTER TABLE Proprietaire ADD (Emailpropr VARCHAR2(40));
+ALTER TABLE AgentImm ADD (EmailAgent VARCHAR2(40));

@@ -40,7 +40,7 @@ public class Real_estate_agent extends User{
         //add later
     }
 
-    public int add_appointment (int id, int client_id){
+    public int add_appointment (int id, int client_id,int owner_id){
         return client_id;
         // add later
     }
