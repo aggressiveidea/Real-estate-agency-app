@@ -11,6 +11,8 @@ import java.awt.EventQueue;
 
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
@@ -23,6 +25,11 @@ import javax.swing.JComponent;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
@@ -35,13 +42,22 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private JButton btnNewButton_1_1_1_1;
     private JButton btnNewButton_1_1_1;
 	
-	private JTextArea txtrrg;
+	private JLabel lblNewLabel_4;
+    private JLabel lblNewLabel_4_1; // Initialize this label
+
 	private JLabel textField;
 	private JLabel textField_1;
+	private static JTextArea txtrrg;
+    private static JLabel lblType;
+    private static JLabel lblPrice;
+	private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String DB_USER = "system";
+    private static final String DB_PASSWORD = "aldjia123";
 	/**
 	 * Create the frame.
 	 */
 	public LandingFrame() {
+		lblNewLabel_4_1 = new JLabel("");
 		setTitle("IMMO");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LandingFrame.class.getResource("assets\\logo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -243,7 +259,6 @@ public class LandingFrame extends JFrame implements ActionListener{
         contentPane.add(btnNewButton_2);
         
 	}
-	
 	@Override
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");
@@ -265,9 +280,52 @@ public void actionPerformed(ActionEvent e) {
         this.dispose();
     }
 }
+/**
+ * @param type
+ * @param description
+ * @param price
+ */
+
+public void loadPropertyDetails() {
+        String url = "jdbc:oracle:thin:@localhost:1521:XE";
+        String user = "system";
+        String password = "aldjia123";
+        String sql = "SELECT Typebien, Prixbien, Descbien FROM BienImmobilier";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            // Parcourir les résultats de la requête
+            while (rs.next()) {
+                String type = rs.getString("Typebien");
+                double price = rs.getDouble("Prixbien");
+                String description = rs.getString("Descbien");
+
+                // Insérer les valeurs dans les champs correspondants
+                setPropertyDetails(type, description, price);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erreur lors du chargement des détails: " + ex.getMessage());
+        }
+    }
+
+    public void setPropertyDetails(String type, String description, double price) {
+        lblNewLabel_4.setText(type);
+        txtrrg.setText(description);
+        lblNewLabel_4_1.setText(String.valueOf(price));
+    }
 	 public static void main(String[] args) {
 	        
 	        LandingFrame frame = new LandingFrame();
 	        frame.setVisible(true);
 	    }
+		public void setValues(String type, String description, double price) {
+			lblNewLabel_4.setText(type);
+			txtrrg.setText(description);
+			lblNewLabel_4_1.setText(String.valueOf(price));
+		}
+		
 }
