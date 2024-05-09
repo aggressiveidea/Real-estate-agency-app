@@ -54,9 +54,24 @@ public class Transaction {
     }
 
     //class methods
-    public int generate_contract(int id){
-        return id;
-        //add later
+    public int generate_contract(){
+        
+        String s;
+        if (this.type == transaction_type.RENT)
+            s = "12 months";
+        else if (this.type == transaction_type.BUY)
+                s = "forever";
+            else s = "null";
+        
+        Contract con =  new Contract(this.cost, s);
+        this.contract_id = con.id;
+
+        con.agent_id = this.agent_id;
+        con.client_id = this.client_id;
+        con.owner_id = this.owner_id;
+        
+        return con.id;
+        
     }
 
     public int add_payment (double cost){

@@ -1,6 +1,5 @@
 package main.DAO;
 
-import java.util.Date;
 import java.util.Random;
 
 enum contract_type{
@@ -13,18 +12,25 @@ public class Contract {
     public String client_name, client_surname, client_email, client_phone,client_address;
     public String owner_name, owner_surname, owner_email, owner_phone, owner_address;
     public String agent_name, agent_surname;
-    public Date duration;
+    public String duration;
     public double amount;
     public contract_type type;
 
-    
-    //construtor 1
-    public Contract(String agent_name, String agent_surname, double amount) {
+    //constructor 1
+    public Contract (double amount, String duration){
         
         this.id = generateRandomId();
 
-        this.duration = new Date ();
+        this.duration = duration;
+        this.amount = amount;
 
+    }
+
+    //constructor 2
+    public Contract(String agent_name, String agent_surname, double amount) {
+        
+        this.id = generateRandomId();
+        
         this.agent_name = agent_name;
         this.agent_surname = agent_surname;
         this.amount = amount;
@@ -38,6 +44,7 @@ public class Contract {
 
     //empty constructor
     public Contract() {
+        this.id = generateRandomId();
     }
 
     //getters and setters
@@ -66,11 +73,11 @@ public class Contract {
         this.id = id;
     }
 
-    public Date getduration() {
+    public String getduration() {
         return duration;
     }
 
-    public void setduration(Date duration) {
+    public void setduration(String duration) {
         this.duration = duration;
     }
 
