@@ -41,7 +41,7 @@ public class ContractFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ContractFrame() {
-		 setTitle("IMMO");
+		setTitle("IMMO");
         setIconImage(Toolkit.getDefaultToolkit().getImage(AppointementFrame.class.getResource("assets\\logo.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 929, 621);

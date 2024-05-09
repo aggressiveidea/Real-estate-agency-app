@@ -69,7 +69,7 @@ public class Transaction {
         con.agent_id = this.agent_id;
         con.client_id = this.client_id;
         con.owner_id = this.owner_id;
-        
+
         return con.id;
         
     }
@@ -95,7 +95,7 @@ public class Transaction {
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(null, "Transaction added successfully", "NOTE",JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Payment added successfully", "NOTE",JOptionPane.PLAIN_MESSAGE);
                 return pay.id;
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to add Payment", "ERROR 1",JOptionPane.ERROR_MESSAGE);

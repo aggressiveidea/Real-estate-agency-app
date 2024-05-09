@@ -75,7 +75,6 @@ CREATE TABLE PropertyContract (
 
 CREATE TABLE Interaction (
     ID NUMBER(7) PRIMARY KEY NOT NULL,
-    Typeinter VARCHAR2(15),
     Dateintr DATE,
     Descriptioninter VARCHAR2(255),
     AgentID NUMBER(7) NOT NULL,
