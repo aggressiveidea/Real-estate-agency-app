@@ -38,7 +38,7 @@ public class User {
         this.password = password;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class User {
     public User(String nom, String prenom, String email, String numtel) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
