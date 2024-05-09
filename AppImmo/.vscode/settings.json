@@ -6,7 +6,8 @@
         "c:\\Users\\ACER\\Downloads\\ojdbc11.jar",
         "c:\\Users\\ACER\\Downloads\\rs2xml.jar",
         "c:\\Users\\ACER\\Desktop\\javax.mail.jar",
-        "lib\\activation.jar"
+        "lib\\activation.jar",
+        "lib\\smtp.jar"
 
     ]
 }

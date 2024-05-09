@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,14 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
 import main.DAO.User;
 //import main.DAO.Type;
-
 import javax.swing.*;
 import java.awt.*;
 

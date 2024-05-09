@@ -23,6 +23,12 @@ import javax.swing.JComponent;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
@@ -36,6 +42,16 @@ public class LandingFrame extends JFrame implements ActionListener{
     private JButton btnNewButton_1_1_1;
 	private JLabel textField;
 	private JLabel textField_1;
+	private JTextField txtType;
+    private JTextField txtPrice;
+    private JTextField txtOwnerPhoneNumber;
+    private JTextField txtOwnerEmail;
+    private JTextArea txtDescription;
+	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
+    static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    static final String USER = "system";
+    static final String PASS = "aldjia123";
+	static final String QUERY = "SELECT Typebien, Prixbien, PropriID, Descbien FROM BienImmobilier ORDER BY IDbien DESC FETCH FIRST 1 ROW ONLY";
 	/**
 	 * Create the frame.
 	 */
@@ -246,7 +262,7 @@ public class LandingFrame extends JFrame implements ActionListener{
         lblNewLabel_3_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_3_1_1_1);
         
-        JLabel lblNewLabel_4_1_2 = new JLabel("kachbnadem@gmail.com");
+        JLabel lblNewLabel_4_1_2 = new JLabel("albertcamus@gmail.com");
         lblNewLabel_4_1_2.setBounds(114, 124, 184, 20);
         lblNewLabel_4_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_4_1_2);
@@ -270,7 +286,10 @@ public class LandingFrame extends JFrame implements ActionListener{
                
                 panel_2.add(scrollPane);
                 
-                JLabel lblNewLabel_6 = new JLabel("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                JLabel lblNewLabel_6 = new JLabel("2 pièces traversant de 55 m² exposé SUD EST situé au 5ᵉ étage sans ascenseur comprenant :\r\n" + //
+										"un vaste séjour avec cuisine ouverte, une chambre avec dressing, une salle d'eau avec W.C.\r\n" + //
+										"Parfait état. Immeuble ancien, BEL EMPLACEMENT. Copropriété de 90 lots (Pas de procédure\r\n" + //
+										"en cours). Charges annuelles : 1640 euros.");
                 lblNewLabel_6.setBackground(Color.RED);
                 scrollPane.setViewportView(lblNewLabel_6);
                 
@@ -286,7 +305,7 @@ public class LandingFrame extends JFrame implements ActionListener{
                 lblNewLabel_3_1_1_1_1.setBounds(0, 65, 96, 25);
                 panel_2.add(lblNewLabel_3_1_1_1_1);
                 
-                JLabel lblNewLabel_4_1_3 = new JLabel("Alger centre");
+                JLabel lblNewLabel_4_1_3 = new JLabel("SUD EST de france ");
                 lblNewLabel_4_1_3.setFont(new Font("Dialog", Font.PLAIN, 15));
                 lblNewLabel_4_1_3.setBounds(74, 69, 224, 20);
                 panel_2.add(lblNewLabel_4_1_3);
@@ -328,7 +347,75 @@ public void actionPerformed(ActionEvent e) {
         this.dispose();
     }
 }
-	 public static void main(String[] args) {
+  // Method to fetch the latest property details from the database
+    private void fetchLatestPropertyDetails() {
+        Connection conn = null;
+        java.sql.Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(QUERY);
+
+            if (rs.next()) {
+                txtType.setText(rs.getString("Typebien"));
+                txtPrice.setText(rs.getString("Prixbien"));
+                txtDescription.setText(rs.getString("Descbien"));
+
+                // Fetch owner's phone number and email using PropriID
+                int propId = rs.getInt("PropriID");
+                fetchOwnerDetails(propId);
+            }
+
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+	private void fetchOwnerDetails(int propId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String query = "SELECT PhoneNumber, Email FROM Proprietaire WHERE IDpropr = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, propId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                txtOwnerPhoneNumber.setText(rs.getString("PhoneNumber"));
+                txtOwnerEmail.setText(rs.getString("Email"));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+
+	public static void main(String[] args) {
 	        
 	        LandingFrame frame = new LandingFrame();
 	        frame.setVisible(true);

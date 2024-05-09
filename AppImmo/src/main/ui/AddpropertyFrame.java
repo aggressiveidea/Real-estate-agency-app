@@ -295,7 +295,7 @@ public class AddpropertyFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Property added successfully!");
 
                     // Pass the values to the LandingFrame
-                    landingFrame.setValues(type, description, price);
+                    
 
                     // Navigate to the landing page
                     landingFrame.setVisible(true);
