@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import main.DAO.OracleAcc;
 import main.DAO.Transaction;
 
 import javax.swing.JButton;

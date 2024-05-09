@@ -32,6 +32,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.border.SoftBevelBorder;
+
+import main.DAO.OracleAcc;
+
 import javax.swing.border.BevelBorder;
 
 public class LandingFrame extends JFrame implements ActionListener{

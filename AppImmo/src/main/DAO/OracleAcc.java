@@ -1,4 +1,4 @@
-package main.ui;
+package main.DAO;
 
 //this is for Oracle account
 public class OracleAcc {

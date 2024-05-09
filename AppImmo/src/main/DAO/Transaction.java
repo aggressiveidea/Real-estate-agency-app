@@ -8,8 +8,6 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import main.ui.OracleAcc;
-
 enum transaction_type{
     RENT, BUY;
 }

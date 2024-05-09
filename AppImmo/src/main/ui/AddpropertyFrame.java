@@ -2,6 +2,9 @@ package main.ui;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import main.DAO.OracleAcc;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;

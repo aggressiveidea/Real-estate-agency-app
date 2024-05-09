@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import main.DAO.OracleAcc;
 import main.DAO.User;
 
 public class LoginFrame extends JFrame {
