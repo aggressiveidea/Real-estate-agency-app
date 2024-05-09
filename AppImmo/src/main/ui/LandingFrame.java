@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 
@@ -40,6 +41,8 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private JTextField txtSearch;
 	private JButton btnNewButton_1_1_1_1;
     private JButton btnNewButton_1_1_1;
+	private JButton btnNewButton_2_1;
+
 	private JLabel textField;
 	private JLabel textField_1;
 	private JTextField txtType;
@@ -47,6 +50,7 @@ public class LandingFrame extends JFrame implements ActionListener{
     private JTextField txtOwnerPhoneNumber;
     private JTextField txtOwnerEmail;
     private JTextArea txtDescription;
+	private Container panel_2;
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
     static final String USER = "system";
@@ -326,6 +330,9 @@ public class LandingFrame extends JFrame implements ActionListener{
         
 	}
 	
+// similarly for txtPrice, txtOwnerPhoneNumber, txtOwnerEmail, txtDescription
+
+	
 	@Override
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");
@@ -346,73 +353,134 @@ public void actionPerformed(ActionEvent e) {
         
         this.dispose();
     }
+	if (e.getSource() == btnNewButton_2_1) {
+		System.out.println("imchi imchi");
+        fetchLatestPropertyDetails();
+    }
+
+
+
+// Add an ActionListener to the Refresh button
+
+
+
 }
-  // Method to fetch the latest property details from the database
-    private void fetchLatestPropertyDetails() {
-        Connection conn = null;
-        java.sql.Statement stmt = null;
+
+  private void fetchLatestPropertyDetails() {
+    Connection conn = null;
+    java.sql.Statement stmt = null;
+    ResultSet rs = null;
+    
+    try {
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        rs = stmt.executeQuery(QUERY);
+
+        if (rs.next()) {
+            // Fetch data from the result set
+            String type = rs.getString("Typebien");
+            String price = rs.getString("Prixbien");
+            String description = rs.getString("Descbien");
+            int propId = rs.getInt("PropriID");
+			panel_2.removeAll();
+			panel_2.revalidate();
+			panel_2.repaint();
+            // Fetch owner details
+            String ownerPhoneNumber = fetchOwnerPhoneNumber(conn, propId);
+            String ownerEmail = fetchOwnerEmail(conn, propId);
+             System.out.println("yarabi nkmal lyoum");
+            // Create new labels for fetched data
+            JLabel typeLabel = new JLabel(type);
+            JLabel priceLabel = new JLabel(price);
+            JLabel descriptionLabel = new JLabel(description);
+            JLabel ownerPhoneNumberLabel = new JLabel(ownerPhoneNumber);
+            JLabel ownerEmailLabel = new JLabel(ownerEmail);
+
+            // Position the new labels
+            typeLabel.setBounds(74, 2, 112, 20);
+            priceLabel.setBounds(74, 38, 112, 20);
+            descriptionLabel.setBounds(0, 155, 300, 20);
+            ownerPhoneNumberLabel.setBounds(179, 93, 119, 20);
+            ownerEmailLabel.setBounds(114, 124, 184, 20);
+
+            // Add the new labels to the panel
+            panel_2.add(typeLabel);
+            panel_2.add(priceLabel);
+            panel_2.add(descriptionLabel);
+            panel_2.add(ownerPhoneNumberLabel);
+            panel_2.add(ownerEmailLabel);
+
+            // Repaint the panel
+            panel_2.revalidate();
+            panel_2.repaint();
+        }
+
+    } catch (SQLException se) {
+        se.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
         try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(QUERY);
-
-            if (rs.next()) {
-                txtType.setText(rs.getString("Typebien"));
-                txtPrice.setText(rs.getString("Prixbien"));
-                txtDescription.setText(rs.getString("Descbien"));
-
-                // Fetch owner's phone number and email using PropriID
-                int propId = rs.getInt("PropriID");
-                fetchOwnerDetails(propId);
-            }
-
-            rs.close();
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         } catch (SQLException se) {
             se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
-	private void fetchOwnerDetails(int propId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+}
 
+private String fetchOwnerPhoneNumber(Connection conn, int propId) {
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String phoneNumber = "";
+    try {
+        String query = "SELECT PhoneNumber FROM Proprietaire WHERE IDpropr = ?";
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, propId);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            phoneNumber = rs.getString("PhoneNumber");
+        }
+    } catch (SQLException se) {
+        se.printStackTrace();
+    } finally {
         try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            String query = "SELECT PhoneNumber, Email FROM Proprietaire WHERE IDpropr = ?";
-            pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, propId);
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                txtOwnerPhoneNumber.setText(rs.getString("PhoneNumber"));
-                txtOwnerEmail.setText(rs.getString("Email"));
-            }
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
         } catch (SQLException se) {
             se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
+    return phoneNumber;
+}
+
+private String fetchOwnerEmail(Connection conn, int propId) {
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String email = "";
+    try {
+        String query = "SELECT Email FROM Proprietaire WHERE IDpropr = ?";
+
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, propId);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            email = rs.getString("Email");
+        }
+    } catch (SQLException se) {
+        se.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return email;
+}
 
 
 	public static void main(String[] args) {
