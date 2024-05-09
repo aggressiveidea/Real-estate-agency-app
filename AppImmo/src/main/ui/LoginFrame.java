@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import main.DAO.User;
 
 import main.DAO.OracleAcc;
-import main.DAO.User;
 
 public class LoginFrame extends JFrame {
     private JButton button;
@@ -146,7 +146,8 @@ public class LoginFrame extends JFrame {
                     
                     LandingFrame landing  = new LandingFrame();
 
-                    dispose(); // Ferme la fenêtre de connexion après l'affichage du message
+                    dispose(); 
+                    // Ferme la fenêtre de connexion après l'affichage du message
                 }
             }
         });

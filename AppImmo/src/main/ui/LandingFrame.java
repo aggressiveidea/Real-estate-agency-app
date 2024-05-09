@@ -9,7 +9,8 @@ import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.EventQueue;
 
-
+import main.DAO.OracleAcc;
+import main.DAO.User;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,11 +31,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.border.SoftBevelBorder;
+import java.util.List;
 
 import main.DAO.OracleAcc;
 
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 public class LandingFrame extends JFrame implements ActionListener{
@@ -56,7 +57,7 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private Container panel_2;
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    static final String USER = OracleAcc.USER;
+	static final String USER = OracleAcc.USER;
     static final String PASS = OracleAcc.PASS;
 	static final String QUERY = "SELECT Typebien, Prixbien, PropriID, Descbien FROM BienImmobilier ORDER BY IDbien DESC FETCH FIRST 1 ROW ONLY";
 	/**
@@ -116,7 +117,9 @@ public class LandingFrame extends JFrame implements ActionListener{
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 
-				AgentFrame frame = new AgentFrame();
+				List<User> agents = User.getAgents(); // Appel de la méthode getAgents() depuis la classe LandingFrame
+                AgentFrame frame = new AgentFrame(agents); // Passage de la liste d'agents à AgentFrame
+
 				 
 				 frame.setVisible(true);
 				 
@@ -243,7 +246,7 @@ public class LandingFrame extends JFrame implements ActionListener{
         contentPane.add(btnNewButton_2);
         
         JLabel lblNewLabel_5 = new JLabel("");
-        lblNewLabel_5.setIcon(new ImageIcon(LandingFrame.class.getResource("assets\\real estate.jpg")));
+        lblNewLabel_5.setIcon(new ImageIcon(LandingFrame.class.getResource("assets\\realestate.jpg")));
         lblNewLabel_5.setBounds(0, 0, 300, 291);
         panel_3.add(lblNewLabel_5);
         JLabel lblNewLabel_2 = new JLabel("Description :");

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -36,7 +38,7 @@ public class User {
         this.password = password;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +121,7 @@ public class User {
     public User(String nom, String prenom, String email, String numtel) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,6 +287,47 @@ public class User {
         }
     }
 
+    public static List<User> getAgents() {
+        List<User> agents = new ArrayList<>();
+        try {
+            // Connexion à la base de données
+           // Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
+
+            // Requête SQL pour sélectionner les informations des agents
+            String sql = "SELECT IDagent, NomAgent, PrenomAgent, EmailAgent, telephoneAgAJent FROM AgentImm ";
+
+            // Préparation de la requête
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            // Exécution de la requête
+            ResultSet resultSet = statement.executeQuery();
+
+            // Parcours du résultat pour récupérer les agents
+            while (resultSet.next()) {
+                int id = resultSet.getInt("IDagent");
+                String surname = resultSet.getString("NomAgent");
+                String name = resultSet.getString("PrenomAgent");
+                String email = resultSet.getString("EmailAgent");
+                String phone_number = resultSet.getString("telephoneAgAJent");
+
+                // Création de l'objet User correspondant à l'agent
+                User agent = new User(id, surname, name, email, phone_number, 3);
+
+                // Ajout de l'agent à la liste des agents
+                agents.add(agent);
+            }
+
+            // Fermeture des ressources
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de récupération des agents
+        }
+        return agents;
+    }
     // Getters and setters
 
     public int getId() {

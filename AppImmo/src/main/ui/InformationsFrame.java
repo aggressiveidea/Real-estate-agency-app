@@ -161,3 +161,4 @@ public class InformationsFrame extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 }
+
