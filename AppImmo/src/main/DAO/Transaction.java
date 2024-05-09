@@ -8,6 +8,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import main.ui.OracleAcc;
+
 enum transaction_type{
     RENT, BUY;
 }
@@ -66,7 +68,7 @@ public class Transaction {
 
         //SQL insert
         try {
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
 
             String sql = "INSERT INTO Payment (ID, Amount, DatePay) VALUES (?,?,?)";
 

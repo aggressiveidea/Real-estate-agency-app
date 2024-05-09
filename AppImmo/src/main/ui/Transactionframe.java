@@ -240,7 +240,7 @@ public class Transactionframe extends JFrame {
 				String sql = "INSERT INTO Transactions (IDtransaction, Typetrans, Datetans, Cost) VALUES (?,?,?,?)";
 
 				try {
-					Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+					Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
 
 					PreparedStatement pstmt = conn.prepareStatement(sql);
 

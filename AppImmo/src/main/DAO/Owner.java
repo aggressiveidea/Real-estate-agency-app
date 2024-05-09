@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import main.ui.OracleAcc;
+
 
 public class Owner extends User {
 
@@ -36,7 +38,7 @@ public class Owner extends User {
         int id = generateRandomId();
 
         // Execute SQL insert
-        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
             String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Localbien, Descbien, AgentID, PropriID) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {

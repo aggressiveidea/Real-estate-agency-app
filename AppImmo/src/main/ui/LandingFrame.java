@@ -53,8 +53,8 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private Container panel_2;
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    static final String USER = "system";
-    static final String PASS = "aldjia123";
+    static final String USER = OracleAcc.USER;
+    static final String PASS = OracleAcc.PASS;
 	static final String QUERY = "SELECT Typebien, Prixbien, PropriID, Descbien FROM BienImmobilier ORDER BY IDbien DESC FETCH FIRST 1 ROW ONLY";
 	/**
 	 * Create the frame.
