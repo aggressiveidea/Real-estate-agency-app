@@ -92,40 +92,34 @@ public class ContractFrame extends JFrame {
         panel_1_1_2.setBounds(0, 0, 41, 573);
         contentPane.add(panel_1_1_2);
         
-        JLabel lblNewLabel_1_2 = new JLabel(" Name : ");
+        JLabel lblNewLabel_1_2 = new JLabel("Name : ");
         lblNewLabel_1_2.setForeground(new Color(115,24,154));
         lblNewLabel_1_2.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2.setBounds(107, 162, 128, 23);
+        lblNewLabel_1_2.setBounds(93, 162, 128, 23);
         contentPane.add(lblNewLabel_1_2);
         
-        JLabel lblNewLabel_1_2_1 = new JLabel(" Surname : ");
+        JLabel lblNewLabel_1_2_1 = new JLabel("Surname : ");
         lblNewLabel_1_2_1.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_1.setBounds(107, 210, 142, 23);
+        lblNewLabel_1_2_1.setBounds(93, 210, 142, 23);
         contentPane.add(lblNewLabel_1_2_1);
         
         JLabel lblNewLabel_1_2_2 = new JLabel("Email : ");
         lblNewLabel_1_2_2.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_2.setBounds(115, 260, 128, 23);
+        lblNewLabel_1_2_2.setBounds(93, 260, 128, 23);
         contentPane.add(lblNewLabel_1_2_2);
-        
-        JLabel lblNewLabel_1_2_3 = new JLabel("Address : ");
-        lblNewLabel_1_2_3.setForeground(new Color(115, 24, 154));
-        lblNewLabel_1_2_3.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_3.setBounds(115, 306, 128, 23);
-        contentPane.add(lblNewLabel_1_2_3);
         
         JLabel lblNewLabel_1_2_4 = new JLabel("Phone number : ");
         lblNewLabel_1_2_4.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_4.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_4.setBounds(115, 355, 163, 23);
+        lblNewLabel_1_2_4.setBounds(93, 316, 163, 23);
         contentPane.add(lblNewLabel_1_2_4);
         
         JLabel lblNewLabel_1_2_5 = new JLabel("Contract type : ");
         lblNewLabel_1_2_5.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_5.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_5.setBounds(115, 441, 150, 23);
+        lblNewLabel_1_2_5.setBounds(93, 388, 150, 23);
         contentPane.add(lblNewLabel_1_2_5);
         
         JLabel lblClient = new JLabel("CLIENT ");
@@ -158,57 +152,46 @@ public class ContractFrame extends JFrame {
         lblNewLabel_1_2_2_1.setBounds(511, 260, 128, 23);
         contentPane.add(lblNewLabel_1_2_2_1);
         
-        JLabel lblNewLabel_1_2_3_1 = new JLabel("Address : ");
-        lblNewLabel_1_2_3_1.setForeground(new Color(115, 24, 154));
-        lblNewLabel_1_2_3_1.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_3_1.setBounds(509, 306, 128, 23);
-        contentPane.add(lblNewLabel_1_2_3_1);
-        
         JLabel lblNewLabel_1_2_4_1 = new JLabel("Phone number : ");
         lblNewLabel_1_2_4_1.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_4_1.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_4_1.setBounds(509, 355, 163, 23);
+        lblNewLabel_1_2_4_1.setBounds(509, 316, 163, 23);
         contentPane.add(lblNewLabel_1_2_4_1);
         
         JLabel lblNewLabel_1_2_4_2 = new JLabel("Duration : ");
         lblNewLabel_1_2_4_2.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_4_2.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_4_2.setBounds(115, 488, 163, 23);
+        lblNewLabel_1_2_4_2.setBounds(93, 434, 163, 23);
         contentPane.add(lblNewLabel_1_2_4_2);
         
         JLabel lblNewLabel_1_2_4_3 = new JLabel("Amount : ");
         lblNewLabel_1_2_4_3.setForeground(new Color(115, 24, 154));
         lblNewLabel_1_2_4_3.setFont(new Font("Dialog", Font.PLAIN, 20));
-        lblNewLabel_1_2_4_3.setBounds(509, 441, 163, 23);
+        lblNewLabel_1_2_4_3.setBounds(509, 390, 163, 23);
         contentPane.add(lblNewLabel_1_2_4_3);
         
         JSeparator separator = new JSeparator();
-        separator.setBounds(107, 406, 618, 2);
+        separator.setBounds(112, 375, 618, 2);
         contentPane.add(separator);
         
         JLabel lblNewLabel_1 = new JLabel("Khadidja");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1.setBounds(214, 164, 203, 22);
+        lblNewLabel_1.setBounds(181, 164, 203, 22);
         contentPane.add(lblNewLabel_1);
         
         JLabel lblNewLabel_1_1 = new JLabel("DAOUADI");
         lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_1.setBounds(214, 212, 203, 22);
+        lblNewLabel_1_1.setBounds(207, 212, 203, 22);
         contentPane.add(lblNewLabel_1_1);
         
         JLabel lblNewLabel_1_3 = new JLabel("Khadidja.DAOUADI@gmail.com");
         lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_3.setBounds(214, 262, 229, 22);
+        lblNewLabel_1_3.setBounds(181, 262, 229, 22);
         contentPane.add(lblNewLabel_1_3);
-        
-        JLabel lblNewLabel_1_4 = new JLabel("Alger");
-        lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_4.setBounds(214, 307, 203, 22);
-        contentPane.add(lblNewLabel_1_4);
         
         JLabel lblNewLabel_1_5 = new JLabel("3276526954");
         lblNewLabel_1_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_5.setBounds(265, 355, 203, 22);
+        lblNewLabel_1_5.setBounds(265, 318, 203, 22);
         contentPane.add(lblNewLabel_1_5);
         
         JLabel lblNewLabel_1_6 = new JLabel("bnadem");
@@ -218,7 +201,7 @@ public class ContractFrame extends JFrame {
         
         JLabel lblNewLabel_1_7 = new JLabel("wlid bnadem");
         lblNewLabel_1_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_7.setBounds(607, 210, 203, 22);
+        lblNewLabel_1_7.setBounds(630, 212, 203, 22);
         contentPane.add(lblNewLabel_1_7);
         
         JLabel lblNewLabel_1_8 = new JLabel("bnadem@gmail.com");
@@ -226,36 +209,46 @@ public class ContractFrame extends JFrame {
         lblNewLabel_1_8.setBounds(607, 261, 203, 22);
         contentPane.add(lblNewLabel_1_8);
         
-        JLabel lblNewLabel_1_9 = new JLabel("kach placa");
-        lblNewLabel_1_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_9.setBounds(607, 306, 203, 22);
-        contentPane.add(lblNewLabel_1_9);
-        
         JLabel lblNewLabel_1_10 = new JLabel("00000000");
         lblNewLabel_1_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_10.setBounds(661, 357, 203, 22);
+        lblNewLabel_1_10.setBounds(682, 318, 203, 22);
         contentPane.add(lblNewLabel_1_10);
         
         JLabel lblNewLabel_1_11 = new JLabel("Lease agreements");
         lblNewLabel_1_11.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_11.setBounds(265, 441, 203, 22);
+        lblNewLabel_1_11.setBounds(252, 390, 203, 22);
         contentPane.add(lblNewLabel_1_11);
         
         JLabel lblNewLabel_1_12 = new JLabel("450000");
         lblNewLabel_1_12.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_12.setBounds(607, 443, 203, 22);
+        lblNewLabel_1_12.setBounds(618, 390, 203, 22);
         contentPane.add(lblNewLabel_1_12);
         
         JLabel lblNewLabel_1_13 = new JLabel("1 ans");
         lblNewLabel_1_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_13.setBounds(225, 488, 203, 22);
+        lblNewLabel_1_13.setBounds(221, 436, 203, 22);
         contentPane.add(lblNewLabel_1_13);
         
         JButton btnNewButton = new JButton("Save");
         btnNewButton.setForeground(new Color(115,24,154));
         btnNewButton.setBounds(346, 512, 173, 23);
         contentPane.add(btnNewButton);
+        
+        JLabel lblNewLabel_1_2_5_1 = new JLabel("Property Adrress : ");
+        lblNewLabel_1_2_5_1.setForeground(new Color(115, 24, 154));
+        lblNewLabel_1_2_5_1.setFont(new Font("Dialog", Font.PLAIN, 20));
+        lblNewLabel_1_2_5_1.setBounds(505, 434, 187, 23);
+        contentPane.add(lblNewLabel_1_2_5_1);
+        
+        JLabel lblNewLabel_1_12_1 = new JLabel("Alger centre ");
+        lblNewLabel_1_12_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel_1_12_1.setBounds(682, 436, 187, 23);
+        contentPane.add(lblNewLabel_1_12_1);
+        
+        JSeparator separator_1 = new JSeparator();
+        separator_1.setForeground(new Color(115,24,154));
+        separator_1.setBounds(361, 84, 128, 2);
+        contentPane.add(separator_1);
        
 	}
-    
 }
