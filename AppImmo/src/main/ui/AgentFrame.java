@@ -27,6 +27,7 @@ public class AgentFrame extends JFrame {
 
     private void initialize() {
         setTitle("IMMO");
+        setResizable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("assets/logo.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(963, 630);
@@ -60,6 +61,10 @@ public class AgentFrame extends JFrame {
         lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 30));
         lblNewLabel.setBounds(144, 11, 165, 41);
         panel_2.add(lblNewLabel);
+        
+        JSeparator separator = new JSeparator();
+        separator.setBounds(144, 50, 101, 2);
+        panel_2.add(separator);
 
         retour = new JButton("<");
         retour.setBounds(10, 10, 45, 45);
@@ -131,5 +136,4 @@ public class AgentFrame extends JFrame {
 
         panel.add(label);
     }
-
 }

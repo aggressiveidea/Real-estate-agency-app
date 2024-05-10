@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import main.DAO.OracleAcc;
@@ -37,6 +38,7 @@ import main.DAO.OracleAcc;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.ScrollPane;
 
 public class LandingFrame extends JFrame implements ActionListener{
 
@@ -55,6 +57,7 @@ public class LandingFrame extends JFrame implements ActionListener{
     private JTextField txtOwnerEmail;
     private JTextArea txtDescription;
 	private Container panel_2;
+    private JPanel scrollPanel;
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	static final String USER = OracleAcc.USER;
@@ -332,7 +335,15 @@ public class LandingFrame extends JFrame implements ActionListener{
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBackground(Color.WHITE);
         scrollPane_1.setBounds(248, 165, 691, 417);
+        scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         contentPane.add(scrollPane_1);
+        
+        scrollPanel = new JPanel();
+        scrollPanel.setPreferredSize(new Dimension(691, 417));
+        scrollPanel.setLayout(null);
+        scrollPane_1.setViewportView(scrollPanel);
+
+        
         
 	}
 	

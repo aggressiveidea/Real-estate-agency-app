@@ -186,13 +186,13 @@ public class ProfileFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Remove account")) {
             // Handle remove account action here
             System.out.println("Remove account button clicked");
-        } /*else if (e.getActionCommand().equals("Edit account")) {
+        } else if (e.getActionCommand().equals("Edit account")) {
 
-            editaccount editaccount = new editaccount();
+            EditaccountFrame editaccount = new EditaccountFrame();
             editaccount.setVisible(true);
             this.dispose();
             System.out.println("Edit account button clicked");
-        }*/
+        }
         
 }
 public static void main(String[] args) {
