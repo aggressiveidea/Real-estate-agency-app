@@ -3,13 +3,20 @@ package main.ui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -87,6 +94,28 @@ public class AppointementFrame extends JFrame implements ActionListener{
         btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 20));
         btnNewButton.setBounds(266, 479, 254, 29);
         contentPane.add(btnNewButton);
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                try {
+						BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                    	Graphics2D g2d = image.createGraphics();
+                    	getContentPane().paint(g2d);
+                    	g2d.dispose();
+
+						JFileChooser fileChooser = new JFileChooser();
+                    	int option = fileChooser.showSaveDialog(AppointementFrame.this);
+                    	if (option == JFileChooser.APPROVE_OPTION) {
+                        	File selectedFile = fileChooser.getSelectedFile();
+                        
+                        	// Save the image to the selected file
+                        	ImageIO.write(image, "png", selectedFile);
+                   		}
+					} catch (IOException ex) {
+						JOptionPane.showMessageDialog(null, "Failed to save image", "ERROR",JOptionPane.ERROR_MESSAGE);
+						ex.printStackTrace();
+					}
+            }
+        });
         
         JPanel panel_1_1 = new JPanel();
         panel_1_1.setBounds(742, 0, 41, 609);
