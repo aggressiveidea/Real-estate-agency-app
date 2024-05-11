@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main.DAO.OracleAcc;
 import main.DAO.User;
 import main.ui.LoginFrame;
 
@@ -121,7 +122,7 @@ public class InformationsFrame extends JFrame implements ActionListener {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "8888");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -28,7 +28,6 @@ CREATE TABLE Client (
     IDclient NUMBER(7) PRIMARY KEY NOT NULL,
     NomClient VARCHAR2(15),
     prenomClient VARCHAR2(20),
-    AdressClient VARCHAR2(30),
     EmailClient VARCHAR2(45),
     telephoneClient VARCHAR2(10),
     CONSTRAINT fk_Client FOREIGN KEY (IDclient) REFERENCES login(id)

@@ -51,6 +51,9 @@ public class Transactionframe extends JFrame {
 	private JTextField textField_13;
 	private JTextField textField_14;
 	private JButton retour;
+	
+	
+	Transaction tran = new Transaction();
 
 	public Transactionframe() {
 		setTitle("IMMO");
@@ -204,7 +207,7 @@ public class Transactionframe extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setForeground(new Color(115,24,154));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Rent ", "Buy"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Rent", "Buy"}));
 		comboBox.setBounds(515, 380, 224, 22);
 		contentPane.add(comboBox);
 		
@@ -217,6 +220,7 @@ public class Transactionframe extends JFrame {
 		textField_5.setColumns(10);
 		textField_5.setBounds(515, 477, 224, 20);
 		contentPane.add(textField_5);*/
+		
 		
 		JButton btnSave = new JButton("Save ");
 		btnSave.addActionListener(new ActionListener() {
@@ -234,9 +238,18 @@ public class Transactionframe extends JFrame {
 				int Owner_id = Integer.parseInt(Owner_id_t);
 				int Cost = Integer.parseInt(Cost_t);
 
-				Transaction tran = new Transaction();
 				int IDT = tran.getId();
 				Date date = (Date) tran.getSQLDate();
+
+				tran.setAgent_id(agentID);
+				tran.setClient_id(Client_id);
+				tran.setOwner_id(Owner_id);
+				tran.setProperty_id(Property_id);
+				tran.setCost(Cost);
+				
+				if (Type == "Rent")
+					tran.settype(1);
+				else tran.settype(2);
 
 				String sql = "INSERT INTO Transactions (IDtransaction, Typetrans, Datetans, Cost) VALUES (?,?,?,?)";
 
@@ -272,6 +285,7 @@ public class Transactionframe extends JFrame {
                         	ImageIO.write(image, "png", selectedFile);
                    		}
 					} catch (IOException ex) {
+						JOptionPane.showMessageDialog(null, "Failed to save image", "ERROR",JOptionPane.ERROR_MESSAGE);
 						ex.printStackTrace();
 					}
 
@@ -289,7 +303,7 @@ public class Transactionframe extends JFrame {
 		JButton btnGenerateContract = new JButton("Generate Contract ");
 		btnGenerateContract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ContractFrame frame = new ContractFrame();
+				ContractFrame frame = new ContractFrame(tran);
 				frame.setVisible(true);
 				dispose();
 			}

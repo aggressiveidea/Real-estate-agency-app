@@ -9,4 +9,5 @@ public class App extends JFrame {
         SignupFrame frame = new SignupFrame();
         frame.setVisible(true);
     }
+    
 }

@@ -54,7 +54,7 @@ public class Transaction {
     }
 
     //class methods
-    public int generate_contract(){
+    public Contract generate_contract(){
         
         String s;
         if (this.type == transaction_type.RENT)
@@ -70,7 +70,7 @@ public class Transaction {
         con.client_id = this.client_id;
         con.owner_id = this.owner_id;
 
-        return con.id;
+        return con;
         
     }
 
