@@ -155,13 +155,13 @@ public class SignupFrame extends JFrame implements ActionListener {
         lblSignupAs.setForeground(Color.WHITE);
         lblSignupAs.setFont(new Font("Dialog", Font.PLAIN, 17));
         lblSignupAs.setBorder(BorderFactory.createEmptyBorder(80, 10, 10, 10));
-        lblSignupAs.setBounds(47, 224, 130, 113);
+        lblSignupAs.setBounds(51, 224, 130, 113);
         panel.add(lblSignupAs);
 
         comboBox = new JComboBox<>();
         comboBox.setForeground(new Color(115, 24, 154));
         comboBox.setModel(new DefaultComboBoxModel<>(new String[] { "OWNER", "CLIENT", "REAL_ESTATE_AGENT" }));
-        comboBox.setBounds(151, 307, 119, 22);
+        comboBox.setBounds(151, 307, 146, 22);
         panel.add(comboBox);
 
         JLabel lblNewLabel = new JLabel("");

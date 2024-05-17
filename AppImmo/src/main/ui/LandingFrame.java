@@ -1,15 +1,13 @@
 package main.ui;
 
+
 import javax.swing.JFrame; 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import main.DAO.OracleAcc;
 import main.DAO.User;
 
@@ -17,16 +15,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,11 +27,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.DAO.OracleAcc;
-
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
-import java.awt.ScrollPane;
 
 public class LandingFrame extends JFrame implements ActionListener{
 
@@ -49,13 +39,6 @@ public class LandingFrame extends JFrame implements ActionListener{
     private JButton btnNewButton_1_1_1;
 	private JButton btnNewButton_2_1;
 
-	private JLabel textField;
-	private JLabel textField_1;
-	private JTextField txtType;
-    private JTextField txtPrice;
-    private JTextField txtOwnerPhoneNumber;
-    private JTextField txtOwnerEmail;
-    private JTextArea txtDescription;
 	private Container panel_2;
     private JPanel scrollPanel;
 	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -202,6 +185,7 @@ public class LandingFrame extends JFrame implements ActionListener{
 				
 			}
 		});
+        
 		
 		JLabel lblNewLabel_1 = new JLabel("Home is Where Your Story Begins.");
 		lblNewLabel_1.setForeground(new Color(115, 24, 154));
@@ -209,10 +193,21 @@ public class LandingFrame extends JFrame implements ActionListener{
 		lblNewLabel_1.setBounds(297, 11, 446, 47);
 		contentPane.add(lblNewLabel_1);
 
+		JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBackground(Color.WHITE);
+        scrollPane_1.setBounds(248, 165, 691, 417);
+        scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        contentPane.add(scrollPane_1);
+        
+        scrollPanel = new JPanel();
+        scrollPanel.setPreferredSize(new Dimension(691, 1200));
+        scrollPane_1.setViewportView(scrollPanel);
+		scrollPanel.setLayout(null);
+
 		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(0, 0, 691, 294);
 		panel_2.setBackground(new Color(115,24,154,110));
-		panel_2.setBounds(248, 165, 691, 294);
-		contentPane.add(panel_2);
+		scrollPanel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JPanel panel_3 = new JPanel();
@@ -221,13 +216,13 @@ public class LandingFrame extends JFrame implements ActionListener{
         panel_2.add(panel_3);
         panel_3.setLayout(null);
         JLabel lblNewLabel_3 = new JLabel("TYPE :");
-        lblNewLabel_3.setBounds(0, 0, 64, 25);
+        lblNewLabel_3.setBounds(10, 0, 64, 25);
         lblNewLabel_3.setForeground(Color.WHITE);
         lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_3);
         
         JLabel lblNewLabel_3_1 = new JLabel("PRICE : ");
-        lblNewLabel_3_1.setBounds(0, 36, 64, 25);
+        lblNewLabel_3_1.setBounds(10, 36, 64, 25);
         lblNewLabel_3_1.setForeground(Color.WHITE);
         lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_3_1);
@@ -243,45 +238,56 @@ public class LandingFrame extends JFrame implements ActionListener{
         panel_2.add(lblNewLabel_4_1);
         
         JButton btnNewButton_2 = new JButton("Search");
+        btnNewButton_2.setBackground(new Color(0, 128, 0));
         btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton_2.setForeground(new Color(115,24,154));
+        btnNewButton_2.setForeground(new Color(255, 255, 255));
         btnNewButton_2.setBounds(687, 76, 89, 29);
         contentPane.add(btnNewButton_2);
+        btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 
+				 SearchFrame frame = new SearchFrame();
+				frame.setVisible(true);
+				dispose();
+				
+			}
+		});
         
         JLabel lblNewLabel_5 = new JLabel("");
         lblNewLabel_5.setIcon(new ImageIcon(LandingFrame.class.getResource("assets\\realestate.jpg")));
         lblNewLabel_5.setBounds(0, 0, 300, 291);
         panel_3.add(lblNewLabel_5);
         JLabel lblNewLabel_2 = new JLabel("Description :");
-        lblNewLabel_2.setBounds(0, 155, 139, 25);
+        lblNewLabel_2.setBounds(10, 154, 139, 25);
         lblNewLabel_2.setForeground(Color.WHITE);
         lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_2);
         
         JLabel lblNewLabel_3_1_1 = new JLabel("Owner's phone number : ");
-        lblNewLabel_3_1_1.setBounds(0, 91, 172, 25);
+        lblNewLabel_3_1_1.setBounds(10, 95, 172, 25);
         lblNewLabel_3_1_1.setForeground(Color.WHITE);
         lblNewLabel_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_3_1_1);
         
         JLabel lblNewLabel_4_1_1 = new JLabel("48375244697");
-        lblNewLabel_4_1_1.setBounds(179, 93, 119, 20);
+        lblNewLabel_4_1_1.setBounds(201, 95, 119, 20);
         lblNewLabel_4_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_4_1_1);
         
         JLabel lblNewLabel_3_1_1_1 = new JLabel("Owner's email : ");
-        lblNewLabel_3_1_1_1.setBounds(0, 124, 162, 25);
+        lblNewLabel_3_1_1_1.setBounds(10, 125, 162, 25);
         lblNewLabel_3_1_1_1.setForeground(Color.WHITE);
         lblNewLabel_3_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_3_1_1_1);
         
         JLabel lblNewLabel_4_1_2 = new JLabel("albertcamus@gmail.com");
-        lblNewLabel_4_1_2.setBounds(114, 124, 184, 20);
+        lblNewLabel_4_1_2.setBounds(136, 127, 184, 20);
         lblNewLabel_4_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
         panel_2.add(lblNewLabel_4_1_2);
                 
                 JButton btnNewButton_2_1_1 = new JButton("Remove");
-                btnNewButton_2_1_1.setForeground(new Color(115, 24, 154));
+                btnNewButton_2_1_1.setBackground(Color.RED);
+                btnNewButton_2_1_1.setForeground(Color.WHITE);
                 btnNewButton_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
                 btnNewButton_2_1_1.setBounds(10, 254, 89, 29);
                 panel_2.add(btnNewButton_2_1_1);
@@ -295,7 +301,7 @@ public class LandingFrame extends JFrame implements ActionListener{
 
                 JScrollPane scrollPane = new JScrollPane();
                 scrollPane.setBackground(new Color(115,24,154,100));
-                scrollPane.setBounds(0, 179, 306, 56);
+                scrollPane.setBounds(10, 177, 306, 56);
                
                 panel_2.add(scrollPane);
                 
@@ -307,7 +313,8 @@ public class LandingFrame extends JFrame implements ActionListener{
                 scrollPane.setViewportView(lblNewLabel_6);
                 
                 JButton btnNewButton_2_1_1_1 = new JButton("Edit");
-                btnNewButton_2_1_1_1.setForeground(new Color(115, 24, 154));
+                btnNewButton_2_1_1_1.setBackground(Color.BLUE);
+                btnNewButton_2_1_1_1.setForeground(Color.WHITE);
                 btnNewButton_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
                 btnNewButton_2_1_1_1.setBounds(114, 254, 89, 29);
                 panel_2.add(btnNewButton_2_1_1_1);
@@ -315,12 +322,12 @@ public class LandingFrame extends JFrame implements ActionListener{
                 JLabel lblNewLabel_3_1_1_1_1 = new JLabel("Address : ");
                 lblNewLabel_3_1_1_1_1.setForeground(Color.WHITE);
                 lblNewLabel_3_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                lblNewLabel_3_1_1_1_1.setBounds(0, 65, 96, 25);
+                lblNewLabel_3_1_1_1_1.setBounds(10, 67, 96, 25);
                 panel_2.add(lblNewLabel_3_1_1_1_1);
                 
                 JLabel lblNewLabel_4_1_3 = new JLabel("SUD EST de france ");
                 lblNewLabel_4_1_3.setFont(new Font("Dialog", Font.PLAIN, 15));
-                lblNewLabel_4_1_3.setBounds(74, 69, 224, 20);
+                lblNewLabel_4_1_3.setBounds(96, 69, 224, 20);
                 panel_2.add(lblNewLabel_4_1_3);
 
        
@@ -332,17 +339,7 @@ public class LandingFrame extends JFrame implements ActionListener{
         btnNewButton_2_1.setBounds(430, 125, 89, 29);
         contentPane.add(btnNewButton_2_1);
         
-        JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBackground(Color.WHITE);
-        scrollPane_1.setBounds(248, 165, 691, 417);
-        scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        contentPane.add(scrollPane_1);
-        
-        scrollPanel = new JPanel();
-        scrollPanel.setPreferredSize(new Dimension(691, 417));
-        scrollPanel.setLayout(null);
-        scrollPane_1.setViewportView(scrollPanel);
-
+       
         
         
 	}
@@ -377,7 +374,7 @@ public void actionPerformed(ActionEvent e) {
 
 
 
-// Add an ActionListener to the Refresh button
+
 
 
 

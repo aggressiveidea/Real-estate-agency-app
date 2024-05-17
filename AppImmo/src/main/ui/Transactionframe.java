@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class Transactionframe extends JFrame {
@@ -40,16 +39,6 @@ public class Transactionframe extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
 	private JButton retour;
 	
 	
@@ -76,7 +65,7 @@ public class Transactionframe extends JFrame {
 		panel.setBackground(new Color(66, 14, 88));
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(106, 63, 237, 634);
+		panel_1.setBounds(106, 63, 252, 634);
 		panel_1.setBackground(new Color(115, 24, 154));
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -105,21 +94,23 @@ public class Transactionframe extends JFrame {
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnNewButton.setBounds(34, 30, 147, 23);
+		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnNewButton.setBounds(34, 30, 193, 23);
 		btnNewButton.setForeground(new Color(115, 24, 154));
 		panel_1.add(btnNewButton);
 		
 		JButton btnRemoveAppointment = new JButton("Remove appointment ");
-		btnRemoveAppointment.setForeground(new Color(115, 24, 154));
-		btnRemoveAppointment.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnRemoveAppointment.setBounds(34, 90, 147, 23);
+		btnRemoveAppointment.setBackground(new Color(153, 0, 0));
+		btnRemoveAppointment.setForeground(new Color(255, 255, 255));
+		btnRemoveAppointment.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnRemoveAppointment.setBounds(34, 90, 193, 23);
 		panel_1.add(btnRemoveAppointment);
 		
 		JButton btnRemoveATransaction = new JButton("Remove a transaction ");
-		btnRemoveATransaction.setForeground(new Color(115, 24, 154));
-		btnRemoveATransaction.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnRemoveATransaction.setBounds(34, 151, 147, 23);
+		btnRemoveATransaction.setBackground(new Color(153, 0, 0));
+		btnRemoveATransaction.setForeground(Color.WHITE);
+		btnRemoveATransaction.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnRemoveATransaction.setBounds(34, 151, 193, 23);
 		panel_1.add(btnRemoveATransaction);
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 0, 1052, 63);
@@ -223,6 +214,7 @@ public class Transactionframe extends JFrame {
 		
 		
 		JButton btnSave = new JButton("Save ");
+		btnSave.setBackground(Color.BLUE);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				String agentID_t = textField.getText();
@@ -295,12 +287,13 @@ public class Transactionframe extends JFrame {
 				}
 			}
 		});
-		btnSave.setForeground(new Color(115, 24, 154));
-		btnSave.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnSave.setBounds(430, 532, 147, 23);
+		btnSave.setForeground(Color.WHITE);
+		btnSave.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnSave.setBounds(430, 532, 155, 23);
 		contentPane.add(btnSave);
 		
 		JButton btnGenerateContract = new JButton("Generate Contract ");
+		btnGenerateContract.setBackground(new Color(0, 100, 0));
 		btnGenerateContract.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ContractFrame frame = new ContractFrame(tran);
@@ -308,9 +301,9 @@ public class Transactionframe extends JFrame {
 				dispose();
 			}
 		});
-		btnGenerateContract.setForeground(new Color(115, 24, 154));
-		btnGenerateContract.setFont(new Font("Dialog", Font.PLAIN, 11));
-		btnGenerateContract.setBounds(691, 532, 147, 23);
+		btnGenerateContract.setForeground(new Color(255, 255, 255));
+		btnGenerateContract.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnGenerateContract.setBounds(691, 532, 172, 23);
 		contentPane.add(btnGenerateContract);
 		
 	}

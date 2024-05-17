@@ -84,7 +84,7 @@ public class EditaccountFrame extends JFrame implements ActionListener {
 
         btnEdit = new JButton("Edit");
         btnEdit.setForeground(new Color(115, 24, 154));
-        btnEdit.setFont(new Font("Dialog", Font.BOLD, 11));
+        btnEdit.setFont(new Font("Dialog", Font.BOLD, 15));
         btnEdit.setBounds(196, 396, 343, 30);
         btnEdit.addActionListener(this);
 

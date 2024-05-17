@@ -480,7 +480,9 @@ public class ContractFrame extends JFrame {
         contentPane.add(lblNewLabel_1_13);
         
         JButton btnSave = new JButton("Save");
-        btnSave.setForeground(new Color(115,24,154));
+        btnSave.setBackground(Color.BLUE);
+        btnSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnSave.setForeground(Color.WHITE);
         btnSave.setBounds(346, 512, 173, 23);
         contentPane.add(btnSave);
         btnSave.addActionListener(new ActionListener() {
@@ -524,3 +526,4 @@ public class ContractFrame extends JFrame {
        
 	}
 }
+

@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JSeparator;
 
 
 public class AppointementFrame extends JFrame implements ActionListener{
@@ -59,7 +60,7 @@ public class AppointementFrame extends JFrame implements ActionListener{
         
         JLabel lblNewLabel = new JLabel("Appointment");
         lblNewLabel.setForeground(new Color(115,24,154));
-        lblNewLabel.setBounds(264, 50, 229, 39);
+        lblNewLabel.setBounds(297, 50, 229, 39);
         lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 30));
         contentPane.add(lblNewLabel);
         
@@ -90,9 +91,10 @@ public class AppointementFrame extends JFrame implements ActionListener{
         
         
         JButton btnNewButton = new JButton("Add Appointment");
-        btnNewButton.setForeground(new Color(115,24,154));
-        btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-        btnNewButton.setBounds(266, 479, 254, 29);
+        btnNewButton.setBackground(Color.BLUE);
+        btnNewButton.setForeground(new Color(255, 255, 255));
+        btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
+        btnNewButton.setBounds(299, 481, 254, 29);
         contentPane.add(btnNewButton);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
@@ -181,6 +183,11 @@ public class AppointementFrame extends JFrame implements ActionListener{
         textField_1.setColumns(10);
         textField_1.setBounds(299, 403, 254, 28);
         contentPane.add(textField_1);
+        
+        JSeparator separator = new JSeparator();
+        separator.setBounds(286, 87, 186, 2);
+        separator.setBackground(new Color(115,24,154));
+        contentPane.add(separator);
     }
 
     @Override

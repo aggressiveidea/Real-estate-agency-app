@@ -19,11 +19,7 @@ import javax.swing.border.SoftBevelBorder;
 
 
 import javax.swing.JTable;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JEditorPane;
 import javax.swing.JSeparator;
 
 public class ProfileFrame extends JFrame implements ActionListener {
@@ -64,58 +60,66 @@ public class ProfileFrame extends JFrame implements ActionListener {
 
         
         JButton btnRemoveAccount = new JButton("Remove account");
-        btnRemoveAccount.setForeground(new Color(115, 24, 154));
-        btnRemoveAccount.setFont(new Font("Dialog", Font.PLAIN, 11));
+        btnRemoveAccount.setBackground(new Color(153, 0, 0));
+        btnRemoveAccount.setForeground(new Color(255, 255, 255));
+        btnRemoveAccount.setFont(new Font("Dialog", Font.PLAIN, 15));
         btnRemoveAccount.setBounds(23, 496, 185, 23);
         panel_1.add(btnRemoveAccount);
         btnRemoveAccount.addActionListener(this); // Add action listener
 
         JButton btnEditAccount = new JButton("Edit account");
-        btnEditAccount.setForeground(new Color(115, 24, 154));
-        btnEditAccount.setFont(new Font("Dialog", Font.PLAIN, 11));
+        btnEditAccount.setBackground(Color.BLUE);
+        btnEditAccount.setForeground(new Color(255, 255, 255));
+        btnEditAccount.setFont(new Font("Dialog", Font.PLAIN, 15));
         btnEditAccount.setBounds(23, 447, 185, 23);
         panel_1.add(btnEditAccount);
         
                 // Button to browse and select an image
                 btnBrowse = new JButton("Browse");
                 btnBrowse.setForeground(new Color(115, 24, 154));
-                btnBrowse.setFont(new Font("Dialog", Font.PLAIN, 11));
+                btnBrowse.setFont(new Font("Dialog", Font.PLAIN, 15));
                 btnBrowse.setBounds(65, 164, 100, 30);
                 panel_1.add(btnBrowse);
-                // JLabel to display the image
+                
                 imageLabel = new JLabel();
                 imageLabel.setBounds(23, 11, 185, 135);
                 panel_1.add(imageLabel);
                 
                 JLabel lblNewLabel_2 = new JLabel("ID : ");
                 lblNewLabel_2.setForeground(Color.WHITE);
-                lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+                lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
                 lblNewLabel_2.setBounds(23, 221, 49, 23);
                 panel_1.add(lblNewLabel_2);
                 
                 JLabel lblNewLabel_2_1 = new JLabel("Username :");
                 lblNewLabel_2_1.setForeground(Color.WHITE);
-                lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                lblNewLabel_2_1.setBounds(23, 265, 128, 23);
+                lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+                lblNewLabel_2_1.setBounds(23, 266, 128, 23);
                 panel_1.add(lblNewLabel_2_1);
                 
                 JLabel lblNewLabel_2_2 = new JLabel("Type : ");
                 lblNewLabel_2_2.setForeground(Color.WHITE);
-                lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                lblNewLabel_2_2.setBounds(23, 313, 100, 37);
+                lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+                lblNewLabel_2_2.setBounds(23, 309, 100, 37);
                 panel_1.add(lblNewLabel_2_2);
                 
-                JLabel lblNewLabel_3 = new JLabel("New label");
+                JLabel lblNewLabel_3 = new JLabel("632845");
+                lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+                lblNewLabel_3.setForeground(new Color(255, 255, 255));
                 lblNewLabel_3.setBackground(Color.LIGHT_GRAY);
-                lblNewLabel_3.setBounds(130, 225, 152, 22);
+                lblNewLabel_3.setBounds(82, 225, 152, 22);
                 panel_1.add(lblNewLabel_3);
                 
-                JLabel lblNewLabel_3_1 = new JLabel("New label");
-                lblNewLabel_3_1.setBounds(130, 266, 152, 22);
+                JLabel lblNewLabel_3_1 = new JLabel("kach bnadem ");
+                lblNewLabel_3_1.setForeground(new Color(255, 255, 255));
+                lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+                lblNewLabel_3_1.setBounds(140, 266, 152, 22);
                 panel_1.add(lblNewLabel_3_1);
                 
-                JLabel lblNewLabel_3_2 = new JLabel("New label");
-                lblNewLabel_3_2.setBounds(130, 324, 152, 22);
+                JLabel lblNewLabel_3_2 = new JLabel("Agent");
+                lblNewLabel_3_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+                lblNewLabel_3_2.setForeground(new Color(255, 255, 255));
+                lblNewLabel_3_2.setBounds(105, 312, 152, 30);
                 panel_1.add(lblNewLabel_3_2);
                 btnBrowse.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -123,7 +127,7 @@ public class ProfileFrame extends JFrame implements ActionListener {
                         int result = fileChooser.showOpenDialog(null);
                         if (result == JFileChooser.APPROVE_OPTION) {
                             File selectedFile = fileChooser.getSelectedFile();
-                            // Set the selected image to the label
+                            
                             ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
                             imageLabel.setIcon(imageIcon);
                         }
