@@ -30,7 +30,7 @@ public class User {
     public Type type;
     public String username, password;
     public int id_generate;
-    public int idall;
+    public static int idall;
 
     // Constructor 1
     public User(String username, String password) {

@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import main.DAO.OracleAcc;
+import main.DAO.User;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -242,32 +243,38 @@ public class AddpropertyFrame extends JFrame {
                 double minPrice = Double.parseDouble(textField_2.getText());
                 String papers = (String) comboBox_1.getSelectedItem();
                 String specifications = (String) comboBox_1_1.getSelectedItem();
-                
+                 int proprietaireID = User.idall;
+
                 // Database connection parameters
                 String url = "jdbc:oracle:thin:@localhost:1521:XE";
                 String user = OracleAcc.USER;
                 String password = OracleAcc.PASS;
             
                 // SQL to insert property
-                String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications) " +
-                        "VALUES (?,?,?,?,?,?,?,?,?)";
-            
+                String sql = "INSERT INTO BienImmobilier (IDbien, Typebien, Taillebien, Prixbien, Descbien, AgentID, PropriID, property_papers, p_specifications, Localbien) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+
                 int PropriID = 0;
                 int AgentID = 0;
             
                 try (Connection conn = DriverManager.getConnection(url, user, password);
                      Statement stmt = conn.createStatement()) {
             
-                    // Get PropriID
+                    /* get PropriID
                     ResultSet rs = stmt.executeQuery("SELECT IDPROPR FROM Proprietaire");
+                    /*Get PropriID
+                    ResultSet rs = stmt.executeQuery("SELECT IDPROPR FROM Proprietaire ");
                     if (rs.next()) {
                         PropriID = rs.getInt(1);
                     } else {
                         throw new SQLException("No PropriID found");
                     }
                     
+                    */
+
                     // Get AgentID
-                    rs = stmt.executeQuery("SELECT IDAGENT FROM AgentImm ORDER BY DBMS_RANDOM.RANDOM");
+                    ResultSet rs = stmt.executeQuery("SELECT IDAGENT FROM AgentImm ORDER BY DBMS_RANDOM.RANDOM");
                     if (rs.next()) {
                         AgentID = rs.getInt(1);
                     } else {
@@ -290,10 +297,11 @@ public class AddpropertyFrame extends JFrame {
                     pstmt.setDouble(4, price);
                     pstmt.setString(5, description);
                     pstmt.setInt(6, AgentID); // Set the AgentID
-                    pstmt.setInt(7, PropriID); // Set the PropriID
+                    pstmt.setInt(7, proprietaireID);  // Set the PropriID
                     pstmt.setString(8, papers);
                     pstmt.setString(9, specifications);
-            
+                    pstmt.setString(10,address );
+
                     // Execute the SQL statement
                     pstmt.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Property added successfully!");
@@ -302,6 +310,7 @@ public class AddpropertyFrame extends JFrame {
                     
 
                     // Navigate to the landing page
+                    LandingFrame landingFrame = new LandingFrame();
                     landingFrame.setVisible(true);
                     dispose(); // Close the current frame
             
