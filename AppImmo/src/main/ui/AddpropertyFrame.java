@@ -149,9 +149,10 @@ public class AddpropertyFrame extends JFrame {
         textArea.setFont(new Font("Dialog", Font.PLAIN, 13));
 
         JButton btnNewButton = new JButton("ADD");
-        btnNewButton.setForeground(new Color(115,24,154));
+        btnNewButton.setBackground(Color.BLUE);
+        btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBounds(323, 510, 165, 23);
-        btnNewButton.setFont(new Font("Dialog", Font.BOLD, 11));
+        btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(btnNewButton);
 
         imageLabel = new JLabel();
@@ -161,7 +162,7 @@ public class AddpropertyFrame extends JFrame {
         btnBrowse = new JButton("Browse");
         btnBrowse.setBounds(485, 317, 100, 30);
         btnBrowse.setForeground(new Color(115,24,154));
-        btnBrowse.setFont(new Font("Dialog", Font.BOLD, 11));
+        btnBrowse.setFont(new Font("Dialog", Font.PLAIN, 15));
         contentPane.add(btnBrowse);
 
         JComboBox comboBox = new JComboBox();
@@ -185,25 +186,25 @@ public class AddpropertyFrame extends JFrame {
         JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Papers");
         lblNewLabel_1_1_1_2_1.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-        lblNewLabel_1_1_1_2_1.setBounds(93, 302, 71, 20);
+        lblNewLabel_1_1_1_2_1.setBounds(93, 293, 71, 20);
         contentPane.add(lblNewLabel_1_1_1_2_1);
 
         JLabel lblNewLabel_1_1_1_2_2 = new JLabel("Specifications");
         lblNewLabel_1_1_1_2_2.setForeground(new Color(115,24,154));
         lblNewLabel_1_1_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-        lblNewLabel_1_1_1_2_2.setBounds(93, 345, 100, 20);
+        lblNewLabel_1_1_1_2_2.setBounds(93, 327, 100, 20);
         contentPane.add(lblNewLabel_1_1_1_2_2);
 
         JComboBox comboBox_1 = new JComboBox();
         comboBox_1.setForeground(new Color(115,24,154));
         comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"NOTARIAL_ACT", "REAL_ESTATE_PROMOTION ", "DECISION", "REAL_ESTATE_BOOKLET", "STAMBED_PAPERS", "INDIVISION_ACT"}));
-        comboBox_1.setBounds(194, 303, 165, 22);
+        comboBox_1.setBounds(194, 289, 165, 22);
         contentPane.add(comboBox_1);
 
         JComboBox comboBox_1_1 = new JComboBox();
         comboBox_1_1.setForeground(new Color(115,24,154));
         comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"WATER", "GAS", "ELECTRICITY", "GARAGE", "GARDEN", "FURNISHED"}));
-        comboBox_1_1.setBounds(194, 347, 165, 22);
+        comboBox_1_1.setBounds(194, 325, 165, 22);
         contentPane.add(comboBox_1_1);
 
         btnBrowse.addActionListener(new ActionListener() {
