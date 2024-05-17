@@ -1,6 +1,5 @@
 package main.ui;
 
-
 import javax.swing.JFrame; 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -81,15 +80,15 @@ public class LandingFrame extends JFrame implements ActionListener{
 		panel_1.add(lblNewLabel);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(41, 284, 175, 2);
+		separator_1.setBounds(24, 283, 175, 2);
 		panel.add(separator_1);
 		
 		JSeparator separator_1_1 = new JSeparator();
-		separator_1_1.setBounds(41, 356, 175, 2);
+		separator_1_1.setBounds(24, 348, 175, 2);
 		panel.add(separator_1_1);
 		
 		JSeparator separator_1_2 = new JSeparator();
-		separator_1_2.setBounds(41, 219, 175, 2);
+		separator_1_2.setBounds(24, 219, 175, 2);
 		panel.add(separator_1_2);
 		
 		JButton btnNewButton_1 = new JButton("Agent ");
@@ -158,6 +157,47 @@ public class LandingFrame extends JFrame implements ActionListener{
        btnNewButton_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 25));
        btnNewButton_1_1_1.setContentAreaFilled(false); 
        btnNewButton_1_1_1.setBorderPainted(false);
+       
+       JButton btnNewButton_1_1_1_2 = new JButton("Users ");
+       btnNewButton_1_1_1_2.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent e) {
+       		AllusersFrame frame = new AllusersFrame();
+            frame.setVisible(true);
+            dispose();
+       	}
+       });
+       btnNewButton_1_1_1_2.setForeground(Color.WHITE);
+       btnNewButton_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 25));
+       btnNewButton_1_1_1_2.setContentAreaFilled(false);
+       btnNewButton_1_1_1_2.setBorderPainted(false);
+       btnNewButton_1_1_1_2.setBackground(new Color(115, 24, 154, 130));
+       btnNewButton_1_1_1_2.setBounds(41, 369, 144, 40);
+       panel.add(btnNewButton_1_1_1_2);
+       
+       JButton btnNewButton_1_1_1_3 = new JButton("Appointments ");
+       btnNewButton_1_1_1_3.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent e) {
+       		TableFrame frame = new TableFrame();
+       		frame.setVisible(true);
+       		dispose();
+       		
+       	}
+       });
+       btnNewButton_1_1_1_3.setForeground(Color.WHITE);
+       btnNewButton_1_1_1_3.setFont(new Font("Dialog", Font.PLAIN, 25));
+       btnNewButton_1_1_1_3.setContentAreaFilled(false);
+       btnNewButton_1_1_1_3.setBorderPainted(false);
+       btnNewButton_1_1_1_3.setBackground(new Color(115, 24, 154, 130));
+       btnNewButton_1_1_1_3.setBounds(10, 443, 212, 40);
+       panel.add(btnNewButton_1_1_1_3);
+       
+       JSeparator separator_1_3 = new JSeparator();
+       separator_1_3.setBounds(24, 420, 175, 2);
+       panel.add(separator_1_3);
+       
+       JSeparator separator_1_4 = new JSeparator();
+       separator_1_4.setBounds(24, 494, 175, 2);
+       panel.add(separator_1_4);
 
        btnNewButton_1_1_1.addActionListener(this); 
            btnNewButton_1_1_1_1.addActionListener(this);

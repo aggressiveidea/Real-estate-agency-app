@@ -1,6 +1,7 @@
 package main.ui;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -118,6 +119,14 @@ public class InformationsFrame extends JFrame implements ActionListener {
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon(InformationsFrame.class.getResource("assets\\clipart2415206.png")));
         lblNewLabel.setBounds(10, 0, 279, 275);
+        panel_1.add(lblNewLabel);
+
+        ImageIcon originalIcon = new ImageIcon(AllusersFrame.class.getResource("assets\\clipart2415206.png"));
+        
+        Image img = originalIcon.getImage();
+        Image scaledImg = img.getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImg);
+        lblNewLabel.setIcon(scaledIcon);
         panel_1.add(lblNewLabel);
 
         try {
