@@ -12,11 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-
+import main.DAO.User;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -65,7 +66,24 @@ public class ProfileFrame extends JFrame implements ActionListener {
         btnRemoveAccount.setFont(new Font("Dialog", Font.PLAIN, 15));
         btnRemoveAccount.setBounds(23, 496, 185, 23);
         panel_1.add(btnRemoveAccount);
-        btnRemoveAccount.addActionListener(this); // Add action listener
+        //btnRemoveAccount.addActionListener(this); // Add action listener
+        btnRemoveAccount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to remove your account?", "Confirm Remove Account",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    User user = new User();
+                    user.remove(User.idall); // Using static variable idall
+                    dispose(); // Close the frame
+                    // Optionally, redirect to the login page or exit the application
+                    // new LoginFrame().setVisible(true);
+                    // System.exit(0);
+                }
+            }
+        });
 
         JButton btnEditAccount = new JButton("Edit account");
         btnEditAccount.setBackground(Color.BLUE);

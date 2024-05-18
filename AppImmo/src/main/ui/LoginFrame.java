@@ -143,10 +143,9 @@ public class LoginFrame extends JFrame {
                 if (e.getSource() == button) {
                     User user = new User(username, password);
                     user.login();
-                    
-                    LandingFrame landing  = new LandingFrame();
-
-                    dispose(); 
+                    LandingFrame main = new LandingFrame();
+                    main.setVisible(true);
+                    dispose();
                     // Ferme la fenêtre de connexion après l'affichage du message
                 }
             }
@@ -156,5 +155,6 @@ public class LoginFrame extends JFrame {
     public static void main(String[] args) {
         LoginFrame frame = new LoginFrame();
         frame.setVisible(true);
+        
     }
 }

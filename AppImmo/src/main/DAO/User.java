@@ -132,16 +132,68 @@ public class User {
         this.email = email;
         this.phone_number = numtel;
     }
+    //constructeur par défaut 
+    public User()
+    {
+
+    }
     
 
     // Methods
 
     public void modify() {
-        // Later
+        PreparedStatement ps = null;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "OracleAcc.USER", "OracleAcc.PASS");
+
+            String sql = "UPDATE login SET name = ?, surname = ?, phone_number = ?, email = ? WHERE id = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, surname);
+            ps.setString(3, phone_number);
+            ps.setString(4, email);
+            ps.setInt(5, idall);
+
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "User information updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update user information");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error occurred while updating information: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (connection != null) connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void remove(int id) {
-        // Later
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+            String sql = "DELETE FROM login WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Account successfully removed");
+            } else {
+                JOptionPane.showMessageDialog(null, "Account removal failed");
+            }
+            ps.close();
+            connection.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error occurred while removing account: " + e.getMessage());
+        }
     }
 
     public void signup(String username, String password, String type1) throws SQLException {
