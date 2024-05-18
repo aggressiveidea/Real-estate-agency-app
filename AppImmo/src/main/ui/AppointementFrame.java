@@ -159,26 +159,31 @@ public class AppointementFrame extends JFrame implements ActionListener{
         lblNewLabel_1_2.setBounds(115, 154, 128, 23);
         contentPane.add(lblNewLabel_1_2);
         
+        //property address
         textField_2 = new JTextField();
         textField_2.setColumns(10);
         textField_2.setBounds(299, 345, 254, 28);
         contentPane.add(textField_2);
         
+        //owner id
         textField_4 = new JTextField();
         textField_4.setColumns(10);
         textField_4.setBounds(299, 277, 254, 28);
         contentPane.add(textField_4);
         
+        //client id
         textField_5 = new JTextField();
         textField_5.setColumns(10);
         textField_5.setBounds(299, 210, 254, 28);
         contentPane.add(textField_5);
         
+        //agent id
         textField = new JTextField();
         textField.setColumns(10);
         textField.setBounds(299, 149, 254, 28);
         contentPane.add(textField);
         
+        //date 
         textField_1 = new JTextField();
         textField_1.setColumns(10);
         textField_1.setBounds(299, 403, 254, 28);
