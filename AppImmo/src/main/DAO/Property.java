@@ -1,58 +1,61 @@
 package main.DAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Property {
 
     public int id;
-    public static int assignedAgentid;
-    public property_type property_type;
-    public property_papers papers;
-    public p_specifications specifications;
-    public static double Size;
-    public static String address;
-    public static String description;
-    public static double price;
-    public double price_min;
+    public int assignedAgentid;
+    public PropertyType propertyType;
+    private PropertyPapers papers;
+    private PSpecifications specifications;
+    public double size;
+    public double price;
+    private double priceMin;
+    public String address;
+    public String description;
+    private String ownerName;
+    private String ownerPhone;
+    private String ownerEmail;
 
-    // Constructor
-    public Property(int assignedAgentid,
-            double size, String address, String description, double price, double price_min) {
-        
+    // Constructors
+    public Property(int assignedAgentid, double size, String address, String description, double price, double priceMin) {
         this.id = generateRandomId();
-
-        Property.assignedAgentid = assignedAgentid;
-        Property.Size = size;
-        Property.address = address;
-        Property.description = description;
-        Property.price = price;
-        this.price_min = price_min;
+        this.assignedAgentid = assignedAgentid;
+        this.size = size;
+        this.address = address;
+        this.description = description;
+        this.price = price;
+        this.priceMin = priceMin;
     }
 
-    public Property(String address2, String type, double price2, double size2, String description2, double minPrice,
-            String papers2, String specifications2) {
-        //TODO Auto-generated constructor stub
+    public Property(String type, String papers, String specifications) {
+        this.propertyType = PropertyType.valueOf(type);
+        this.papers = PropertyPapers.valueOf(papers);
+        this.specifications = PSpecifications.valueOf(specifications);
     }
 
-    private int generateRandomId (){
+    public Property(int propertyId, String address, String description, double price, PropertyType type, String ownerName, String ownerPhone, String ownerEmail) {
+        this.id = propertyId;
+        this.address = address;
+        this.description = description;
+        this.price = price;
+        this.propertyType = type;
+        this.ownerName = ownerName;
+        this.ownerPhone = ownerPhone;
+        this.ownerEmail = ownerEmail;
+    }
+
+    private int generateRandomId() {
         Random rand = new Random();
         return rand.nextInt(1000000);
-    }
-
-    //methods
-    public int affecteproperty(int id) {
-        return id;
-        // add later
-    }
-
-    public int searchproperty(String property_type) {
-        return assignedAgentid;
-        // add later
-    }
-
-    public int searchproperty(double price) {
-        return assignedAgentid;
-        // add later
     }
 
     // Getter and Setter methods
@@ -61,102 +64,167 @@ public class Property {
         return id;
     }
 
-    public static double getSize() {
-        return Size;
-    }
-
-    public static String getAddress() {
-        return address;
-    }
-
-    public static String getDescription() {
-        return description;
-    }
-
-    public static double getPrice() {
-        return price;
-    }
-
-    public static int getAssignedAgentid() {
-        return assignedAgentid;
-    }
-
-    public static void setAssignedAgentid(int assignedAgentid) {
-        Property.assignedAgentid = assignedAgentid;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    public int getAssignedAgentid() {
+        return assignedAgentid;
+    }
+
+    public void setAssignedAgentid(int assignedAgentid) {
+        this.assignedAgentid = assignedAgentid;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
     public void setSize(double size) {
-        Size = size;
+        this.size = size;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
-        Property.address = address;
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
-        Property.description = description;
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
-        Property.price = price;
+        this.price = price;
     }
 
-    public void setPrice_min(double price_min) {
-        this.price_min = price_min;
+    public double getPriceMin() {
+        return priceMin;
     }
 
-    public property_type getProperty_type() {
-        return property_type;
+    public void setPriceMin(double priceMin) {
+        this.priceMin = priceMin;
     }
 
-    public void setProperty_type(property_type property_type) {
-        this.property_type = property_type;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public property_papers getPapers() {
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerPhone() {
+        return ownerPhone;
+    }
+
+    public void setOwnerPhone(String ownerPhone) {
+        this.ownerPhone = ownerPhone;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public String getPropertyType() {
+        return propertyType.name();
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
+
+    public PropertyPapers getPapers() {
         return papers;
     }
 
-    public void setPapers(property_papers papers) {
+    public void setPapers(PropertyPapers papers) {
         this.papers = papers;
     }
 
-    public p_specifications getSpecifications() {
+    public PSpecifications getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(p_specifications specifications) {
+    public void setSpecifications(PSpecifications specifications) {
         this.specifications = specifications;
     }
 
+    public static List<Property> getProperties() {
+        List<Property> properties = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
+            System.out.println("Database connection established.");
+            String sql = "SELECT b.Typebien, b.Prixbien, b.Localbien, b.Descbien, p.IDpropr, p.Nompropr, p.Prenompropr, p.Emailpropr, p.Telephonepropr " +
+                         "FROM BienImmobilier b " +
+                         "JOIN Proprietaire p ON b.PropriID = p.IDpropr";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                System.out.println("Executing query: " + sql);
+                ResultSet resultSet = statement.executeQuery();
+
+                int rowCount = 0;
+                while (resultSet.next()) {
+                    rowCount++;
+                    String type = resultSet.getString("Typebien");
+                    double price = resultSet.getDouble("Prixbien");
+                    String address = resultSet.getString("Localbien");
+                    String description = resultSet.getString("Descbien");
+                    int propertyId = resultSet.getInt("IDpropr");
+                    String ownerName = resultSet.getString("Nompropr") + " " + resultSet.getString("Prenompropr");
+                    String ownerPhone = resultSet.getString("Telephonepropr");
+                    String ownerEmail = resultSet.getString("Emailpropr");
+
+                    PropertyType propertyType = PropertyType.valueOf(type);
+
+                    Property property = new Property(propertyId, address, description, price, propertyType, ownerName, ownerPhone, ownerEmail);
+                    properties.add(property);
+                }
+                System.out.println("Number of rows retrieved: " + rowCount);
+
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
+
     // Nested enum classes
-    enum property_type {
+    public enum PropertyType {
         STUDIO, F1, F2, F3, F4, F5, DUPLEXE, VILLA, CARCASS, COMMERCIAL, BUILDING, LAND;
     }
 
-    enum property_papers {
-        NOTARIAL_ACT, REAL_ESTATE_PROMOTION, DECISION, REAL_ESTATE_BOOKLET, STAMBED_PAPERS, INDIVISION_ACT;
+    public enum PropertyPapers {
+        NOTARIAL_ACT, REAL_ESTATE_PROMOTION, DECISION, REAL_ESTATE_BOOKLET, STAMPED_PAPERS, INDIVISION_ACT;
     }
 
-    enum p_specifications {
+    public enum PSpecifications {
         WATER, GAS, ELECTRICITY, GARAGE, GARDEN, FURNISHED;
     }
 
     @Override
     public String toString() {
-        return "Property [id=" + id + ", property_type=" + property_type + ", Size=" + Size + ", address=" + address
-                + ", description=" + description + ", price=" + price + "]";
+        return "Property [id=" + id + ", propertyType=" + propertyType + ", size=" + size + ", address=" + address
+                + ", description=" + description + ", price=" + price + ", ownerName=" + ownerName + ", ownerPhone=" + ownerPhone + ", ownerEmail=" + ownerEmail + "]";
     }
 
-    public void setType(String text) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setType'");
+    public static void main(String[] args) {
+        List<Property> properties = getProperties();
+        for (Property property : properties) {
+            System.out.println(property);
+        }
     }
 }
-
-
-

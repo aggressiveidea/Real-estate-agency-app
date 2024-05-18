@@ -294,31 +294,37 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     JLabel typeLabel = new JLabel("TYPE: " + property.getPropertyType());
     typeLabel.setBounds(20, 10, 200, 20);
     typeLabel.setForeground(Color.WHITE);
+    typeLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(typeLabel);
 
     JLabel priceLabel = new JLabel("PRICE: " + String.valueOf(property.getPrice()));
     priceLabel.setBounds(20, 40, 200, 20);
     priceLabel.setForeground(Color.WHITE);
+    priceLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(priceLabel);
 
     JLabel addressLabel = new JLabel("Address: " + property.getAddress());
     addressLabel.setBounds(20, 70, 400, 20);
     addressLabel.setForeground(Color.WHITE);
+    addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(addressLabel);
 
     JLabel numLabel = new JLabel("Owner's phone number: " + property.getOwnerPhone());
     numLabel.setBounds(20, 100, 300, 20);
     numLabel.setForeground(Color.WHITE);
+    numLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(numLabel);
 
     JLabel mailLabel = new JLabel("Owner's email: " + property.getOwnerEmail());
     mailLabel.setBounds(20, 130, 300, 20);
     mailLabel.setForeground(Color.WHITE);
+    mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(mailLabel);
 
     JLabel descriptionLabel = new JLabel("Description: ");
     descriptionLabel.setBounds(20, 160, 400, 20);
     descriptionLabel.setForeground(Color.WHITE);
+    descriptionLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
     propertyPanel.add(descriptionLabel);
 
     String propertyDescription = property.getDescription();
@@ -362,14 +368,6 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     propertyPanel.add(btnRemove);
 
     return propertyPanel;
-}
-
-// Add label to panel
-public void addLabel(JPanel panel, String prefix, String text) {
-    JLabel label = new JLabel(prefix + text);
-    label.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    label.setForeground(Color.WHITE);
-    panel.add(label);
 }
 
 	@Override
