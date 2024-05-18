@@ -90,6 +90,18 @@ CREATE TABLE Payment (
     CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(IDtransaction)
 );
 
+CREATE TABLE RDV(
+    ID NUMBER(7) PRIMARY KEY,
+    ClientID NUMBER(7),
+    OwnerID NUMBER(7),
+    AgentID NUMBER(7),
+    Address_rdv VARCHAR2(100),
+    date_rdv Date,
+    CONSTRAINT fk_AgentID_RDV FOREIGN KEY (AgentID) REFERENCES AgentImm(IDagent),
+    CONSTRAINT fk_ClientID_RDV FOREIGN KEY (ClientID) REFERENCES Client(IDclient),
+    CONSTRAINT fk_OwnerID_RDV FOREIGN KEY (OwnerID) REFERENCES Proprietaire(IDpropr)
+):
+
 ALTER TABLE BienImmobilier
 ADD (property_type VARCHAR2(100),
      property_papers VARCHAR2(100),
