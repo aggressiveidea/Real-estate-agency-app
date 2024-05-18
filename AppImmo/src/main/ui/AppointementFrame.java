@@ -10,6 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -20,6 +26,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import main.DAO.Appointment;
+import main.DAO.OracleAcc;
+
 import javax.swing.JSeparator;
 
 
@@ -98,24 +108,72 @@ public class AppointementFrame extends JFrame implements ActionListener{
         contentPane.add(btnNewButton);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                try {
-						BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-                    	Graphics2D g2d = image.createGraphics();
-                    	getContentPane().paint(g2d);
-                    	g2d.dispose();
 
-						JFileChooser fileChooser = new JFileChooser();
-                    	int option = fileChooser.showSaveDialog(AppointementFrame.this);
-                    	if (option == JFileChooser.APPROVE_OPTION) {
-                        	File selectedFile = fileChooser.getSelectedFile();
+                String agentIDS = textField.getText();
+                String clientIDS = textField_5.getText();
+                String ownerIDS = textField_4.getText();
+                String dateS = textField_1.getText();
+                String address = textField_2.getText();
+
+                int agentID = Integer.parseInt(agentIDS);
+                int clientID = Integer.parseInt(clientIDS);
+                int ownerID = Integer.parseInt(ownerIDS);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                try {
+
+                    Date date = formatter.parse(dateS);
+
+                    Appointment app = new Appointment();
+                    app.setappointment_date(date);
+                    
+
+                    String SQL = "INSERT INTO RDV (ID, Address_rdv, date_rdv) VALUES (?,?,?)";
+
+                    try {
                         
-                        	// Save the image to the selected file
-                        	ImageIO.write(image, "png", selectedFile);
-                   		}
-					} catch (IOException ex) {
-						JOptionPane.showMessageDialog(null, "Failed to save image", "ERROR",JOptionPane.ERROR_MESSAGE);
-						ex.printStackTrace();
-					}
+                        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+
+					    PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+                        pstmt.setInt(1,app.getId());
+                        pstmt.setString(2, address);
+                        pstmt.setDate(3, app.getSQLDate());
+
+                        // Execute query
+					    pstmt.executeUpdate();
+					    JOptionPane.showMessageDialog(null, "Appointment added successfully!");
+
+                        //save file 
+                        try {
+                            BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                            Graphics2D g2d = image.createGraphics();
+                            getContentPane().paint(g2d);
+                            g2d.dispose();
+    
+                            JFileChooser fileChooser = new JFileChooser();
+                            int option = fileChooser.showSaveDialog(AppointementFrame.this);
+                            if (option == JFileChooser.APPROVE_OPTION) {
+                                File selectedFile = fileChooser.getSelectedFile();
+                            
+                                // Save the image to the selected file
+                                ImageIO.write(image, "png", selectedFile);
+                               }
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Failed to save image", "ERROR",JOptionPane.ERROR_MESSAGE);
+                            ex.printStackTrace();
+                        }
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Failed to add appointment :"+ex.getStackTrace(), "ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (ParseException  ee) {
+                    JOptionPane.showMessageDialog(null, "Wrong date format, it must be (yyyy-MM-dd)", "ERROR",JOptionPane.ERROR_MESSAGE);
+					ee.printStackTrace();
+                }
+    
             }
         });
         

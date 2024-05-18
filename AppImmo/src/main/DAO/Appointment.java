@@ -14,11 +14,11 @@ public class Appointment {
 
 
     // Constructeur 
-    public Appointment(int client_id, int owner_id, int agent_id, String property_address, Time appointment_hour_deb, Time appointment_hour_fin) {
+    public Appointment(int client_id, Date date, int owner_id, int agent_id, String property_address, Time appointment_hour_deb, Time appointment_hour_fin) {
         
         this.id = generateRandomId();
 
-        this.appointment_date = new Date();
+        this.appointment_date = date;
 
         this.client_id = client_id;
         this.owner_id = owner_id;
@@ -28,13 +28,28 @@ public class Appointment {
         this.appointment_hour_fin = appointment_hour_fin;
     }
 
+    //constructeur 2     
+    public Appointment() {
+        this.id = generateRandomId();
+    }
+
+    //necessary methods
     private int generateRandomId (){
         Random rand = new Random();
         return rand.nextInt(1000000);
     }
+
+    private java.sql.Date SqlDate (Date utilDate){
+        return new java.sql.Date (utilDate.getTime());
+    }
+
+    public java.sql.Date getSQLDate() {
+        return SqlDate(this.appointment_date);
+    }
+
     
     // getters and setters
-    
+
     public int getId() {
         return id;
     }

@@ -1,3 +1,5 @@
+drop table RDV
+/
 drop table Payment
 /
 drop table Interaction

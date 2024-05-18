@@ -100,7 +100,7 @@ CREATE TABLE RDV(
     CONSTRAINT fk_AgentID_RDV FOREIGN KEY (AgentID) REFERENCES AgentImm(IDagent),
     CONSTRAINT fk_ClientID_RDV FOREIGN KEY (ClientID) REFERENCES Client(IDclient),
     CONSTRAINT fk_OwnerID_RDV FOREIGN KEY (OwnerID) REFERENCES Proprietaire(IDpropr)
-):
+);
 
 ALTER TABLE BienImmobilier
 ADD (property_type VARCHAR2(100),
