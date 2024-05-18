@@ -8,12 +8,16 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import main.DAO.OracleAcc;
+import main.DAO.Property;
 import main.DAO.User;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Toolkit;
@@ -61,6 +65,7 @@ public class LandingFrame extends JFrame implements ActionListener{
         this.setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(115,24,154));
@@ -198,7 +203,7 @@ public class LandingFrame extends JFrame implements ActionListener{
        JSeparator separator_1_4 = new JSeparator();
        separator_1_4.setBounds(24, 494, 175, 2);
        panel.add(separator_1_4);
-
+   
        btnNewButton_1_1_1.addActionListener(this); 
            btnNewButton_1_1_1_1.addActionListener(this);
 
@@ -226,57 +231,18 @@ public class LandingFrame extends JFrame implements ActionListener{
 			}
 		});
         
-		
+		JButton btnNewButton_2_1 = new JButton("Refresh");
+        btnNewButton_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnNewButton_2_1.setForeground(new Color(115, 24, 154));
+        btnNewButton_2_1.setBounds(430, 125, 89, 29);
+        contentPane.add(btnNewButton_2_1);
+
 		JLabel lblNewLabel_1 = new JLabel("Home is Where Your Story Begins.");
 		lblNewLabel_1.setForeground(new Color(115, 24, 154));
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 28));
 		lblNewLabel_1.setBounds(297, 11, 446, 47);
 		contentPane.add(lblNewLabel_1);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBackground(Color.WHITE);
-        scrollPane_1.setBounds(248, 165, 691, 417);
-        scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        contentPane.add(scrollPane_1);
-        
-        scrollPanel = new JPanel();
-        scrollPanel.setPreferredSize(new Dimension(691, 1200));
-        scrollPane_1.setViewportView(scrollPanel);
-		scrollPanel.setLayout(null);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 0, 691, 294);
-		panel_2.setBackground(new Color(115,24,154,110));
-		scrollPanel.add(panel_2);
-		panel_2.setLayout(null);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(330, 0, 300, 294);
-		panel_3.setBackground(Color.WHITE);
-        panel_2.add(panel_3);
-        panel_3.setLayout(null);
-        JLabel lblNewLabel_3 = new JLabel("TYPE :");
-        lblNewLabel_3.setBounds(10, 0, 64, 25);
-        lblNewLabel_3.setForeground(Color.WHITE);
-        lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_3);
-        
-        JLabel lblNewLabel_3_1 = new JLabel("PRICE : ");
-        lblNewLabel_3_1.setBounds(10, 36, 64, 25);
-        lblNewLabel_3_1.setForeground(Color.WHITE);
-        lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_3_1);
-        
-        JLabel lblNewLabel_4 = new JLabel("Studio");
-        lblNewLabel_4.setBounds(74, 2, 112, 20);
-        lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_4);
-        
-        JLabel lblNewLabel_4_1 = new JLabel("45000");
-        lblNewLabel_4_1.setBounds(74, 38, 112, 20);
-        lblNewLabel_4_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_4_1);
-        
         JButton btnNewButton_2 = new JButton("Search");
         btnNewButton_2.setBackground(new Color(0, 128, 0));
         btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -293,100 +259,119 @@ public class LandingFrame extends JFrame implements ActionListener{
 			}
 		});
         
-        JLabel lblNewLabel_5 = new JLabel("");
-        lblNewLabel_5.setIcon(new ImageIcon(LandingFrame.class.getResource("assets\\realestate.jpg")));
-        lblNewLabel_5.setBounds(0, 0, 300, 291);
-        panel_3.add(lblNewLabel_5);
-        JLabel lblNewLabel_2 = new JLabel("Description :");
-        lblNewLabel_2.setBounds(10, 154, 139, 25);
-        lblNewLabel_2.setForeground(Color.WHITE);
-        lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_2);
         
-        JLabel lblNewLabel_3_1_1 = new JLabel("Owner's phone number : ");
-        lblNewLabel_3_1_1.setBounds(10, 95, 172, 25);
-        lblNewLabel_3_1_1.setForeground(Color.WHITE);
-        lblNewLabel_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_3_1_1);
-        
-        JLabel lblNewLabel_4_1_1 = new JLabel("48375244697");
-        lblNewLabel_4_1_1.setBounds(201, 95, 119, 20);
-        lblNewLabel_4_1_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_4_1_1);
-        
-        JLabel lblNewLabel_3_1_1_1 = new JLabel("Owner's email : ");
-        lblNewLabel_3_1_1_1.setBounds(10, 125, 162, 25);
-        lblNewLabel_3_1_1_1.setForeground(Color.WHITE);
-        lblNewLabel_3_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_3_1_1_1);
-        
-        JLabel lblNewLabel_4_1_2 = new JLabel("albertcamus@gmail.com");
-        lblNewLabel_4_1_2.setBounds(136, 127, 184, 20);
-        lblNewLabel_4_1_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-        panel_2.add(lblNewLabel_4_1_2);
-                
-                JButton btnNewButton_2_1_1 = new JButton("Remove");
-                btnNewButton_2_1_1.setBackground(Color.RED);
-                btnNewButton_2_1_1.setForeground(Color.WHITE);
-                btnNewButton_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                btnNewButton_2_1_1.setBounds(10, 254, 89, 29);
-                panel_2.add(btnNewButton_2_1_1);
-                
-                JLabel lblNewLabel_3_2 = new JLabel("DA");
-                lblNewLabel_3_2.setForeground(Color.WHITE);
-                lblNewLabel_3_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                lblNewLabel_3_2.setBounds(196, 36, 64, 25);
-                panel_2.add(lblNewLabel_3_2);
-                
+		JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBackground(Color.WHITE);
+        scrollPane_1.setBounds(248, 165, 691, 417);
+        scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        contentPane.add(scrollPane_1);
 
-                JScrollPane scrollPane = new JScrollPane();
-                scrollPane.setBackground(new Color(115,24,154,100));
-                scrollPane.setBounds(10, 177, 306, 56);
-               
-                panel_2.add(scrollPane);
-                
-                JLabel lblNewLabel_6 = new JLabel("2 pièces traversant de 55 m² exposé SUD EST situé au 5ᵉ étage sans ascenseur comprenant :\r\n" + //
-										"un vaste séjour avec cuisine ouverte, une chambre avec dressing, une salle d'eau avec W.C.\r\n" + //
-										"Parfait état. Immeuble ancien, BEL EMPLACEMENT. Copropriété de 90 lots (Pas de procédure\r\n" + //
-										"en cours). Charges annuelles : 1640 euros.");
-                lblNewLabel_6.setBackground(Color.RED);
-                scrollPane.setViewportView(lblNewLabel_6);
-                
-                JButton btnNewButton_2_1_1_1 = new JButton("Edit");
-                btnNewButton_2_1_1_1.setBackground(Color.BLUE);
-                btnNewButton_2_1_1_1.setForeground(Color.WHITE);
-                btnNewButton_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                btnNewButton_2_1_1_1.setBounds(114, 254, 89, 29);
-                panel_2.add(btnNewButton_2_1_1_1);
-                
-                JLabel lblNewLabel_3_1_1_1_1 = new JLabel("Address : ");
-                lblNewLabel_3_1_1_1_1.setForeground(Color.WHITE);
-                lblNewLabel_3_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                lblNewLabel_3_1_1_1_1.setBounds(10, 67, 96, 25);
-                panel_2.add(lblNewLabel_3_1_1_1_1);
-                
-                JLabel lblNewLabel_4_1_3 = new JLabel("SUD EST de france ");
-                lblNewLabel_4_1_3.setFont(new Font("Dialog", Font.PLAIN, 15));
-                lblNewLabel_4_1_3.setBounds(96, 69, 224, 20);
-                panel_2.add(lblNewLabel_4_1_3);
+        scrollPanel = new JPanel();
+        scrollPanel.setPreferredSize(new Dimension(691, 20000));
+        scrollPane_1.setViewportView(scrollPanel);
+        scrollPanel.setLayout(null);
 
-       
-        
-        
-        JButton btnNewButton_2_1 = new JButton("Refresh");
-        btnNewButton_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton_2_1.setForeground(new Color(115, 24, 154));
-        btnNewButton_2_1.setBounds(430, 125, 89, 29);
-        contentPane.add(btnNewButton_2_1);
-        
-       
-        
-        
-	}
+        List<Property> properties = Property.getProperties();
+        int initialY = 15;
+        int initialX = 15;
+
+        for (Property property : properties) {
+            JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
+            initialY += 350; // Adjust Y position for the next property panel
+            scrollPanel.add(propertyPanel);
+        }
+    }
 	
-// similarly for txtPrice, txtOwnerPhoneNumber, txtOwnerEmail, txtDescription
-
 	
+
+private JPanel createPropertyPanel(Property property, int initialX, int initialY) {
+    JPanel propertyPanel = new JPanel();
+    propertyPanel.setBackground(new Color(181, 150, 202)); 
+    propertyPanel.setBorder(BorderFactory.createLineBorder(new Color(153, 102, 204)));
+    propertyPanel.setLayout(null);
+    propertyPanel.setBounds(initialX, initialY, 650, 330);
+
+    JLabel typeLabel = new JLabel("TYPE: " + property.getPropertyType());
+    typeLabel.setBounds(20, 10, 200, 20);
+    typeLabel.setForeground(Color.WHITE);
+    propertyPanel.add(typeLabel);
+
+    JLabel priceLabel = new JLabel("PRICE: " + String.valueOf(property.getPrice()));
+    priceLabel.setBounds(20, 40, 200, 20);
+    priceLabel.setForeground(Color.WHITE);
+    propertyPanel.add(priceLabel);
+
+    JLabel addressLabel = new JLabel("Address: " + property.getAddress());
+    addressLabel.setBounds(20, 70, 400, 20);
+    addressLabel.setForeground(Color.WHITE);
+    propertyPanel.add(addressLabel);
+
+    JLabel numLabel = new JLabel("Owner's phone number: " + property.getOwnerPhone());
+    numLabel.setBounds(20, 100, 300, 20);
+    numLabel.setForeground(Color.WHITE);
+    propertyPanel.add(numLabel);
+
+    JLabel mailLabel = new JLabel("Owner's email: " + property.getOwnerEmail());
+    mailLabel.setBounds(20, 130, 300, 20);
+    mailLabel.setForeground(Color.WHITE);
+    propertyPanel.add(mailLabel);
+
+    JLabel descriptionLabel = new JLabel("Description: ");
+    descriptionLabel.setBounds(20, 160, 400, 20);
+    descriptionLabel.setForeground(Color.WHITE);
+    propertyPanel.add(descriptionLabel);
+
+    String propertyDescription = property.getDescription();
+
+    JTextArea descriptionTextArea = new JTextArea(propertyDescription);
+    descriptionTextArea.setLineWrap(true);
+    descriptionTextArea.setWrapStyleWord(true);
+    descriptionTextArea.setEditable(false); 
+
+    JScrollPane scrollPane = new JScrollPane(descriptionTextArea);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+    scrollPane.setBounds(20, 190, 250, 70); 
+    propertyPanel.add(scrollPane);
+
+
+    // Création d'un JPanel blanc pour afficher l'image
+    JPanel imagePanel = new JPanel();
+    imagePanel.setBackground(Color.WHITE);
+    imagePanel.setBounds(350, 10, 290, 310);
+    propertyPanel.add(imagePanel);
+
+    // Création d'un JLabel pour afficher l'icône
+    JLabel iconLabel = new JLabel();
+    ImageIcon icon = new ImageIcon(LandingFrame.class.getResource("assets//realestate.jpg"));
+    iconLabel.setIcon(icon);
+    iconLabel.setBounds(0, 0, 290, 300); 
+    imagePanel.add(iconLabel);
+
+    JButton btnEdit = new JButton("Edit");
+    btnEdit.setBackground(Color.BLUE);
+    btnEdit.setForeground(Color.WHITE);
+    btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    btnEdit.setBounds(155, 280, 89, 29);
+    propertyPanel.add(btnEdit);
+
+    JButton btnRemove = new JButton("Remove");
+    btnRemove.setBackground(Color.RED);
+    btnRemove.setForeground(Color.WHITE);
+    btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    btnRemove.setBounds(30, 280, 89, 29);
+    propertyPanel.add(btnRemove);
+
+    return propertyPanel;
+}
+
+// Add label to panel
+public void addLabel(JPanel panel, String prefix, String text) {
+    JLabel label = new JLabel(prefix + text);
+    label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+    label.setForeground(Color.WHITE);
+    panel.add(label);
+}
+
 	@Override
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");
@@ -412,15 +397,60 @@ public void actionPerformed(ActionEvent e) {
         fetchLatestPropertyDetails();
     }
 
-
-
-
-
-
-
 }
 
-  private void fetchLatestPropertyDetails() {
+private String fetchOwnerPhoneNumber(Connection conn, int propId) {
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String phoneNumber = "";
+    try {
+        String query = "SELECT PhoneNumber FROM Proprietaire WHERE IDpropr = ?";
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, propId);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            phoneNumber = rs.getString("PhoneNumber");
+        }
+    } catch (SQLException se) {
+        se.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return phoneNumber;
+}
+
+private String fetchOwnerEmail(Connection conn, int propId) {
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String email = "";
+    try {
+        String query = "SELECT Email FROM Proprietaire WHERE IDpropr = ?";
+
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, propId);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            email = rs.getString("Email");
+        }
+    } catch (SQLException se) {
+        se.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return email;
+}
+
+private void fetchLatestPropertyDetails() {
     Connection conn = null;
     java.sql.Statement stmt = null;
     ResultSet rs = null;
@@ -484,58 +514,6 @@ public void actionPerformed(ActionEvent e) {
         }
     }
 }
-
-private String fetchOwnerPhoneNumber(Connection conn, int propId) {
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    String phoneNumber = "";
-    try {
-        String query = "SELECT PhoneNumber FROM Proprietaire WHERE IDpropr = ?";
-        pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, propId);
-        rs = pstmt.executeQuery();
-        if (rs.next()) {
-            phoneNumber = rs.getString("PhoneNumber");
-        }
-    } catch (SQLException se) {
-        se.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (pstmt != null) pstmt.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    return phoneNumber;
-}
-
-private String fetchOwnerEmail(Connection conn, int propId) {
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    String email = "";
-    try {
-        String query = "SELECT Email FROM Proprietaire WHERE IDpropr = ?";
-
-        pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, propId);
-        rs = pstmt.executeQuery();
-        if (rs.next()) {
-            email = rs.getString("Email");
-        }
-    } catch (SQLException se) {
-        se.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (pstmt != null) pstmt.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    return email;
-}
-
 
 	public static void main(String[] args) {
 	        

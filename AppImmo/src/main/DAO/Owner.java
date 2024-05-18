@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import main.DAO.*;
+import main.DAO.Property;
 
 public class Owner extends User {
 
@@ -42,12 +44,12 @@ public class Owner extends User {
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 // Set parameters for the prepared statement
                 pstmt.setInt(1, id);
-                pstmt.setString(2, property.property_type.name());
-                pstmt.setDouble(3, Property.Size);
-                pstmt.setDouble(4, Property.price);
-                pstmt.setString(5, Property.address);
-                pstmt.setString(6, Property.description);
-                pstmt.setInt(7, Property.assignedAgentid);
+                pstmt.setString(2, property.getPropertyType());
+                pstmt.setDouble(3, property.getSize());
+                pstmt.setDouble(4, property.getPrice());
+                pstmt.setString(5, property.getAddress());
+                pstmt.setString(6, property.getDescription());
+                pstmt.setInt(7, property.getAssignedAgentid());
                 pstmt.setInt(8, getProperty_id());
 
                 // Execute the SQL query
