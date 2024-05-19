@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import main.DAO.User;
-
+import main.DAO.UserSession;
 import main.DAO.OracleAcc;
 //import main.DAO.Type;
 import javax.swing.*;
@@ -185,7 +185,7 @@ public class SignupFrame extends JFrame implements ActionListener {
 
                 // Afficher un message de réussite
                 JOptionPane.showMessageDialog(button, " Inscription réussie ! Votre identifiant est : " + utilisateur.id_generate);
-
+                UserSession.setCurrentUserType(userType.toUpperCase(),username,utilisateur.id_generate); // to stock the type and the username of the current user 
                 InformationsFrame frame = new InformationsFrame();
                 // Fermer la fenêtre de sign up
                 this.dispose();

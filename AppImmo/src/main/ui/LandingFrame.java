@@ -11,6 +11,7 @@ import main.DAO.OracleAcc;
 import main.DAO.Property;
 import main.DAO.Real_estate_agent;
 import main.DAO.User;
+import main.DAO.UserSession;
 import main.DAO.Owner;
 
 import javax.swing.JLabel;
@@ -243,6 +244,23 @@ public class LandingFrame extends JFrame implements ActionListener{
 			}
 		});
         
+        String userRole = UserSession.getCurrentUserType();
+            if ("REAL_ESTATE_AGENT".equals(userRole)) {
+                btnNewButton_1_1_1_3.setEnabled(true);
+                btnNewButton_1_1_1_2.setEnabled(true);
+                btnNewButton_1_1.setEnabled(true);
+                
+            } else {
+                btnNewButton_1_1_1_3.setEnabled(false);
+                btnNewButton_1_1_1_2.setEnabled(false);
+                btnNewButton_1_1.setEnabled(false);
+                
+            }  if ("OWNER".equals(userRole) )
+            {
+                btnNewButton.setEnabled(true);
+            } else {
+                btnNewButton.setEnabled(false);
+            }
 		JButton btnNewButton_2_1 = new JButton("Refresh");
         btnNewButton_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnNewButton_2_1.setForeground(new Color(115, 24, 154));
@@ -371,7 +389,8 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
     btnEdit.setBounds(155, 280, 89, 29);
     propertyPanel.add(btnEdit);
-
+    int currentUserId = UserSession.getCurrentUserid();
+    String userRole = UserSession.getCurrentUserType();
     
 
     JButton btnRemove = new JButton("Remove");
@@ -379,17 +398,17 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     btnRemove.setForeground(Color.WHITE);
     btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
     btnRemove.setBounds(30, 280, 89, 29);
-    propertyPanel.add(btnRemove);
+
+    if (("REAL_ESTATE_AGENT".equals(userRole) || isPropertyOwner(currentUserId, property.getId()))) {
+        propertyPanel.add(btnRemove);
+    }
+
     
     btnRemove.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            String typeString = User.getType();
+            String typeString = UserSession.getCurrentUserType();
             System.out.println(typeString);
-            if (typeString.equals("CLIENT")) {
-                 //hna zidddddiii marrrroooo
-            }
-                
-            else {
+            
                 
                 if(typeString.equals("REAL_ESTATE_AGENT")){
                     
@@ -408,7 +427,8 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
                     newLandingFrame.setVisible(true);
                     }
                 }
-                else{
+                else{ if (typeString.equals("OWNER"))
+                {
                     
                     int propertyId = property.getId(); 
                     boolean success = Owner.remove_property(propertyId); 
@@ -425,6 +445,8 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
                     newLandingFrame.setVisible(true);
                     }
 
+                } else {
+                    btnRemove.setVisible(false);
                 }
                  
                 
@@ -435,6 +457,25 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     );
 
     return propertyPanel;
+}
+private boolean isPropertyOwner(int userId, int propertyId) {
+    // a methode to check if the current user is the owner of the property 
+    try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
+        if (connection != null) {
+            String query = "SELECT COUNT(*) FROM BienImmobilier WHERE IDbien = ? AND PropriID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, propertyId);
+            preparedStatement.setInt(2, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
 }
 
 private void removeProperty(int propertyId) {

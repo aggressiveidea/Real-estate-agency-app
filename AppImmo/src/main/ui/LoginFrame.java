@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import main.DAO.User;
-
+import main.DAO.UserSession;
 import main.DAO.OracleAcc;
 
 public class LoginFrame extends JFrame {
@@ -139,7 +139,8 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = textField.getText();
                 String password = new String(textField2.getPassword());
-
+                
+                UserSession.setCurrentUsername(username);//pour stocker l username
                 if (e.getSource() == button) {
                     User user = new User(username, password);
                     user.login();

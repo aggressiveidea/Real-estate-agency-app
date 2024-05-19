@@ -440,6 +440,8 @@ public class User {
                     System.out.println("catched");
                     idall = rs1.getInt("id");
                     String type1 = rs1.getString("typeuser");
+                    UserSession.setcurrenttypeuser(type1);//pour stocker l username
+                    UserSession.setcurrentid(idall);
                     System.out.println(type1);
                     switch (type1) {
                         case "REAL_ESTATE_AGENT ":

@@ -6,6 +6,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import main.DAO.OracleAcc;
 import main.DAO.User;
+import main.DAO.UserSession;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -121,20 +128,87 @@ public class ProfileFrame extends JFrame implements ActionListener {
                 lblNewLabel_2_2.setBounds(23, 309, 100, 37);
                 panel_1.add(lblNewLabel_2_2);
                 
-                JLabel lblNewLabel_3 = new JLabel("632845");
+                
+                String username = UserSession.getCurrentUsername();
+               
+
+                int userID =0;
+            try {
+                // Create a Connection object
+                Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+
+    
+                // Create a PreparedStatement object with SQL query
+                String sql = "SELECT id FROM login WHERE nomutilisateur = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, username);
+                
+    
+                // Execute the query
+                ResultSet rs = pstmt.executeQuery();
+    
+               
+               if (rs.next()) {
+                userID = rs.getInt("id");
+            }
+
+                
+                // Close the ResultSet, PreparedStatement, and Connection
+                rs.close();
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+            String type = "";
+            try {
+                // Create a Connection object
+                Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+
+    
+                // Create a PreparedStatement object with SQL query
+                String sql = "SELECT typeuser FROM login WHERE nomutilisateur = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, username);
+                
+    
+                // Execute the query
+                ResultSet rs = pstmt.executeQuery();
+    
+               
+               if (rs.next()) {
+                type = rs.getString("typeuser");
+            }
+
+                
+                // Close the ResultSet, PreparedStatement, and Connection
+                rs.close();
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        
+                JLabel lblNewLabel_3 = new JLabel( String.valueOf(userID));;
+               
                 lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
                 lblNewLabel_3.setForeground(new Color(255, 255, 255));
                 lblNewLabel_3.setBackground(Color.LIGHT_GRAY);
                 lblNewLabel_3.setBounds(82, 225, 152, 22);
                 panel_1.add(lblNewLabel_3);
+                 
                 
-                JLabel lblNewLabel_3_1 = new JLabel("kach bnadem ");
+                JLabel lblNewLabel_3_1 = new JLabel( username);
                 lblNewLabel_3_1.setForeground(new Color(255, 255, 255));
                 lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
                 lblNewLabel_3_1.setBounds(140, 266, 152, 22);
                 panel_1.add(lblNewLabel_3_1);
+
                 
-                JLabel lblNewLabel_3_2 = new JLabel("Agent");
+                
+                JLabel lblNewLabel_3_2 = new JLabel(type);
                 lblNewLabel_3_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
                 lblNewLabel_3_2.setForeground(new Color(255, 255, 255));
                 lblNewLabel_3_2.setBounds(105, 312, 152, 30);
@@ -151,8 +225,6 @@ public class ProfileFrame extends JFrame implements ActionListener {
                         }
                     }
                 });
-        btnEditAccount.addActionListener(this); 
-        
         
         JPanel panel_2 = new JPanel();
         panel_2.setBounds(0, 0, 949, 63);
