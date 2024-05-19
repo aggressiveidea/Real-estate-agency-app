@@ -120,12 +120,12 @@ public class AllusersFrame extends JFrame implements ActionListener {
                 userPanel.setLayout(null);
 
                 // Labels pour les informations utilisateur
-                addLabel(userPanel, "ID:", String.valueOf(user.getId()), 20, 30);
-                addLabel(userPanel, "Nom:", user.getSurname(), 20, 74);
-                addLabel(userPanel, "Prénom:", user.getName(), 20, 118);
-                addLabel(userPanel, "Email:", user.getEmail(), 20, 162);
-                addLabel(userPanel, "Numéro de téléphone:", user.getPhone_number(), 20, 206);
-                addLabel(userPanel, "Type:", user.getType().toString(), 20, 256);
+                addLabel(userPanel, "ID: ", String.valueOf(user.getId()), 20, 30);
+                addLabel(userPanel, "Name: ", user.getSurname(), 20, 74);
+                addLabel(userPanel, "Surname: ", user.getName(), 20, 120);
+                addLabel(userPanel, "Email: ", user.getEmail(), 20, 162);
+                addLabel(userPanel, "Phone number: ", user.getPhone_number(), 20, 206);
+                addLabel(userPanel, "Type: ", user.getType().toString(), 20, 256);
 
                 // Image
                 JLabel iconLabel = new JLabel();
@@ -154,14 +154,14 @@ public class AllusersFrame extends JFrame implements ActionListener {
 
         JLabel textLabel;
         switch (labelText) {
-            case "Numéro de téléphone:":
+            case "Phone number:":
                 textLabel = new JLabel(text);
                textLabel.setForeground(Color.BLACK);
                textLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-               textLabel.setBounds(x + 150, y + 10, 500, 20);
+               textLabel.setBounds(x + 200, y + 10, 500, 20);
                panel.add(textLabel); 
                 break;
-            case "Prénom:":
+            case "Name:":
                 textLabel = new JLabel(text);
                textLabel.setForeground(Color.BLACK);
                textLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -179,7 +179,7 @@ public class AllusersFrame extends JFrame implements ActionListener {
                textLabel = new JLabel(text);
                textLabel.setForeground(Color.BLACK);
                textLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-               textLabel.setBounds(x + 50, y + 10, 500, 20);
+               textLabel.setBounds(x + 120, y + 10, 500, 20);
                panel.add(textLabel);
                 break;
         }

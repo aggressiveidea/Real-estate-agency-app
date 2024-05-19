@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,12 +23,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class TableFrame extends JFrame {
+public class TableFrame extends JFrame implements ActionListener{
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTable table;
     private DefaultTableModel tableModel;
+    private JButton retour;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -73,6 +77,21 @@ public class TableFrame extends JFrame {
                 "ID", "Agent ID", "Client ID", "Owner ID", "Property address", "Date"
             }
         );
+
+        retour = new JButton("<");
+        retour.setBounds(10, 10, 45, 45);
+        contentPane.add(retour);
+        retour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 
+				 LandingFrame mainpage = new LandingFrame();
+				 
+				 mainpage.setVisible(true);
+				
+				dispose();
+				
+			}
+		});
         table.setModel(tableModel);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setCellSelectionEnabled(true);
@@ -133,6 +152,12 @@ public class TableFrame extends JFrame {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 }
 

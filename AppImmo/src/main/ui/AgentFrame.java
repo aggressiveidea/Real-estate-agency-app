@@ -119,10 +119,10 @@ public class AgentFrame extends JFrame {
             agentPanel.add(iconLabel);
 
             addLabel(agentPanel, "ID : ", String.valueOf(agent.getId()), 20, 0);
-            addLabel(agentPanel, "Nom : ", agent.getSurname(), 20, 34);
-            addLabel(agentPanel, "Prénom : ", agent.getName(), 20, 68);
+            addLabel(agentPanel, "Name : ", agent.getSurname(), 20, 34);
+            addLabel(agentPanel, "Surname : ", agent.getName(), 20, 68);
             addLabel(agentPanel, "Email : ", agent.getEmail(), 20, 104);
-            addLabel(agentPanel, "Numéro de téléphone : ", agent.getPhone_number(), 20, 137);
+            addLabel(agentPanel, "Phone number : ", agent.getPhone_number(), 20, 137);
 
             initialY += yOffset;
         }
