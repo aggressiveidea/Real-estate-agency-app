@@ -392,7 +392,7 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
 
 private void removeProperty(int propertyId) {
     System.out.println(propertyId);
-    try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE")) {
+    try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
         if (connection != null) {
             try {
                 String query = "DELETE FROM BienImmobilier WHERE IDbien = ?";

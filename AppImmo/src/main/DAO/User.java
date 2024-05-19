@@ -469,7 +469,7 @@ public class User {
         try {
             // Connexion à la base de données
            // Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
 
             // Requête SQL pour sélectionner les informations des agents
             String sql = "SELECT IDagent, NomAgent, PrenomAgent, EmailAgent, telephoneAgAJent FROM AgentImm ";
@@ -509,7 +509,7 @@ public class User {
     public static List<User> getUsersByType() {
         List<User> users = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
     
             String sql = "SELECT IDpropr AS ID, Nompropr AS Surname, Prenompropr AS Name, Emailpropr AS Email, telephonepropr AS Phone_number, 2 AS Type FROM Proprietaire " +
                          "UNION " +
