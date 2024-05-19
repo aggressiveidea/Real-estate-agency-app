@@ -29,11 +29,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.sql.Statement;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 public class LandingFrame extends JFrame implements ActionListener{
+ 
+    public Connection connection;
+    public Statement statement;
 
 	
 	private JPanel contentPane;
@@ -41,6 +45,7 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private JButton btnNewButton_1_1_1_1;
     private JButton btnNewButton_1_1_1;
 	private JButton btnNewButton_2_1;
+    private JButton btnNewButton_remove;
 
 	private Container panel_2;
     private JPanel scrollPanel;
@@ -166,7 +171,12 @@ public class LandingFrame extends JFrame implements ActionListener{
        JButton btnNewButton_1_1_1_2 = new JButton("Users ");
        btnNewButton_1_1_1_2.addActionListener(new ActionListener() {
        	public void actionPerformed(ActionEvent e) {
-       		AllusersFrame frame = new AllusersFrame();
+            List<User> users = User.getUsersByType(); 
+            for (User user : users) {
+                System.out.println(user);
+            }
+       		AllusersFrame frame = new AllusersFrame(users);
+
             frame.setVisible(true);
             dispose();
        	}
@@ -353,12 +363,14 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     iconLabel.setBounds(0, 0, 290, 300); 
     imagePanel.add(iconLabel);
 
-    JButton btnEdit = new JButton("Edit");
+    JButton btnEdit = new JButton("Favorite");
     btnEdit.setBackground(Color.BLUE);
     btnEdit.setForeground(Color.WHITE);
     btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
     btnEdit.setBounds(155, 280, 89, 29);
     propertyPanel.add(btnEdit);
+
+    
 
     JButton btnRemove = new JButton("Remove");
     btnRemove.setBackground(Color.RED);
@@ -366,10 +378,43 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
     btnRemove.setBounds(30, 280, 89, 29);
     propertyPanel.add(btnRemove);
-
+    
+    btnRemove.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            removeProperty(property.getId());
+            scrollPanel.remove(propertyPanel);
+            scrollPanel.revalidate();
+            scrollPanel.repaint();
+        }
+    });
     return propertyPanel;
 }
 
+private void removeProperty(int propertyId) {
+    System.out.println(propertyId);
+    try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE")) {
+        if (connection != null) {
+            try {
+                String query = "DELETE FROM BienImmobilier WHERE IDbien = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, propertyId);
+                preparedStatement.executeUpdate();
+
+                // Fermer l'ancienne fenêtre avant d'ouvrir une nouvelle instance
+                this.dispose();
+
+                LandingFrame L = new LandingFrame();
+                L.setVisible(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Database connection is not established.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 	@Override
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");

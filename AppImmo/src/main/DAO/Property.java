@@ -24,6 +24,7 @@ public class Property {
     private String ownerName;
     private String ownerPhone;
     private String ownerEmail;
+    public int ownerid;
 
     // Constructors
     public Property(int assignedAgentid, double size, String address, String description, double price, double priceMin) {
@@ -42,8 +43,8 @@ public class Property {
         this.specifications = PSpecifications.valueOf(specifications);
     }
 
-    public Property(int propertyId, String address, String description, double price, PropertyType type, String ownerName, String ownerPhone, String ownerEmail) {
-        this.id = propertyId;
+    public Property(int propId, String address, String description, double price, PropertyType type, String ownerName, String ownerPhone, String ownerEmail,int id) {
+        this.ownerid = propId;
         this.address = address;
         this.description = description;
         this.price = price;
@@ -51,6 +52,7 @@ public class Property {
         this.ownerName = ownerName;
         this.ownerPhone = ownerPhone;
         this.ownerEmail = ownerEmail;
+        this.id = id;
     }
 
     private int generateRandomId() {
@@ -140,6 +142,14 @@ public class Property {
         this.ownerEmail = ownerEmail;
     }
 
+      public String getOwnerId() {
+        return ownerEmail;
+    }
+
+    public void setOwnerId(String ownerid) {
+        this.ownerEmail = ownerEmail;
+    }
+
     public String getPropertyType() {
         return propertyType.name();
     }
@@ -166,9 +176,9 @@ public class Property {
 
     public static List<Property> getProperties() {
         List<Property> properties = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
+            try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
             System.out.println("Database connection established.");
-            String sql = "SELECT b.Typebien, b.Prixbien, b.Localbien, b.Descbien, p.IDpropr, p.Nompropr, p.Prenompropr, p.Emailpropr, p.Telephonepropr " +
+              String sql = "SELECT b.Typebien, b.Prixbien, b.Localbien, b.Descbien, p.IDpropr, p.Nompropr, p.Prenompropr, p.Emailpropr, p.Telephonepropr,b.IDbien " +
                          "FROM BienImmobilier b " +
                          "JOIN Proprietaire p ON b.PropriID = p.IDpropr";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -182,14 +192,16 @@ public class Property {
                     double price = resultSet.getDouble("Prixbien");
                     String address = resultSet.getString("Localbien");
                     String description = resultSet.getString("Descbien");
-                    int propertyId = resultSet.getInt("IDpropr");
+                    int propId = resultSet.getInt("IDpropr");
                     String ownerName = resultSet.getString("Nompropr") + " " + resultSet.getString("Prenompropr");
                     String ownerPhone = resultSet.getString("Telephonepropr");
                     String ownerEmail = resultSet.getString("Emailpropr");
+                     int propretyId = resultSet.getInt("IDbien");
+                    System.out.println(propretyId);
 
                     PropertyType propertyType = PropertyType.valueOf(type);
 
-                    Property property = new Property(propertyId, address, description, price, propertyType, ownerName, ownerPhone, ownerEmail);
+                         Property property = new Property(propId, address, description, price, propertyType, ownerName, ownerPhone, ownerEmail,propretyId);
                     properties.add(property);
                 }
                 System.out.println("Number of rows retrieved: " + rowCount);

@@ -344,7 +344,7 @@ public class User {
         try {
             // Connexion à la base de données
            // Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "sabrine.123");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE");
 
             // Requête SQL pour sélectionner les informations des agents
             String sql = "SELECT IDagent, NomAgent, PrenomAgent, EmailAgent, telephoneAgAJent FROM AgentImm ";
@@ -379,6 +379,40 @@ public class User {
             // Gérer les erreurs de récupération des agents
         }
         return agents;
+    }
+
+    public static List<User> getUsersByType() {
+        List<User> users = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "SABRINE");
+    
+            String sql = "SELECT IDpropr AS ID, Nompropr AS Surname, Prenompropr AS Name, Emailpropr AS Email, telephonepropr AS Phone_number, 2 AS Type FROM Proprietaire " +
+                         "UNION " +
+                         "SELECT IDclient AS ID, NomClient AS Surname, prenomClient AS Name, EmailClient AS Email, telephoneClient AS Phone_number, 1 AS Type FROM Client";
+    
+            PreparedStatement statement = connection.prepareStatement(sql);
+    
+            ResultSet resultSet = statement.executeQuery();
+    
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ID");
+                String surname = resultSet.getString("Surname");
+                String name = resultSet.getString("Name");
+                String email = resultSet.getString("Email");
+                String phone_number = resultSet.getString("Phone_number");
+                int type = resultSet.getInt("Type"); // Get the user type
+    
+                User user = new User(id, surname, name, email, phone_number, type);
+                users.add(user);
+            }
+    
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
     // Getters and setters
 
@@ -452,5 +486,9 @@ public class User {
 
     public void setId_generate(int id_generate) {
         this.id_generate = id_generate;
+    }
+
+    public enum Type {
+        OWNER, CLIENT, REAL_ESTATE_AGENT;
     }
 }
