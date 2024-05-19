@@ -1,0 +1,232 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 58720256 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3613), pid=21596, tid=19084
+#
+# JRE version:  (17.0.10+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.10+7, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages main.ui.LoginFrame
+
+Host: AMD 3020e with Radeon Graphics                 , 2 cores, 3G,  Windows 11 , 64 bit Build 22621 (10.0.22621.3527)
+Time: Sun May 19 15:22:16 2024 Afr. centrale Ouest elapsed time: 1.021066 seconds (0d 0h 0m 1s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000021f63ea47c0):  JavaThread "Unknown thread" [_thread_in_vm, id=19084, stack(0x0000004406100000,0x0000004406200000)]
+
+Stack: [0x0000004406100000,0x0000004406200000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x67d2c9]
+V  [jvm.dll+0x834afa]
+V  [jvm.dll+0x8365be]
+V  [jvm.dll+0x836c23]
+V  [jvm.dll+0x2477ff]
+V  [jvm.dll+0x67a109]
+V  [jvm.dll+0x66eb7a]
+V  [jvm.dll+0x30764b]
+V  [jvm.dll+0x30eaf6]
+V  [jvm.dll+0x35e83e]
+V  [jvm.dll+0x35ea6f]
+V  [jvm.dll+0x2de248]
+V  [jvm.dll+0x2df1b4]
+V  [jvm.dll+0x806361]
+V  [jvm.dll+0x36c6f1]
+V  [jvm.dll+0x7e4e06]
+V  [jvm.dll+0x3eff3f]
+V  [jvm.dll+0x3f1b71]
+C  [jli.dll+0x528f]
+C  [ucrtbase.dll+0x29333]
+C  [KERNEL32.DLL+0x1257d]
+C  [ntdll.dll+0x5aa48]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ff9badaee98, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000021f63edcb70 GCTaskThread "GC Thread#0" [stack: 0x0000004406200000,0x0000004406300000] [id=2720]
+  0x0000021f63ee4710 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000004406300000,0x0000004406400000] [id=23056]
+  0x0000021f63ee4f40 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000004406400000,0x0000004406500000] [id=13596]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff9ba56ec87]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000021f63e9f960] Heap_lock - owner thread: 0x0000021f63ea47c0
+
+Heap address: 0x00000000c8e00000, size: 882 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000c8e00000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff9ba956fb9]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.048 Loaded shared library C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff64f1d0000 - 0x00007ff64f1de000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\java.exe
+0x00007ffa35210000 - 0x00007ffa35427000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffa07800000 - 0x00007ffa07819000 	C:\Program Files\AVG\Antivirus\aswhook.dll
+0x00007ffa34710000 - 0x00007ffa347d4000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffa326c0000 - 0x00007ffa32a67000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffa32ae0000 - 0x00007ffa32bf1000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffa16f50000 - 0x00007ffa16f67000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\jli.dll
+0x00007ffa34a00000 - 0x00007ffa34bae000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffa325d0000 - 0x00007ffa325f6000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffa331b0000 - 0x00007ffa331d9000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffa32da0000 - 0x00007ffa32eb9000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffa32530000 - 0x00007ffa325ca000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffa10960000 - 0x00007ffa1097b000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\VCRUNTIME140.dll
+0x00007ffa31710000 - 0x00007ffa319a3000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3527_none_270e469b73872a76\COMCTL32.dll
+0x00007ffa32f50000 - 0x00007ffa32ff7000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffa34900000 - 0x00007ffa34931000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffa17000000 - 0x00007ffa1700c000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\vcruntime140_1.dll
+0x00007ff9efdd0000 - 0x00007ff9efe5d000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\msvcp140.dll
+0x00007ff9ba280000 - 0x00007ff9baee2000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\server\jvm.dll
+0x00007ffa33480000 - 0x00007ffa33532000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffa34940000 - 0x00007ffa349e8000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffa32c00000 - 0x00007ffa32c28000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffa34f40000 - 0x00007ffa35055000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffa323f0000 - 0x00007ffa3243d000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ffa1f150000 - 0x00007ffa1f159000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffa33400000 - 0x00007ffa33471000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffa2b840000 - 0x00007ffa2b874000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffa2a5d0000 - 0x00007ffa2a5da000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffa323d0000 - 0x00007ffa323e3000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ffa30d10000 - 0x00007ffa30d28000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffa16dc0000 - 0x00007ffa16dca000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\jimage.dll
+0x00007ffa31da0000 - 0x00007ffa31fd2000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffa34bb0000 - 0x00007ffa34f38000 	C:\WINDOWS\System32\combase.dll
+0x00007ffa34800000 - 0x00007ffa348d7000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffa31c90000 - 0x00007ffa31cc2000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffa32ec0000 - 0x00007ffa32f39000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffa0ce00000 - 0x00007ffa0ce25000 	C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin;C:\WINDOWS\SYSTEM32;C:\Program Files\AVG\Antivirus;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3527_none_270e469b73872a76;C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin\server
+
+VM Arguments:
+jvm_args: -XX:+ShowCodeDetailsInExceptionMessages 
+java_command: main.ui.LoginFrame
+java_class_path (initial): C:\Users\Aouimeur Sabrine\AppData\Roaming\Code\User\workspaceStorage\71e7c252d79c2a0c943cfb81f7c9264c\redhat.java\jdt_ws\Real-estate-agency-app_b6ae75e9\bin;c:\Users\Aouimeur Sabrine\Downloads\rs2xml.jar;c:\Users\Aouimeur Sabrine\Downloads\ojdbc11.jar;c:\Users\Aouimeur Sabrine\Documents\GitHub\Real-estate-agency-app\AppImmo\lib\smtp-1.4.4.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 2                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 2                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 58720256                                  {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 924844032                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5826188                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122916026                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122916026                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool ShowCodeDetailsInExceptionMessages       = true                                   {manageable} {command line}
+   size_t SoftMaxHeapSize                          = 924844032                              {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\
+PATH=C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.10.7-hotspot\bin;C:\Python\Python312\Scripts\;C:\Python\Python312\;C:\Users\Aouimeur Sabrine\AppData\Local\Microsoft\WindowsApps;C:\Users\Aouimeur Sabrine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Aouimeur Sabrine\AppData\Local\GitHubDesktop\bin
+USERNAME=Aouimeur Sabrine
+LANG=en_US.UTF-8
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 32 Stepping 1, AuthenticAMD
+TMP=C:\Users\AOUIME~1\AppData\Local\Temp
+TEMP=C:\Users\AOUIME~1\AppData\Local\Temp
+
+
+
+Periodic native trim disabled
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.3527)
+OS uptime: 1 days 9:35 hours
+
+CPU: total 2 (initial active 2) (2 cores per cpu, 1 threads per core) family 23 model 32 stepping 1 microcode 0x0, cx8, cmov, fxsr, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt
+Processor Information for all 2 processors :
+  Max Mhz: 1200, Current Mhz: 1200, Mhz Limit: 1200
+
+Memory: 4k page, system-wide physical 3521M (118M free)
+TotalPageFile size 14273M (AvailPageFile size 35M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 47M, peak: 103M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.10+7) for windows-amd64 JRE (17.0.10+7), built on Jan 16 2024 23:25:11 by "admin" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.

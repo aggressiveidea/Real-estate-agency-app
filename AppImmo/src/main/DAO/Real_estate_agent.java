@@ -1,5 +1,12 @@
 package main.DAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import main.ui.LandingFrame;
+
 public class Real_estate_agent extends User{
     
     public int property_id, transaction_id, appointment_id;
@@ -32,9 +39,30 @@ public class Real_estate_agent extends User{
     }
 
     //methods
-    public void remove_property (int property_id){
-        //add later
-    }
+        public static boolean remove_property(int property_id) {
+            System.out.println(property_id);
+            try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
+                if (connection != null) {
+                    try {
+                        String query = "DELETE FROM BienImmobilier WHERE IDbien = ?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(query);
+                        preparedStatement.setInt(1, property_id);
+                        preparedStatement.executeUpdate();
+                        return true; // Suppression réussie
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return false; // Suppression échouée
+                    }
+                } else {
+                    System.out.println("Database connection is not established.");
+                    return false; // Connexion échouée
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false; // Connexion échouée
+            }
+        }
+    
 
     public void modify_property (int property_id){
         //add later

@@ -70,9 +70,32 @@ public class Owner extends User {
         }
     }
 
-    public void remove_property(int property_id) {
+    
         // Implementation for removing property
+    public static boolean remove_property(int property_id) {
+            System.out.println(property_id);
+            try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
+                if (connection != null) {
+                    try {
+                        String query = "DELETE FROM BienImmobilier WHERE IDbien = ?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(query);
+                        preparedStatement.setInt(1, property_id);
+                        preparedStatement.executeUpdate();
+                        return true; // Suppression réussie
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return false; // Suppression échouée
+                    }
+                } else {
+                    System.out.println("Database connection is not established.");
+                    return false; // Connexion échouée
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false; // Connexion échouée
+            }
     }
+    
 
     private int generateRandomId() {
         return (int) (Math.random() * 1000000); // Adjust range as needed

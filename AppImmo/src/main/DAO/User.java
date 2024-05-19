@@ -27,7 +27,7 @@ public class User {
 
     public int id;
     public String surname, name, email, phone_number;
-    public Type type;
+    public static Type type;
     public String username, password;
     public int id_generate;
     public static int idall;
@@ -431,7 +431,7 @@ public class User {
 
             if (rs.next()) {
                 System.out.println("yes ");
-                String sql1 = "SELECT id FROM LOGIN WHERE  nomutilisateur = ? AND motdepasse = ?";
+                String sql1 = "SELECT id,typeuser FROM LOGIN WHERE  nomutilisateur = ? AND motdepasse = ?";
                 PreparedStatement ps1 = connection.prepareStatement(sql1);
                 ps1.setString(1, username);
                 ps1.setString(2, password);
@@ -439,6 +439,23 @@ public class User {
                 if (rs1.next()) {
                     System.out.println("catched");
                     idall = rs1.getInt("id");
+                    String type1 = rs1.getString("typeuser");
+                    System.out.println(type1);
+                    switch (type1) {
+                        case "REAL_ESTATE_AGENT ":
+                              type = Type.REAL_ESTATE_AGENT ;
+                            break;
+                        case "CLIENT ":
+                              type = Type.CLIENT;
+                            break;
+                        case "OWNER ":
+                              type = Type.OWNER;
+                            break;
+                        default:
+                           System.out.println("proooobbssssss");
+                            break;
+                    }
+
                     System.out.println("catch the id done");
                 }
                 JOptionPane.showMessageDialog(null, "Successfully logged in");
@@ -581,8 +598,9 @@ public class User {
         this.phone_number = phone_number;
     }
 
-    public Type getType() {
-        return type;
+    public static String getType() {
+        
+        return type.name();
     }
 
     public void setType(Type type) {

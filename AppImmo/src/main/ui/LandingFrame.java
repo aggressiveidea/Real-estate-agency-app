@@ -9,7 +9,9 @@ import java.awt.Container;
 import java.awt.Dimension;
 import main.DAO.OracleAcc;
 import main.DAO.Property;
+import main.DAO.Real_estate_agent;
 import main.DAO.User;
+import main.DAO.Owner;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -381,12 +383,57 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     
     btnRemove.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            removeProperty(property.getId());
-            scrollPanel.remove(propertyPanel);
-            scrollPanel.revalidate();
-            scrollPanel.repaint();
+            String typeString = User.getType();
+            System.out.println(typeString);
+            if (typeString.equals("CLIENT")) {
+                 //hna zidddddiii marrrroooo
+            }
+                
+            else {
+                
+                if(typeString.equals("REAL_ESTATE_AGENT")){
+                    
+                    int propertyId = property.getId(); 
+                    boolean success = Real_estate_agent.remove_property(propertyId); 
+
+                    if (success) {
+                    
+                    scrollPanel.remove(propertyPanel);
+                    scrollPanel.revalidate();
+                    scrollPanel.repaint();
+
+                   
+                    dispose();
+                    LandingFrame newLandingFrame = new LandingFrame();
+                    newLandingFrame.setVisible(true);
+                    }
+                }
+                else{
+                    
+                    int propertyId = property.getId(); 
+                    boolean success = Owner.remove_property(propertyId); 
+
+                    if (success) {
+                    
+                    scrollPanel.remove(propertyPanel);
+                    scrollPanel.revalidate();
+                    scrollPanel.repaint();
+
+                   
+                    dispose();
+                    LandingFrame newLandingFrame = new LandingFrame();
+                    newLandingFrame.setVisible(true);
+                    }
+
+                }
+                 
+                
+            }
+            
         }
-    });
+    }
+    );
+
     return propertyPanel;
 }
 
