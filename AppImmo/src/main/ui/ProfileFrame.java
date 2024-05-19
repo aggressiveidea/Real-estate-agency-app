@@ -79,7 +79,7 @@ public class ProfileFrame extends JFrame implements ActionListener {
                     user.remove(User.idall); // Using static variable idall
                     dispose(); // Close the frame
                     // Optionally, redirect to the login page or exit the application
-                    // new LoginFrame().setVisible(true);
+                     new LoginFrame().setVisible(true);
                     // System.exit(0);
                 }
             }

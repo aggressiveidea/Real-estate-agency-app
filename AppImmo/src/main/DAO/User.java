@@ -179,15 +179,140 @@ public class User {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
-            String sql = "DELETE FROM login WHERE id = ?";
+            String sql = "SELECT TYPEUSER FROM login WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-            int rowsAffected = ps.executeUpdate();
+    
+            ResultSet rs = ps.executeQuery();
+            String user1 = null;
+            if (rs.next()) {
+                user1 = rs.getString("TYPEUSER");
+            }
+    
+            System.out.println(user1);
+    
+            switch (user1) {
+                case "OWNER":
+                    // Vérifier si une ligne correspondante existe dans BienImmobilier
+                    sql = "SELECT * FROM BienImmobilier WHERE PropriID = ?";
+                    ps = connection.prepareStatement(sql);
+                    ps.setInt(1, id);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                    // Supprimer la ligne dans BienImmobilier
+                    String deleteSql = "DELETE FROM BienImmobilier WHERE PropriID = ?";
+                    PreparedStatement deletePs = connection.prepareStatement(deleteSql);
+                    deletePs.setInt(1, id);
+                    deletePs.executeUpdate();
+                }
+
+                    // Supprimer la ligne dans d'autres tables liées si nécessaire...
+                    String[] otherTables = {"Transactions", "PropertyContract", "Interaction", "Payment", "RDV"};
+                    for (String table : otherTables) {
+                        sql = "DELETE FROM " + table + " WHERE OwnerID = ?";
+                        PreparedStatement deletePs = connection.prepareStatement(sql);
+                        deletePs.setInt(1, id);
+                        deletePs.executeUpdate();
+                    }
+    
+                    break;
+    
+                    case "CLIENT":
+                    // Vérifier si une ligne correspondante existe dans Transactions
+                    sql = "SELECT * FROM Transactions WHERE CltID = ?";
+                    ps = connection.prepareStatement(sql);
+                    ps.setInt(1, id);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        // Supprimer la ligne dans Transactions
+                        String deleteSql = "DELETE FROM Transactions WHERE CltID = ?";
+                        PreparedStatement deletePs = connection.prepareStatement(deleteSql);
+                        deletePs.setInt(1, id);
+                        deletePs.executeUpdate();
+                    }
+                
+                    // Supprimer la ligne dans PropertyContract
+                    String deletePropertyContractSql = "DELETE FROM PropertyContract WHERE ClientID = ?";
+                    PreparedStatement deletePropertyContractPs = connection.prepareStatement(deletePropertyContractSql);
+                    deletePropertyContractPs.setInt(1, id);
+                    deletePropertyContractPs.executeUpdate();
+                
+                    // Supprimer la ligne dans Interaction
+                    String deleteInteractionSql = "DELETE FROM Interaction WHERE ClientID = ?";
+                    PreparedStatement deleteInteractionPs = connection.prepareStatement(deleteInteractionSql);
+                    deleteInteractionPs.setInt(1, id);
+                    deleteInteractionPs.executeUpdate();
+                
+                    // Supprimer la ligne dans Payment
+                    String deletePaymentSql = "DELETE FROM Payment WHERE TransactionID IN (SELECT IDtransaction FROM Transactions WHERE CltID = ?)";
+                    PreparedStatement deletePaymentPs = connection.prepareStatement(deletePaymentSql);
+                    deletePaymentPs.setInt(1, id);
+                    deletePaymentPs.executeUpdate();
+                
+                    // Supprimer la ligne dans RDV
+                    String deleteRDVSql = "DELETE FROM RDV WHERE ClientID = ?";
+                    PreparedStatement deleteRDVPs = connection.prepareStatement(deleteRDVSql);
+                    deleteRDVPs.setInt(1, id);
+                    deleteRDVPs.executeUpdate();
+                
+                    break;
+                
+    
+                    case "REAL_ESTATE_AGENT":
+                    // Supprimer les lignes dans BienImmobilier
+                    String deleteBienImmobilierSql = "DELETE FROM BienImmobilier WHERE AgentID = ?";
+                    PreparedStatement deleteBienImmobilierPs = connection.prepareStatement(deleteBienImmobilierSql);
+                    deleteBienImmobilierPs.setInt(1, id);
+                    deleteBienImmobilierPs.executeUpdate();
+                
+                    // Supprimer les lignes dans Transactions
+                    String deleteTransactionsSql = "DELETE FROM Transactions WHERE AgentID = ?";
+                    PreparedStatement deleteTransactionsPs = connection.prepareStatement(deleteTransactionsSql);
+                    deleteTransactionsPs.setInt(1, id);
+                    deleteTransactionsPs.executeUpdate();
+                
+                    // Supprimer les lignes dans PropertyContract
+                    deletePropertyContractSql = "DELETE FROM PropertyContract WHERE AgentID = ?";
+                    deletePropertyContractPs = connection.prepareStatement(deletePropertyContractSql);
+                    deletePropertyContractPs.setInt(1, id);
+                    deletePropertyContractPs.executeUpdate();
+                
+                    // Supprimer les lignes dans Interaction
+                    deleteInteractionSql = "DELETE FROM Interaction WHERE AgentID = ?";
+                    deleteInteractionPs = connection.prepareStatement(deleteInteractionSql);
+                    deleteInteractionPs.setInt(1, id);
+                    deleteInteractionPs.executeUpdate();
+                
+                    // Supprimer les lignes dans Payment
+                    deletePaymentSql = "DELETE FROM Payment WHERE TransactionID IN (SELECT IDtransaction FROM Transactions WHERE AgentID = ?)";
+                    deletePaymentPs = connection.prepareStatement(deletePaymentSql);
+                    deletePaymentPs.setInt(1, id);
+                    deletePaymentPs.executeUpdate();
+                
+                    // Supprimer les lignes dans RDV
+                    deleteRDVSql = "DELETE FROM RDV WHERE AgentID = ?";
+                    deleteRDVPs = connection.prepareStatement(deleteRDVSql);
+                    deleteRDVPs.setInt(1, id);
+                    deleteRDVPs.executeUpdate();
+                
+                    break;
+                
+    
+                default:
+                    System.out.println("Unknown user type");
+                    break;
+            }
+    
+            sql = "DELETE FROM login WHERE id = ?";
+            PreparedStatement ps13 = connection.prepareStatement(sql);
+            ps13.setInt(1, id);
+            int rowsAffected = ps13.executeUpdate();
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(null, "Account successfully removed");
             } else {
                 JOptionPane.showMessageDialog(null, "Account removal failed");
             }
+    
             ps.close();
             connection.close();
         } catch (SQLException | ClassNotFoundException e) {
@@ -195,7 +320,7 @@ public class User {
             JOptionPane.showMessageDialog(null, "Error occurred while removing account: " + e.getMessage());
         }
     }
-
+    
     public void signup(String username, String password, String type1) throws SQLException {
 
        // boolean value = true
