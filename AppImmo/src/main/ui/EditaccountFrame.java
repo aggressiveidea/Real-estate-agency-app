@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import main.DAO.User;
+import main.ui.*;
+
 public class EditaccountFrame extends JFrame implements ActionListener {
 
     private JPanel contentPane;
@@ -24,16 +27,12 @@ public class EditaccountFrame extends JFrame implements ActionListener {
     private JButton retour;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
                 try {
                     EditaccountFrame frame = new EditaccountFrame();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
     }
 
     public EditaccountFrame() {
@@ -124,11 +123,20 @@ public class EditaccountFrame extends JFrame implements ActionListener {
             dispose(); 
         } else if (e.getSource() == btnEdit) {
             
+            
             String name = nomField.getText();
             String surname = prenomField.getText();
-            String phoneNumber = numTelephoneField.getText();
+            String phone_number = numTelephoneField.getText();
             String email = emailField.getText();
            
+            User.modify(name,surname,phone_number,email);
+            
+
+            ProfileFrame l = new ProfileFrame();
+            l.setVisible(true);
+            
+            dispose(); 
+            
         }
     }
 }

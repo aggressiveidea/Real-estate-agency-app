@@ -478,31 +478,6 @@ private boolean isPropertyOwner(int userId, int propertyId) {
     return false;
 }
 
-private void removeProperty(int propertyId) {
-    System.out.println(propertyId);
-    try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS)) {
-        if (connection != null) {
-            try {
-                String query = "DELETE FROM BienImmobilier WHERE IDbien = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, propertyId);
-                preparedStatement.executeUpdate();
-
-                // Fermer l'ancienne fenêtre avant d'ouvrir une nouvelle instance
-                this.dispose();
-
-                LandingFrame L = new LandingFrame();
-                L.setVisible(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Database connection is not established.");
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
 	@Override
 public void actionPerformed(ActionEvent e) {
     System.out.println("Action Performed in mainpage class");

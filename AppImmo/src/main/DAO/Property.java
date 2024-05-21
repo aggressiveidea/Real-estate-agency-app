@@ -188,7 +188,7 @@ public class Property {
                 int rowCount = 0;
                 while (resultSet.next()) {
                     rowCount++;
-                    String type = resultSet.getString("Typebien");
+                    String type = resultSet.getString("Typebien").trim();;
                     double price = resultSet.getDouble("Prixbien");
                     String address = resultSet.getString("Localbien");
                     String description = resultSet.getString("Descbien");
@@ -196,13 +196,17 @@ public class Property {
                     String ownerName = resultSet.getString("Nompropr") + " " + resultSet.getString("Prenompropr");
                     String ownerPhone = resultSet.getString("Telephonepropr");
                     String ownerEmail = resultSet.getString("Emailpropr");
-                     int propretyId = resultSet.getInt("IDbien");
-                    System.out.println(propretyId);
-
-                    PropertyType propertyType = PropertyType.valueOf(type);
-
-                         Property property = new Property(propId, address, description, price, propertyType, ownerName, ownerPhone, ownerEmail,propretyId);
-                    properties.add(property);
+                    int propretyId = resultSet.getInt("IDbien");
+                    System.out.println("Property ID: " + propretyId + ", Type: " + type);
+    
+                    try {
+                        PropertyType propertyType = PropertyType.valueOf(type);
+                        Property property = new Property(propId, address, description, price, propertyType, ownerName, ownerPhone, ownerEmail, propretyId);
+                        properties.add(property);
+                    } catch (IllegalArgumentException e) {
+                        System.err.println("Erreur de conversion du type de propriété : '" + type + "'");
+                        e.printStackTrace();
+                    }
                 }
                 System.out.println("Number of rows retrieved: " + rowCount);
 

@@ -22,7 +22,7 @@ enum Type {
 
 public class User {
 
-    public Connection connection;
+    public static Connection connection;
     public Statement statement;
 
     public int id;
@@ -141,13 +141,28 @@ public class User {
 
     // Methods
 
-    public void modify() {
+    public static void modify(String name,String surname,String phone_number,String email) {
         PreparedStatement ps = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "OracleAcc.USER", "OracleAcc.PASS");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
 
-            String sql = "UPDATE login SET name = ?, surname = ?, phone_number = ?, email = ? WHERE id = ?";
+            String sql = "";
+            switch (type) {
+                case OWNER:
+                    sql = "UPDATE PROPRIETAIRE SET NOMPROPR = ?, PRENOMPROPR = ?, telephonepropr = ?, Emailpropr = ? WHERE IDpropr = ?";
+                    break;
+                case REAL_ESTATE_AGENT:
+                    sql = "UPDATE AgentImm SET NomAgent = ?, PrenomAgent = ?, telephoneAgAJent = ?, EmailAgent = ? WHERE IDagent = ?";
+                    break;
+                case CLIENT:
+                    sql = "UPDATE Client SET NomClient = ?, prenomClient = ?, telephoneClient = ?, EmailClient = ? WHERE IDclient = ?";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Unknown user type");
+                    return;
+            }
+
             ps = connection.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, surname);
@@ -443,14 +458,14 @@ public class User {
                     UserSession.setcurrenttypeuser(type1);//pour stocker l username
                     UserSession.setcurrentid(idall);
                     System.out.println(type1);
-                    switch (type1) {
-                        case "REAL_ESTATE_AGENT ":
+                    switch (type1.trim()) {
+                        case "REAL_ESTATE_AGENT":
                               type = Type.REAL_ESTATE_AGENT ;
                             break;
-                        case "CLIENT ":
+                        case "CLIENT":
                               type = Type.CLIENT;
                             break;
-                        case "OWNER ":
+                        case "OWNER":
                               type = Type.OWNER;
                             break;
                         default:

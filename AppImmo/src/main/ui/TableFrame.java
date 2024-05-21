@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -23,7 +24,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class TableFrame extends JFrame implements ActionListener{
+import java.text.SimpleDateFormat;
+
+import main.DAO.OracleAcc;
+
+import main.DAO.*;
+
+public class TableFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -37,7 +44,9 @@ public class TableFrame extends JFrame implements ActionListener{
                 try {
                     TableFrame frame = new TableFrame();
                     frame.setVisible(true);
-                    frame.loadData();
+                    frame.insertTestData(); // Insert test data
+                    frame.loadData(); // Load data from the database
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -108,6 +117,43 @@ public class TableFrame extends JFrame implements ActionListener{
         contentPane.add(separator);
     }
 
+     // Method to insert test data into the tables
+    public void insertTestData() {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            // Load the Oracle JDBC driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // Establish a connection to the database
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+
+            // Create a statement
+            statement = connection.createStatement();
+
+            // Insert data into the OWNER, CLIENT, and AGENT tables
+            statement.executeUpdate("INSERT INTO Proprietaire ( IDpropr , Nompropr) VALUES (9938303, 'OwnerName')"); // Adjust columns as needed
+            statement.executeUpdate("INSERT INTO CLIENT (IDclient, NomClient) VALUES (8158972, 'ClientName')"); // Adjust columns as needed
+            statement.executeUpdate("INSERT INTO AgentImm (IDagent, NomAgent) VALUES (3537078, 'AgentName')"); // Adjust columns as needed
+
+            // Insert a single appointment into the RDV table
+            String insertQuery = "INSERT INTO RDV (ID, AGENTID, CLIENTID, OWNERID, ADDRESS_RDV, DATE_RDV) " +
+                                 "VALUES (1, 3537078, 8158972, 9938303, '123 Main St', TO_DATE('01/06/24', 'MM/DD/YY'))";
+            statement.executeUpdate(insertQuery);
+            System.out.println("Inserted test data into OWNER, CLIENT, AGENT, and RDV tables.");
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the statement and connection
+            try {
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     // Method to load data from the database and populate the table
 
     public void loadData() {
@@ -120,25 +166,38 @@ public class TableFrame extends JFrame implements ActionListener{
             Class.forName("oracle.jdbc.driver.OracleDriver");
             
             // Establish a connection to the database
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "OracleAcc.USER", "OracleAcc.PASS");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
             
             // Create a statement
             statement = connection.createStatement();
             
             // Execute the query to fetch data from the RDV table
             String query = "SELECT * FROM RDV";
-            resultSet  = statement.executeQuery(query);
-            
-            // Loop through the result set and add rows to the table model
-            while (resultSet.next()) {
-                int id = resultSet.getInt("ID");
-                int agentId = resultSet.getInt("AGENTID");
-                int clientId = resultSet.getInt("CLIENTID");
-                int ownerId = resultSet.getInt("OWNERID");
-                String address = resultSet.getString("ADDRESS_RDV");
-                Date date = resultSet.getDate("DATE_RDV");
-                
-                tableModel.addRow(new Object[] {id, agentId, clientId, ownerId, address, date});
+             resultSet = statement.executeQuery(query);
+
+            // Check if result set is empty
+            if (!resultSet.isBeforeFirst()) {
+                System.out.println("No data found in RDV table");
+            } else {
+                // Loop through the result set and add rows to the table model
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("ID");
+                    int agentId = resultSet.getInt("AGENTID");
+                    int clientId = resultSet.getInt("CLIENTID");
+                    int ownerId = resultSet.getInt("OWNERID");
+                    String address = resultSet.getString("ADDRESS_RDV");
+                    java.sql.Date date = resultSet.getDate("DATE_RDV"); // Retrieve date as java.sql.Date
+
+                    // Format date as required by the table model
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                    String formattedDate = sdf.format(date);
+
+                    Object[] rowData = {id, agentId, clientId, ownerId, address, formattedDate}; // Use formatted date
+                    tableModel.addRow(rowData);
+
+                    // Print the fetched row data to the console
+                    System.out.println("Row added: " + java.util.Arrays.toString(rowData));
+                }
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -153,12 +212,11 @@ public class TableFrame extends JFrame implements ActionListener{
             }
         }
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
+   // @Override
+  ///  public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
+    //    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+  //  }
 }
 
 
