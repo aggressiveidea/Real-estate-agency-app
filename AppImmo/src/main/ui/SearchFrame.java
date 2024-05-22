@@ -45,22 +45,19 @@ public class SearchFrame extends JFrame implements ActionListener {
     private JPanel scrollPanel;
     private JButton retour;
 
-    /**
-     * Launch the application.
-     */
+    //Launch the application.
     public static void main(String[] args) {
                 try {
-                    SearchFrame frame = new SearchFrame();
+                    String info = "DUPLEXE";
+                    SearchFrame frame = new SearchFrame(info);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
     }
 
-    /**
-     * Create the frame.
-     */
-    public SearchFrame() {
+    //Create the frame.
+    public SearchFrame(String info) {
 
         setTitle("IMMO");
         setIconImage(Toolkit.getDefaultToolkit().getImage(SearchFrame.class.getResource("assets\\logo.png")));
@@ -104,15 +101,35 @@ public class SearchFrame extends JFrame implements ActionListener {
         separator.setBounds(355, 75, 210, 10);
         contentPane.add(separator);
 
-         List<Property> properties = Property.getProperties();
+        /****************************************/
+
+        List<Property> properties = Property.getProperties();
         int initialY = 15;
         int initialX = 15;
 
-        for (Property property : properties) {
-            JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
-            initialY += 350; // Adjust Y position for the next property panel
-            scrollPanel.add(propertyPanel);
+
+        try {
+            int number = Integer.parseInt(info);
+            
+            for (Property property : properties) {
+                if (property.getId()==number){
+                    JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
+                    initialY += 350; // Adjust Y position for the next property panel
+                    scrollPanel.add(propertyPanel);
+                }
+            }
+        } catch (NumberFormatException e) {
+            for (Property property : properties) {
+                if (property.getPropertyType()==info || property.getAddress()==info){
+                    JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
+                    initialY += 350; // Adjust Y position for the next property panel
+                    scrollPanel.add(propertyPanel);
+                }
+            }
         }
+
+        
+        
     }
     
 

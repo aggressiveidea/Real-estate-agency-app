@@ -281,8 +281,8 @@ public class LandingFrame extends JFrame implements ActionListener{
         contentPane.add(btnNewButton_2);
         btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 
-				 SearchFrame frame = new SearchFrame();
+                String info = txtSearch.getText();
+                SearchFrame frame = new SearchFrame(info);
 				frame.setVisible(true);
 				dispose();
 				
