@@ -117,3 +117,4 @@ ALTER TABLE AgentImm  DROP COLUMN EmailAgent;
 ALTER TABLE Client ADD (EmailClient VARCHAR2(40));
 ALTER TABLE Proprietaire ADD (Emailpropr VARCHAR2(40));
 ALTER TABLE AgentImm ADD (EmailAgent VARCHAR2(40));
+
