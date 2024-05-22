@@ -391,8 +391,15 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     btnEdit.setBackground(Color.BLUE);
     btnEdit.setForeground(Color.WHITE);
     btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    btnEdit.setBounds(155, 280, 89, 29);
+    btnEdit.setBounds(250, 280, 89, 29);
     propertyPanel.add(btnEdit);
+
+    JLabel idarea = new JLabel("ID : "+ property.getId());
+    idarea.setBounds(20,280,200,29);
+    idarea.setForeground(new Color(85,6,119));
+    idarea.setFont(new Font("Tahoma", Font.BOLD, 16));
+    propertyPanel.add(idarea);
+
     int currentUserId = UserSession.getCurrentUserid();
     String userRole = UserSession.getCurrentUserType();
     
@@ -401,7 +408,7 @@ private JPanel createPropertyPanel(Property property, int initialX, int initialY
     btnRemove.setBackground(Color.RED);
     btnRemove.setForeground(Color.WHITE);
     btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
-    btnRemove.setBounds(30, 280, 89, 29);
+    btnRemove.setBounds(150, 280, 89, 29);
 
     if (("REAL_ESTATE_AGENT".equals(userRole) || isPropertyOwner(currentUserId, property.getId()))) {
         propertyPanel.add(btnRemove);
