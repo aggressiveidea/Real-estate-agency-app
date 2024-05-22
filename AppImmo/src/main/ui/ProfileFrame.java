@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.table.DefaultTableModel;
 
 import main.DAO.OracleAcc;
 import main.DAO.User;
@@ -38,6 +40,8 @@ public class ProfileFrame extends JFrame implements ActionListener {
     private JButton btnBrowse;
     private JTable table;
 
+    private DefaultTableModel tableModel;
+
     public ProfileFrame() {
         setTitle("IMMO");
         setIconImage(Toolkit.getDefaultToolkit().getImage(ProfileFrame.class.getResource("assets\\logo.png")));
@@ -45,9 +49,6 @@ public class ProfileFrame extends JFrame implements ActionListener {
         setBounds(100, 100, 802, 625);
         this.setSize(963, 630);
         this.setResizable(false);
-
-        this.setLocationRelativeTo(null);
-        
         contentPane = new JPanel();
         contentPane.setForeground(new Color(0, 0, 0));
         contentPane.setBackground(new Color(255, 255, 255));
@@ -243,6 +244,20 @@ public class ProfileFrame extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(428, 165, 492, 417);
         contentPane.add(scrollPane);
+
+        table = new JTable();
+        table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        table.setBackground(new Color(255, 255, 255));
+        scrollPane.setViewportView(table);
+        tableModel = new DefaultTableModel(
+            new Object[][] {},
+            new String[] {
+                "id", "type", "date", "clientID", "ownerID", "agentID", "cost"
+            }
+        );
+
+         // Load data from the database
+        loadData();
     }
 
 
@@ -257,9 +272,45 @@ public class ProfileFrame extends JFrame implements ActionListener {
             editaccount.setVisible(true);
             this.dispose();
             System.out.println("Edit account button clicked");
+
+
         }
         
-}
+    }
+        public void loadData() {
+            try {
+                // Connexion à la base de données et récupération des données
+                Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", OracleAcc.USER, OracleAcc.PASS);
+                String query = "SELECT * FROM Transactions";
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery();
+    
+                // Effacez les données existantes dans le modèle de table
+                tableModel.setRowCount(0);
+    
+                // Parcourez les résultats de la requête et ajoutez-les au modèle de table
+                while (rs.next()) {
+                    int id = rs.getInt("IDtransaction");
+                    String type = rs.getString("Typetrans");
+                    Date date = rs.getDate("Datetans");
+                    int clientID = rs.getInt("CltID");
+                    int ownerID = rs.getInt("OwnerID");
+                    int agentID = rs.getInt("AgentID");
+                    int cost = rs.getInt("Cost");
+    
+                    // Ajoutez une ligne au modèle de table
+                    tableModel.addRow(new Object[]{id, type, date, clientID, ownerID, agentID, cost});
+                }
+    
+                // Fermez les ressources
+                rs.close();
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
 public static void main(String[] args) {
 	       
 	        ProfileFrame frame = new ProfileFrame();
