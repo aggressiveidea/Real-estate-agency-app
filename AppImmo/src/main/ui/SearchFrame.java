@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -48,8 +49,8 @@ public class SearchFrame extends JFrame implements ActionListener {
     //Launch the application.
     public static void main(String[] args) {
                 try {
-                    String info = "DUPLEXE";
-                    SearchFrame frame = new SearchFrame(info);
+                    String info1 = "DUPLEXE";
+                    SearchFrame frame = new SearchFrame(info1);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -109,27 +110,40 @@ public class SearchFrame extends JFrame implements ActionListener {
         int initialY = 15;
         int initialX = 15;
 
+        boolean bobo = false;
+        boolean fofo = false;
+        int number=0;
 
         try {
-            int number = Integer.parseInt(info);
-            
+            number = Integer.parseInt(info);
+            bobo = true;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        if (bobo == true ){
             for (Property property : properties) {
                 if (property.getId()==number){
-                    JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
-                    initialY += 350; // Adjust Y position for the next property panel
-                    scrollPanel.add(propertyPanel);
-                }
-            }
-        } catch (NumberFormatException e) {
-            for (Property property : properties) {
-                if (property.getPropertyType()==info || property.getAddress()==info){
+                    fofo = true;
                     JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
                     initialY += 350; // Adjust Y position for the next property panel
                     scrollPanel.add(propertyPanel);
                 }
             }
         }
-
+        else{
+            for (Property property : properties) {
+                info = info.intern();
+                if (property.getAddress()== info || property.getPropertyType()== info  ){
+                    fofo = true;
+                    JPanel propertyPanel = createPropertyPanel(property, initialX, initialY);
+                    initialY += 350; // Adjust Y position for the next property panel
+                    scrollPanel.add(propertyPanel);
+                }
+            }
+        }
+        if (fofo == false ){
+            JOptionPane.showMessageDialog(null, "No result");
+        }
         
         
     }
