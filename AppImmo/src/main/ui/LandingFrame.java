@@ -47,8 +47,9 @@ public class LandingFrame extends JFrame implements ActionListener{
 	private JTextField txtSearch;
 	private JButton btnNewButton_1_1_1_1;
     private JButton btnNewButton_1_1_1;
-	private JButton btnNewButton_2_1;
+	private JButton button2;
     private JButton btnNewButton_remove;
+    private JButton searchButton;
 
 	private Container panel_2;
     private JPanel scrollPanel;
@@ -220,12 +221,12 @@ public class LandingFrame extends JFrame implements ActionListener{
        panel.add(separator_1_4);
    
        btnNewButton_1_1_1.addActionListener(this); 
-           btnNewButton_1_1_1_1.addActionListener(this);
+        btnNewButton_1_1_1_1.addActionListener(this);
 
 		txtSearch = new JTextField();
 		txtSearch.setForeground(new Color(115, 24, 154));
-		txtSearch.setText("Search by price or type or papers...");
-		txtSearch.setFont(new Font("Dialog", Font.PLAIN, 15));
+		//txtSearch.setText("Search by price or type or papers...");
+		//txtSearch.setFont(new Font("Dialog", Font.PLAIN, 15));
 		txtSearch.setBounds(360, 76, 305, 30);
 		contentPane.add(txtSearch);
 		txtSearch.setColumns(10);
@@ -263,11 +264,11 @@ public class LandingFrame extends JFrame implements ActionListener{
             } else {
                 btnNewButton.setEnabled(false);
             }
-		JButton btnNewButton_2_1 = new JButton("Refresh");
-        btnNewButton_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton_2_1.setForeground(new Color(115, 24, 154));
-        btnNewButton_2_1.setBounds(430, 125, 89, 29);
-        contentPane.add(btnNewButton_2_1);
+		JButton button2 = new JButton("Refresh");
+        button2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        button2.setForeground(new Color(115, 24, 154));
+        button2.setBounds(430, 125, 89, 29);
+        contentPane.add(button2);
 
 		JLabel lblNewLabel_1 = new JLabel("Home is Where Your Story Begins.");
 		lblNewLabel_1.setForeground(new Color(115, 24, 154));
@@ -275,13 +276,14 @@ public class LandingFrame extends JFrame implements ActionListener{
 		lblNewLabel_1.setBounds(297, 11, 446, 47);
 		contentPane.add(lblNewLabel_1);
 
-        JButton btnNewButton_2 = new JButton("Search");
-        btnNewButton_2.setBackground(new Color(0, 128, 0));
-        btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton_2.setForeground(new Color(255, 255, 255));
-        btnNewButton_2.setBounds(687, 76, 89, 29);
-        contentPane.add(btnNewButton_2);
-        btnNewButton_2.addActionListener(new ActionListener() {
+        searchButton = new JButton("Search");
+        searchButton.setBackground(new Color(0, 128, 0));
+        searchButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        searchButton.setForeground(new Color(255, 255, 255));
+        searchButton.setBounds(687, 76, 89, 29);
+        contentPane.add(searchButton);
+
+        searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 String info = txtSearch.getText();
                 SearchFrame frame = new SearchFrame(info);
@@ -500,7 +502,7 @@ public void actionPerformed(ActionEvent e) {
         
         this.dispose();
     }
-	if (e.getSource() == btnNewButton_2_1) {
+	if (e.getSource() == button2) {
 		System.out.println("imchi imchi");
         fetchLatestPropertyDetails();
     }

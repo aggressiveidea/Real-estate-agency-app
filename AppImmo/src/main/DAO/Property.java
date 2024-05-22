@@ -87,7 +87,7 @@ public class Property {
     }
 
     public String getAddress() {
-        return address;
+        return address.toString();
     }
 
     public void setAddress(String address) {
@@ -146,8 +146,8 @@ public class Property {
         return ownerEmail;
     }
 
-    public void setOwnerId(String ownerid) {
-        this.ownerEmail = ownerEmail;
+    public void setOwnerId(int ownerid) {
+        this.id = ownerid;
     }
 
     public String getPropertyType() {
