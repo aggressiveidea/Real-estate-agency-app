@@ -74,6 +74,8 @@ public class LandingFrame extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+        this.setLocationRelativeTo(null);
+
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(115,24,154));

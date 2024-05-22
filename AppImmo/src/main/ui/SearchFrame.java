@@ -65,6 +65,8 @@ public class SearchFrame extends JFrame implements ActionListener {
         setBounds(100, 100, 929, 621);
         setResizable(false);
 
+        this.setLocationRelativeTo(null);
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(200, 10, 5, 10));
         contentPane.setLayout(null);
