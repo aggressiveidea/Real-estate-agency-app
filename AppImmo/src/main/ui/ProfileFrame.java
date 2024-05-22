@@ -45,6 +45,9 @@ public class ProfileFrame extends JFrame implements ActionListener {
         setBounds(100, 100, 802, 625);
         this.setSize(963, 630);
         this.setResizable(false);
+
+        this.setLocationRelativeTo(null);
+        
         contentPane = new JPanel();
         contentPane.setForeground(new Color(0, 0, 0));
         contentPane.setBackground(new Color(255, 255, 255));

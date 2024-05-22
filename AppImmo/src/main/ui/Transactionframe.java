@@ -50,6 +50,7 @@ public class Transactionframe extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(963, 630);
         setResizable(false);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBackground(new Color(255, 255, 255));

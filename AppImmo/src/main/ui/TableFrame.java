@@ -64,6 +64,8 @@ public class TableFrame extends JFrame {
         setSize(963, 630);
         setResizable(false);
 
+        this.setLocationRelativeTo(null);
+
         contentPane = new JPanel();
         contentPane.setBackground(new Color(66, 14, 88));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -4,4 +4,5 @@ package main.DAO;
 public class OracleAcc {
     public static final String USER = "system";
     public static final String PASS = "aldjia123";
+    
 }

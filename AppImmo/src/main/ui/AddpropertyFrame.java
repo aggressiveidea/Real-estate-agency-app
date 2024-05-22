@@ -55,6 +55,8 @@ public class AddpropertyFrame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        this.setLocationRelativeTo(null);
+
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 741, 40);
         contentPane.add(panel);
