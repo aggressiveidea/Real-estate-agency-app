@@ -24,4 +24,5 @@ git clone https://github.com/aggressiveidea/Real-estate-agency-app.git
 **what do you need to run IMMO**
 - download all the jar files and oracl sqlplus 
 - don't forget to update the class OracleAcc with your own infos 'oracl username and password'
--the jar files already exist in the lib folder so make sure to install them and then puth them in the Referenced Libraries 
+- the jar files already exist in the lib folder so make sure to install them and then puth them in the Referenced Libraries  
+
