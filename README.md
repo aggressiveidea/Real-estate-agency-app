@@ -10,9 +10,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [présentation](https://www.canva.com/design/DAGCNacHeZQ/J84Iv2irIFE5lQ_I7KO4Uw/watch?utm_content=DAGCNacHeZQ&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
-# raport 
+# report 
 
-[raport](https://www.canva.com/design/DAGBgFEIc5g/XXVMeuI2eLCgK4LrvcEFFQ/edit?utm_content=DAGBgFEIc5g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[report](https://www.canva.com/design/DAGBgFEIc5g/XXVMeuI2eLCgK4LrvcEFFQ/edit?utm_content=DAGBgFEIc5g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 # instalation 
 **clone the repo to your device**
