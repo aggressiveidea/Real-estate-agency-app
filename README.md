@@ -2,7 +2,7 @@ HI THERE !!
 
 # REAL ESTATE AGENCY APP 
 
-#lisence 
+# lisence 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
