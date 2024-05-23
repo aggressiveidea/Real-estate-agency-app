@@ -6,19 +6,20 @@ HI THERE !!
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-# présentation
+# here's the canva presentation
 
 [présentation](https://www.canva.com/design/DAGCNacHeZQ/J84Iv2irIFE5lQ_I7KO4Uw/watch?utm_content=DAGCNacHeZQ&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
-# report 
+# here's the canva report 
 
 [report](https://www.canva.com/design/DAGBgFEIc5g/XXVMeuI2eLCgK4LrvcEFFQ/edit?utm_content=DAGBgFEIc5g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-# instalation 
+# instalation guide
 **clone the repo to your device**
 
 ```bash 
 git clone https://github.com/aggressiveidea/Real-estate-agency-app.git
+cd AppImmo
 ```
 
 **what do you need to run IMMO**
