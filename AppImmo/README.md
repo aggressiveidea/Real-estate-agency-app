@@ -1,3 +1,8 @@
+# REAL ESTATE AGENCY APP 
+
+#lisence 
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 # présentation
 
@@ -5,4 +10,19 @@
 
 # raport 
 
-[raport](https://www.canva.com/design/DAGBgFEIc5g/kT740Psehm6NXgIJv-bXwA/view?utm_content=DAGBgFEIc5g&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+[raport](https://www.canva.com/design/DAGBgFEIc5g/XXVMeuI2eLCgK4LrvcEFFQ/edit?utm_content=DAGBgFEIc5g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+# instalation 
+**clone the repo to your device**
+
+```bash 
+git clone https://github.com/aggressiveidea/Real-estate-agency-app.git
+```
+
+**what do you need to run IMMO**
+- download all the jar files and oracl sqlplus 
+- don't forget to update the class OracleAcc with your own infos 'oracl username and password'
+
+
+
+
